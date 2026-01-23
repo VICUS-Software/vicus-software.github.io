@@ -1,0 +1,41 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const lang = 'de';
+
+// Get all German blog posts, sorted by date
+const posts = (await getCollection('blog', ({ data }) => {
+  return data.lang === 'de' && !data.draft;
+})).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<PageLayout
+  title="Blog"
+  description="Neuigkeiten, Tutorials und Einblicke rund um Gebäudesimulation und nachhaltige Planung."
+  heroSubtitle="Neuigkeiten und Einblicke"
+>
+  <section class="section">
+    <div class="container-custom">
+      {posts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              image={post.data.image}
+              href={`/de/blog/${post.slug.replace('de/', '')}`}
+              pubDate={post.data.pubDate}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-foreground/70 text-xl mb-4">Noch keine Blogbeiträge vorhanden.</p>
+          <p class="text-foreground/50">Schauen Sie bald wieder vorbei!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</PageLayout>

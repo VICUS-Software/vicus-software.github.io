@@ -1,0 +1,55 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  href: string;
+  pubDate: Date;
+  readTime?: number;
+}
+
+const { title, description, image, href, pubDate, readTime } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = useTranslations(lang);
+
+const formattedDate = pubDate.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+});
+---
+
+<article class="card hover-lift group">
+  {image && (
+    <div class="relative overflow-hidden rounded-lg mb-6 aspect-video bg-background">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="flex items-center gap-3 text-sm text-foreground/60 mb-3">
+    <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+    {readTime && (
+      <>
+        <span>•</span>
+        <span>{t('misc.readTime', { min: readTime })}</span>
+      </>
+    )}
+  </div>
+  <h3 class="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+    <a href={href}>{title}</a>
+  </h3>
+  <p class="text-foreground/70 mb-4 line-clamp-3">{description}</p>
+  <a href={href} class="text-primary hover:text-primary/80 font-medium inline-flex items-center gap-2">
+    {t('btn.readMore')}
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </a>
+</article>

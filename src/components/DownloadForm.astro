@@ -1,0 +1,119 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+import { HUBSPOT_CONFIG } from '../config/hubspot';
+
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = useTranslations(lang);
+---
+
+<form
+  id="download-form"
+  class="space-y-6"
+  data-hubspot-portal={HUBSPOT_CONFIG.portalId}
+  data-hubspot-form={HUBSPOT_CONFIG.formIds.download}
+>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="form-group">
+      <label for="dl-name" class="form-label">
+        {t('form.name')} <span class="text-primary">*</span>
+      </label>
+      <input
+        type="text"
+        id="dl-name"
+        name="name"
+        required
+        class="form-input"
+      />
+    </div>
+    <div class="form-group">
+      <label for="dl-email" class="form-label">
+        {t('form.email')} <span class="text-primary">*</span>
+      </label>
+      <input
+        type="email"
+        id="dl-email"
+        name="email"
+        required
+        class="form-input"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dl-company" class="form-label">{t('form.company')}</label>
+    <input
+      type="text"
+      id="dl-company"
+      name="company"
+      class="form-input"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="dl-product" class="form-label">
+      {lang === 'de' ? 'Produkt' : 'Product'} <span class="text-primary">*</span>
+    </label>
+    <select id="dl-product" name="product" required class="form-input">
+      <option value="">{lang === 'de' ? 'Bitte wählen...' : 'Please select...'}</option>
+      <option value="buildings">VICUS BUILDINGS</option>
+      <option value="districts">VICUS DISTRICTS</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label class="flex items-start gap-3 cursor-pointer">
+      <input type="checkbox" name="newsletter" class="mt-1 w-4 h-4 rounded border-foreground/30 text-primary focus:ring-primary" />
+      <span class="text-sm text-foreground/70">
+        {lang === 'de'
+          ? 'Ich möchte den VICUS Newsletter erhalten'
+          : 'I want to receive the VICUS newsletter'}
+      </span>
+    </label>
+  </div>
+
+  <div id="download-form-status" class="hidden p-4 rounded-lg"></div>
+
+  <button type="submit" class="btn btn-primary w-full md:w-auto">
+    {t('btn.download')}
+  </button>
+</form>
+
+<script>
+  const form = document.getElementById('download-form') as HTMLFormElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const statusEl = document.getElementById('download-form-status');
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '...';
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      if (statusEl) {
+        statusEl.className = 'p-4 rounded-lg bg-primary/20 text-primary';
+        statusEl.textContent = document.documentElement.lang === 'de'
+          ? 'Vielen Dank! Sie erhalten den Download-Link per E-Mail.'
+          : 'Thank you! You will receive the download link via email.';
+        statusEl.classList.remove('hidden');
+      }
+
+      form.reset();
+    } catch (error) {
+      if (statusEl) {
+        statusEl.className = 'p-4 rounded-lg bg-red-500/20 text-red-400';
+        statusEl.textContent = document.documentElement.lang === 'de'
+          ? 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.'
+          : 'An error occurred. Please try again.';
+        statusEl.classList.remove('hidden');
+      }
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = document.documentElement.lang === 'de' ? 'Download' : 'Download';
+    }
+  });
+</script>

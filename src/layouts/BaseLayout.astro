@@ -1,0 +1,133 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import { languages, type Language } from '../i18n/languages';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title, description = 'VICUS Software - Nachhaltige Planung mit Simulation', image = '/images/og-default.png', noindex = false } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url) as Language;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const gaId = import.meta.env.PUBLIC_GA_ID;
+
+// Generate alternate language URLs for hreflang
+const currentPath = Astro.url.pathname;
+const alternateLangs = Object.keys(languages).map(l => ({
+  lang: l,
+  url: new URL(currentPath.replace(/^\/(de|en)/, `/${l}`), Astro.site).href
+}));
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title} | VICUS Software</title>
+    <meta name="title" content={`${title} | VICUS Software`} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Canonical and Alternate Languages -->
+    <link rel="canonical" href={canonicalURL} />
+    {alternateLangs.map(alt => (
+      <link rel="alternate" hreflang={alt.lang} href={alt.url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL('/de/', Astro.site).href} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | VICUS Software`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | VICUS Software`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    {gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Cookie Consent Placeholder -->
+    <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-secondary p-4 shadow-lg transform translate-y-full transition-transform duration-300 z-50 hidden">
+      <div class="container-custom flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-foreground/80">
+          {lang === 'de'
+            ? 'Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern.'
+            : 'This website uses cookies to enhance your experience.'}
+        </p>
+        <div class="flex gap-4">
+          <button id="cookie-accept" class="btn btn-primary text-sm py-2 px-4">
+            {lang === 'de' ? 'Akzeptieren' : 'Accept'}
+          </button>
+          <a href={`/${lang}/${lang === 'de' ? 'datenschutz' : 'privacy'}`} class="btn btn-secondary text-sm py-2 px-4">
+            {lang === 'de' ? 'Mehr erfahren' : 'Learn more'}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cookie consent logic
+      const consent = document.getElementById('cookie-consent');
+      const acceptBtn = document.getElementById('cookie-accept');
+
+      if (!localStorage.getItem('cookieConsent') && consent) {
+        consent.classList.remove('hidden');
+        setTimeout(() => {
+          consent.classList.remove('translate-y-full');
+        }, 1000);
+      }
+
+      acceptBtn?.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        consent?.classList.add('translate-y-full');
+        setTimeout(() => {
+          consent?.classList.add('hidden');
+        }, 300);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+
+const lang = 'en';
+---
+
+<PageLayout
+  title="Newsletter"
+  description="Subscribe to the VICUS newsletter and receive updates on software, tutorials, and events."
+  heroSubtitle="Stay informed"
+>
+  <section class="section">
+    <div class="container-custom max-w-2xl">
+      <div class="card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Subscribe to Newsletter</h2>
+        <p class="text-foreground/70 mb-8">
+          Receive regular updates on new features, tutorials, webinars, and
+          industry news directly in your inbox.
+        </p>
+
+        <div class="mb-8 p-4 rounded-lg bg-primary/10 border border-primary/20">
+          <h3 class="text-lg font-semibold text-foreground mb-2">What to expect:</h3>
+          <ul class="space-y-2 text-foreground/80">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Information about new software versions
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Tutorials and best practices
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Invitations to webinars and events
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Industry news on sustainable planning
+            </li>
+          </ul>
+        </div>
+
+        <NewsletterForm />
+      </div>
+    </div>
+  </section>
+</PageLayout>

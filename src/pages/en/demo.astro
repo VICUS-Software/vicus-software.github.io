@@ -1,0 +1,138 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DemoForm from '../../components/DemoForm.astro';
+import DownloadForm from '../../components/DownloadForm.astro';
+import LicenseForm from '../../components/LicenseForm.astro';
+
+const lang = 'en';
+---
+
+<PageLayout
+  title="Book Demo"
+  description="Book a personal demo, download the software, or request a license."
+  heroSubtitle="Discover VICUS Software"
+>
+  <section class="section">
+    <div class="container-custom">
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-2 mb-12 justify-center" role="tablist">
+        <button
+          role="tab"
+          aria-selected="true"
+          aria-controls="demo-panel"
+          id="demo-tab"
+          class="tab-btn active px-6 py-3 rounded-lg font-medium transition-all"
+        >
+          Book Demo
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="download-panel"
+          id="download-tab"
+          class="tab-btn px-6 py-3 rounded-lg font-medium transition-all"
+        >
+          Download
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="license-panel"
+          id="license-tab"
+          class="tab-btn px-6 py-3 rounded-lg font-medium transition-all"
+        >
+          Request License
+        </button>
+      </div>
+
+      <!-- Tab Panels -->
+      <div class="max-w-2xl mx-auto">
+        <!-- Demo Panel -->
+        <div
+          role="tabpanel"
+          id="demo-panel"
+          aria-labelledby="demo-tab"
+          class="tab-panel"
+        >
+          <div class="card">
+            <h2 class="text-2xl font-bold text-foreground mb-2">Personal Demo</h2>
+            <p class="text-foreground/70 mb-8">
+              Experience VICUS in a personal demo session. We'll show you
+              the software's capabilities and answer your questions.
+            </p>
+            <DemoForm />
+          </div>
+        </div>
+
+        <!-- Download Panel -->
+        <div
+          role="tabpanel"
+          id="download-panel"
+          aria-labelledby="download-tab"
+          class="tab-panel hidden"
+        >
+          <div class="card">
+            <h2 class="text-2xl font-bold text-foreground mb-2">Software Download</h2>
+            <p class="text-foreground/70 mb-8">
+              Download the latest version of VICUS.
+              After registration, you'll receive the download link via email.
+            </p>
+            <DownloadForm />
+          </div>
+        </div>
+
+        <!-- License Panel -->
+        <div
+          role="tabpanel"
+          id="license-panel"
+          aria-labelledby="license-tab"
+          class="tab-panel hidden"
+        >
+          <div class="card">
+            <h2 class="text-2xl font-bold text-foreground mb-2">Request License</h2>
+            <p class="text-foreground/70 mb-8">
+              Request a license for production use.
+              We'll create a customized offer for you.
+            </p>
+            <LicenseForm />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .tab-btn {
+    @apply bg-secondary/50 text-foreground/70 hover:text-foreground hover:bg-secondary;
+  }
+
+  .tab-btn.active {
+    @apply bg-primary text-background;
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('active');
+      });
+
+      panels.forEach((p) => {
+        p.classList.add('hidden');
+      });
+
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.add('active');
+
+      const panelId = tab.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId!);
+      panel?.classList.remove('hidden');
+    });
+  });
+</script>

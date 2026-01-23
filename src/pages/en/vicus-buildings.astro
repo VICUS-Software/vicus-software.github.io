@@ -1,0 +1,142 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Features from '../../components/Features.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const features = [
+  {
+    icon: 'energy',
+    title: 'Thermal Simulation',
+    description: 'Detailed calculation of heat flows, thermal masses, and dynamic thermal behavior.'
+  },
+  {
+    icon: 'comfort',
+    title: 'Comfort Assessment',
+    description: 'Analysis of room temperatures, humidity, and thermal comfort according to current standards.'
+  },
+  {
+    icon: 'simulation',
+    title: 'Energy Balance',
+    description: 'Precise calculation of heating and cooling demand throughout the year.'
+  },
+  {
+    icon: 'network',
+    title: 'HVAC Simulation',
+    description: 'Modeling of heating, ventilation, and air conditioning systems for optimal system design.'
+  },
+  {
+    icon: 'sustainability',
+    title: 'CO2 Accounting',
+    description: 'Determination of greenhouse gas emissions for sustainability assessments.'
+  },
+  {
+    icon: 'gis',
+    title: '3D Modeling',
+    description: 'Intuitive 3D geometry creation and import from IFC/gbXML.'
+  }
+];
+
+const useCases = [
+  'Energy retrofit planning',
+  'New construction planning and optimization',
+  'Sustainability certifications (DGNB, LEED, BREEAM)',
+  'Summer thermal protection (DIN 4108-2)',
+  'Thermal bridge calculation',
+  'Research and development'
+];
+---
+
+<PageLayout
+  title="VICUS BUILDINGS"
+  description="Professional software for thermal building simulation. Energy efficiency, comfort analysis, and sustainable planning."
+  heroSubtitle="Professional software for thermal building simulation"
+>
+  <!-- Screenshot Section -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-foreground mb-6">Powerful Building Simulation</h2>
+          <p class="text-foreground/70 mb-6">
+            VICUS BUILDINGS is professional software for dynamic thermal building simulation.
+            Based on the proven NANDRAD simulation core, it enables precise analysis of
+            energy consumption and thermal comfort.
+          </p>
+          <p class="text-foreground/70 mb-8">
+            With the integrated 3D modeling environment, you can create building models efficiently and intuitively.
+            The software supports import of IFC and gbXML files for seamless BIM workflows.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/en/demo" class="btn btn-primary">{t('btn.demo')}</a>
+            <a href="/en/tutorials-help" class="btn btn-secondary">{t('btn.learnMore')}</a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-video rounded-xl overflow-hidden bg-secondary/50 border border-primary/20">
+            <img
+              src="/images/screenshots/vicus-buildings-main.png"
+              alt="VICUS BUILDINGS Screenshot"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <Features
+    title="Features"
+    subtitle="Comprehensive tools for professional building simulation"
+    features={features}
+  />
+
+  <!-- Use Cases -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="aspect-video rounded-xl overflow-hidden bg-secondary/50 border border-primary/20">
+            <img
+              src="/images/screenshots/vicus-buildings-results.png"
+              alt="VICUS BUILDINGS Results"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <h2 class="text-foreground mb-6">Use Cases</h2>
+          <ul class="space-y-4">
+            {useCases.map((useCase) => (
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-foreground/80">{useCase}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Try VICUS BUILDINGS Now</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        See for yourself the possibilities of professional building simulation.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/en/demo" class="btn btn-primary">{t('btn.demo')}</a>
+        <a href="/en/contact" class="btn btn-secondary">{t('btn.contact')}</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

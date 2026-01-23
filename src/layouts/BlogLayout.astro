@@ -1,0 +1,68 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  pubDate: Date;
+  author?: string;
+  readTime?: number;
+}
+
+const { title, description, image, pubDate, author = 'VICUS Team', readTime } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = useTranslations(lang);
+
+const formattedDate = pubDate.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <article class="pt-24 pb-16">
+    <div class="container-custom max-w-4xl">
+      <!-- Back link -->
+      <a href={`/${lang}/blog`} class="inline-flex items-center text-primary hover:text-primary/80 mb-8">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        {t('misc.backToBlog')}
+      </a>
+
+      <!-- Article header -->
+      <header class="mb-12">
+        <h1 class="text-foreground mb-6">{title}</h1>
+        <div class="flex items-center gap-4 text-foreground/60 text-sm">
+          <span>{author}</span>
+          <span>•</span>
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          {readTime && (
+            <>
+              <span>•</span>
+              <span>{t('misc.readTime', { min: readTime })}</span>
+            </>
+          )}
+        </div>
+      </header>
+
+      <!-- Featured image -->
+      {image && (
+        <img
+          src={image}
+          alt={title}
+          class="w-full rounded-xl mb-12 aspect-video object-cover"
+        />
+      )}
+
+      <!-- Article content -->
+      <div class="prose-custom">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

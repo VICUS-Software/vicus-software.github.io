@@ -1,0 +1,177 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+import { HUBSPOT_CONFIG } from '../config/hubspot';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = useTranslations(lang);
+---
+
+{compact ? (
+  <form id="newsletter-form-compact" class="flex flex-col sm:flex-row gap-3">
+    <input
+      type="email"
+      name="email"
+      required
+      class="form-input flex-1"
+      placeholder={lang === 'de' ? 'Ihre E-Mail-Adresse' : 'Your email address'}
+    />
+    <button type="submit" class="btn btn-primary whitespace-nowrap">
+      {t('btn.subscribe')}
+    </button>
+    <div id="newsletter-compact-status" class="hidden text-sm"></div>
+  </form>
+) : (
+  <form
+    id="newsletter-form"
+    class="space-y-6"
+    data-hubspot-portal={HUBSPOT_CONFIG.portalId}
+    data-hubspot-form={HUBSPOT_CONFIG.formIds.newsletter}
+  >
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="form-group">
+        <label for="nl-name" class="form-label">{t('form.name')}</label>
+        <input
+          type="text"
+          id="nl-name"
+          name="name"
+          class="form-input"
+        />
+      </div>
+      <div class="form-group">
+        <label for="nl-email" class="form-label">
+          {t('form.email')} <span class="text-primary">*</span>
+        </label>
+        <input
+          type="email"
+          id="nl-email"
+          name="email"
+          required
+          class="form-input"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nl-company" class="form-label">{t('form.company')}</label>
+      <input
+        type="text"
+        id="nl-company"
+        name="company"
+        class="form-input"
+      />
+    </div>
+
+    <div class="form-group">
+      <p class="form-label mb-3">{lang === 'de' ? 'Interessen' : 'Interests'}</p>
+      <div class="space-y-2">
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" name="interests" value="buildings" class="w-4 h-4 rounded border-foreground/30 text-primary focus:ring-primary" />
+          <span class="text-foreground/80">VICUS BUILDINGS</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" name="interests" value="districts" class="w-4 h-4 rounded border-foreground/30 text-primary focus:ring-primary" />
+          <span class="text-foreground/80">VICUS DISTRICTS</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" name="interests" value="general" class="w-4 h-4 rounded border-foreground/30 text-primary focus:ring-primary" />
+          <span class="text-foreground/80">{lang === 'de' ? 'Allgemeine Updates' : 'General updates'}</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="flex items-start gap-3 cursor-pointer">
+        <input type="checkbox" name="privacy" required class="mt-1 w-4 h-4 rounded border-foreground/30 text-primary focus:ring-primary" />
+        <span class="text-sm text-foreground/70">
+          {lang === 'de'
+            ? 'Ich stimme zu, dass VICUS Software mir Newsletter per E-Mail senden darf. Ich kann mich jederzeit abmelden.'
+            : 'I agree that VICUS Software may send me newsletters via email. I can unsubscribe at any time.'} <span class="text-primary">*</span>
+        </span>
+      </label>
+    </div>
+
+    <div id="newsletter-form-status" class="hidden p-4 rounded-lg"></div>
+
+    <button type="submit" class="btn btn-primary w-full md:w-auto">
+      {t('btn.subscribe')}
+    </button>
+  </form>
+)}
+
+<script>
+  // Full form
+  const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const statusEl = document.getElementById('newsletter-form-status');
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '...';
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      if (statusEl) {
+        statusEl.className = 'p-4 rounded-lg bg-primary/20 text-primary';
+        statusEl.textContent = document.documentElement.lang === 'de'
+          ? 'Vielen Dank! Sie wurden erfolgreich angemeldet.'
+          : 'Thank you! You have been successfully subscribed.';
+        statusEl.classList.remove('hidden');
+      }
+
+      form.reset();
+    } catch (error) {
+      if (statusEl) {
+        statusEl.className = 'p-4 rounded-lg bg-red-500/20 text-red-400';
+        statusEl.textContent = document.documentElement.lang === 'de'
+          ? 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.'
+          : 'An error occurred. Please try again.';
+        statusEl.classList.remove('hidden');
+      }
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = document.documentElement.lang === 'de' ? 'Anmelden' : 'Subscribe';
+    }
+  });
+
+  // Compact form
+  const compactForm = document.getElementById('newsletter-form-compact') as HTMLFormElement;
+  compactForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const statusEl = document.getElementById('newsletter-compact-status');
+    const submitBtn = compactForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '...';
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      if (statusEl) {
+        statusEl.className = 'text-sm text-primary';
+        statusEl.textContent = document.documentElement.lang === 'de' ? 'Erfolgreich angemeldet!' : 'Successfully subscribed!';
+        statusEl.classList.remove('hidden');
+      }
+
+      compactForm.reset();
+    } catch (error) {
+      if (statusEl) {
+        statusEl.className = 'text-sm text-red-400';
+        statusEl.textContent = document.documentElement.lang === 'de' ? 'Fehler aufgetreten' : 'Error occurred';
+        statusEl.classList.remove('hidden');
+      }
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = document.documentElement.lang === 'de' ? 'Anmelden' : 'Subscribe';
+    }
+  });
+</script>

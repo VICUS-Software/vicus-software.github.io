@@ -1,0 +1,56 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+
+const lang = 'de';
+---
+
+<PageLayout
+  title="Newsletter"
+  description="Abonnieren Sie den VICUS Newsletter und erhalten Sie Updates zu Software, Tutorials und Events."
+  heroSubtitle="Bleiben Sie informiert"
+>
+  <section class="section">
+    <div class="container-custom max-w-2xl">
+      <div class="card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Newsletter abonnieren</h2>
+        <p class="text-foreground/70 mb-8">
+          Erhalten Sie regelmäßig Updates zu neuen Features, Tutorials, Webinaren und
+          Branchenneuigkeiten direkt in Ihr Postfach.
+        </p>
+
+        <div class="mb-8 p-4 rounded-lg bg-primary/10 border border-primary/20">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Was Sie erwartet:</h3>
+          <ul class="space-y-2 text-foreground/80">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Informationen zu neuen Software-Versionen
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Tutorials und Best Practices
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Einladungen zu Webinaren und Events
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Branchenneuigkeiten zur nachhaltigen Planung
+            </li>
+          </ul>
+        </div>
+
+        <NewsletterForm />
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,165 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const jobs = [
+  {
+    title: 'Softwareentwickler/in (C++/Qt)',
+    type: 'Vollzeit',
+    location: 'Dresden / Remote',
+    description: 'Entwicklung und Optimierung unserer Simulationssoftware mit Fokus auf Performance und Benutzerfreundlichkeit.',
+    requirements: [
+      'Erfahrung in C++ und Qt',
+      'Kenntnisse in numerischen Methoden von Vorteil',
+      'Teamfähigkeit und eigenverantwortliches Arbeiten'
+    ]
+  },
+  {
+    title: 'Bauingenieur/in - Thermische Simulation',
+    type: 'Vollzeit',
+    location: 'Dresden',
+    description: 'Durchführung von Gebäudesimulationen und Unterstützung unserer Kunden bei der Anwendung der Software.',
+    requirements: [
+      'Studium Bauingenieurwesen, Energietechnik oder vergleichbar',
+      'Interesse an thermischer Gebäudesimulation',
+      'Gute Kommunikationsfähigkeiten'
+    ]
+  },
+  {
+    title: 'Werkstudent/in Marketing',
+    type: 'Teilzeit (20h)',
+    location: 'Dresden / Remote',
+    description: 'Unterstützung bei Marketing-Aktivitäten, Content-Erstellung und Social Media.',
+    requirements: [
+      'Studium Marketing, Kommunikation oder vergleichbar',
+      'Affinität zu technischen Themen',
+      'Kreativität und selbstständiges Arbeiten'
+    ]
+  }
+];
+
+const benefits = [
+  {
+    icon: 'home',
+    title: 'Flexible Arbeit',
+    description: 'Homeoffice-Möglichkeit und flexible Arbeitszeiten'
+  },
+  {
+    icon: 'growth',
+    title: 'Weiterbildung',
+    description: 'Budget für Konferenzen, Kurse und persönliche Entwicklung'
+  },
+  {
+    icon: 'team',
+    title: 'Tolles Team',
+    description: 'Interdisziplinäres Team mit flachen Hierarchien'
+  },
+  {
+    icon: 'impact',
+    title: 'Sinnvolle Arbeit',
+    description: 'Beitrag zu nachhaltiger Gebäudeplanung'
+  }
+];
+---
+
+<PageLayout
+  title="Karriere"
+  description="Karriere bei VICUS Software. Entdecken Sie offene Stellen und werden Sie Teil unseres Teams."
+  heroSubtitle="Gestalten Sie die Zukunft der nachhaltigen Planung"
+>
+  <!-- Benefits -->
+  <section class="section">
+    <div class="container-custom">
+      <h2 class="text-foreground text-center mb-12">Warum VICUS?</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {benefits.map((benefit) => (
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              {benefit.icon === 'home' && (
+                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              )}
+              {benefit.icon === 'growth' && (
+                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              )}
+              {benefit.icon === 'team' && (
+                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              )}
+              {benefit.icon === 'impact' && (
+                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
+            <p class="text-foreground/70">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Job Listings -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <h2 class="text-foreground text-center mb-12">Offene Stellen</h2>
+      <div class="space-y-6 max-w-4xl mx-auto">
+        {jobs.map((job) => (
+          <div class="card">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+              <div>
+                <h3 class="text-xl font-semibold text-foreground">{job.title}</h3>
+                <div class="flex flex-wrap gap-3 mt-2">
+                  <span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm">
+                    {job.type}
+                  </span>
+                  <span class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary text-sm">
+                    {job.location}
+                  </span>
+                </div>
+              </div>
+              <a href="/de/bewerbung" class="btn btn-primary">
+                {t('btn.apply')}
+              </a>
+            </div>
+            <p class="text-foreground/70 mb-4">{job.description}</p>
+            <div>
+              <p class="text-sm font-medium text-foreground mb-2">Anforderungen:</p>
+              <ul class="space-y-1">
+                {job.requirements.map((req) => (
+                  <li class="flex items-start gap-2 text-foreground/70 text-sm">
+                    <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {req}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Speculative Application -->
+  <section class="section">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Keine passende Stelle dabei?</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Wir freuen uns auch über Initiativbewerbungen. Zeigen Sie uns, was Sie können!
+      </p>
+      <a href="/de/bewerbung" class="btn btn-secondary">
+        Initiativbewerbung senden
+      </a>
+    </div>
+  </section>
+</PageLayout>

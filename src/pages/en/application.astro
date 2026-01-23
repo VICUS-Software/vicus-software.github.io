@@ -1,0 +1,28 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ApplicationForm from '../../components/ApplicationForm.astro';
+
+const lang = 'en';
+
+// Get position from URL params if available
+const position = Astro.url.searchParams.get('position') || '';
+---
+
+<PageLayout
+  title="Application"
+  description="Apply to VICUS Software. We look forward to receiving your documents."
+  heroSubtitle="Become part of our team"
+>
+  <section class="section">
+    <div class="container-custom max-w-2xl">
+      <div class="card">
+        <h2 class="text-2xl font-bold text-foreground mb-2">Application Form</h2>
+        <p class="text-foreground/70 mb-8">
+          Fill out the following form and upload your application documents.
+          We will get back to you as soon as possible.
+        </p>
+        <ApplicationForm position={position} />
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,187 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const playlists = [
+  {
+    title: 'VICUS Basics',
+    description: 'Grundlagen und erste Schritte mit VICUS',
+    playlistId: 'PLly1k7uPVIxNIO2T0Me-c66BPCBkVFWbi',
+    videos: [
+      { title: 'Einführung in VICUS Districts', id: 'k7zjsrNO-7I', duration: '8:45' },
+      { title: 'Netzplan als DXF erzeugen', id: 'gasCt28CoFI', duration: '3:17' },
+      { title: 'PDF importieren', id: '14CkR-fgY4k', duration: '3:11' },
+      { title: 'DXF importieren', id: 'CWSk5oCuqaE', duration: '3:00' },
+    ]
+  },
+  {
+    title: 'Fernwärme- & Nahwärmenetze',
+    description: 'Planung und Simulation von klassischen Wärmenetzen',
+    playlistId: 'PLly1k7uPVIxOJntKyIbf7sP7_N5ltUF7Z',
+    videos: [
+      { title: 'Netz erstellen und Rohre dimensionieren', id: 'k8CRFdqW834', duration: '7:48' },
+      { title: 'Stationäre Berechnung & Pumpe dimensionieren', id: 'ykzmWrQiplk', duration: '5:31' },
+      { title: 'Thermo-hydraulische Simulation', id: 'qJ746ZeybnE', duration: '8:17' },
+      { title: 'Einfluss Temperaturdifferenz auf Druckverlust', id: '1A1QioRAogE', duration: '6:25' },
+      { title: 'Heizkurve einstellen & Austrittstemperatur begrenzen', id: 'km5dVhwElu4', duration: '10:00' },
+      { title: 'Detaillierte Übergabestationen & Vorlauftemperatur senken', id: 'Qc14vRpdZF8', duration: '11:49' },
+      { title: 'Schlechtpunktregelung', id: 'wMWI181aLYU', duration: '6:22' },
+      { title: 'Dimensionierung bei mehreren Energiezentralen', id: 'iKueX4Q_8nE', duration: '3:48' },
+      { title: 'Simulation bei mehreren Energiezentralen', id: 'bd3fkLku7f0', duration: '7:41' },
+    ]
+  },
+  {
+    title: 'Kalte Nahwärme',
+    description: 'Simulation von kalten Nahwärmenetzen mit Wärmepumpen',
+    playlistId: 'PLly1k7uPVIxMZckwDujKMrTeXns5VbvkQ',
+    videos: [
+      { title: 'Netz erstellen und dimensionieren', id: 'qirGE1MTVsI', duration: '8:16' },
+      { title: 'Stationäre Berechnung & Dimensionierung prüfen', id: 'NF3XSOiaml8', duration: '8:19' },
+      { title: 'Passives Netz simulieren & Hydraulik prüfen', id: 'GlM9-rt0UN8', duration: '6:08' },
+      { title: 'Jahressimulation & Wärmegewinne des Netzes', id: 'KcM8NKYizS0', duration: '13:30' },
+      { title: 'Aktives Netz mit zentraler Pumpe simulieren', id: 'MDUEAWHPKWY', duration: '6:45' },
+      { title: 'Erdwärmekollektoren dimensionieren & simulieren', id: 'TLoFtF4ehEw', duration: '11:36' },
+    ]
+  }
+];
+
+const resources = [
+  {
+    title: 'Dokumentation',
+    description: 'Ausführliche technische Dokumentation zu allen Funktionen.',
+    href: 'https://sim-vicus.de',
+    icon: 'book'
+  },
+  {
+    title: 'GitHub Repository',
+    description: 'Quellcode und Issue-Tracker auf GitHub.',
+    href: 'https://github.com/ghorwin/SIM-VICUS',
+    icon: 'code'
+  },
+  {
+    title: 'YouTube Kanal',
+    description: 'Alle Video-Tutorials und Webinare.',
+    href: 'https://www.youtube.com/@vicus-software',
+    icon: 'video'
+  }
+];
+---
+
+<PageLayout
+  title="Tutorials & Hilfe"
+  description="Lernen Sie VICUS Software kennen. Video-Tutorials, Dokumentation und Hilferessourcen für Gebäudesimulation und Wärmenetzplanung."
+  heroSubtitle="Alles was Sie für den Einstieg brauchen"
+>
+  <!-- Playlists -->
+  {playlists.map((playlist, playlistIndex) => (
+    <section class:list={["section", playlistIndex % 2 === 1 ? "bg-secondary/30" : ""]}>
+      <div class="container-custom">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+          <div>
+            <h2 class="text-foreground mb-2">{playlist.title}</h2>
+            <p class="text-foreground/70">{playlist.description}</p>
+          </div>
+          <a
+            href={`https://www.youtube.com/playlist?list=${playlist.playlistId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary"
+          >
+            Playlist auf YouTube
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {playlist.videos.map((video, index) => (
+            <a
+              href={`https://www.youtube.com/watch?v=${video.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card group cursor-pointer"
+            >
+              <div class="aspect-video rounded-lg overflow-hidden bg-background mb-4 relative">
+                <img
+                  src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                  alt={video.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div class="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-background ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="absolute bottom-2 right-2 px-2 py-1 rounded bg-black/80 text-white text-xs">
+                  {video.duration}
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary text-sm font-medium flex items-center justify-center">
+                  {index + 1}
+                </span>
+                <h3 class="text-base font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                  {video.title}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Resources -->
+  <section class="section">
+    <div class="container-custom">
+      <h2 class="text-foreground text-center mb-12">Weitere Ressourcen</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {resources.map((resource) => (
+          <a
+            href={resource.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card group"
+          >
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              {resource.icon === 'book' && (
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              )}
+              {resource.icon === 'code' && (
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              )}
+              {resource.icon === 'video' && (
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+              {resource.title}
+            </h3>
+            <p class="text-foreground/70">{resource.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Support CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Brauchen Sie weitere Hilfe?</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Unser Team steht Ihnen gerne für Fragen und individuelle Unterstützung zur Verfügung.
+      </p>
+      <a href="/de/kontakt" class="btn btn-primary">{t('btn.contact')}</a>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'tertiary';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  type = 'button',
+  ...rest
+} = Astro.props;
+
+const baseStyles = 'btn';
+const variantStyles = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  tertiary: 'btn-tertiary',
+};
+const sizeStyles = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3',
+  lg: 'px-8 py-4 text-lg',
+};
+
+const classes = [baseStyles, variantStyles[variant], sizeStyles[size], className].join(' ');
+---
+
+{href ? (
+  <a href={href} class={classes} {...rest}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes} {...rest}>
+    <slot />
+  </button>
+)}

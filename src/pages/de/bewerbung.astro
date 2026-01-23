@@ -1,0 +1,28 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ApplicationForm from '../../components/ApplicationForm.astro';
+
+const lang = 'de';
+
+// Get position from URL params if available
+const position = Astro.url.searchParams.get('position') || '';
+---
+
+<PageLayout
+  title="Bewerbung"
+  description="Bewerben Sie sich bei VICUS Software. Wir freuen uns auf Ihre Unterlagen."
+  heroSubtitle="Werden Sie Teil unseres Teams"
+>
+  <section class="section">
+    <div class="container-custom max-w-2xl">
+      <div class="card">
+        <h2 class="text-2xl font-bold text-foreground mb-2">Bewerbungsformular</h2>
+        <p class="text-foreground/70 mb-8">
+          Füllen Sie das folgende Formular aus und laden Sie Ihre Bewerbungsunterlagen hoch.
+          Wir melden uns schnellstmöglich bei Ihnen.
+        </p>
+        <ApplicationForm position={position} />
+      </div>
+    </div>
+  </section>
+</PageLayout>

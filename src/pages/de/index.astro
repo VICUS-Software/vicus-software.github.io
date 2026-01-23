@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const features = [
+  {
+    icon: 'energy',
+    title: 'Energieeffizienz',
+    description: 'Optimieren Sie den Energieverbrauch Ihrer Gebäude durch präzise Simulationen und datengestützte Analysen.'
+  },
+  {
+    icon: 'comfort',
+    title: 'Raumkomfort',
+    description: 'Gewährleisten Sie optimalen thermischen Komfort für Gebäudenutzer bei gleichzeitiger Energieeinsparung.'
+  },
+  {
+    icon: 'sustainability',
+    title: 'Nachhaltigkeit',
+    description: 'Planen Sie umweltfreundliche Gebäude und Quartiere mit reduzierten CO2-Emissionen.'
+  },
+  {
+    icon: 'simulation',
+    title: 'Präzise Simulation',
+    description: 'Nutzen Sie hochmoderne thermodynamische Simulationsmodelle für zuverlässige Ergebnisse.'
+  },
+  {
+    icon: 'network',
+    title: 'Wärmenetze',
+    description: 'Planen und optimieren Sie Wärmenetze für effiziente Quartiersversorgung.'
+  },
+  {
+    icon: 'gis',
+    title: 'GIS-Integration',
+    description: 'Nahtlose Integration von Geodaten für standortbezogene Analysen und Planungen.'
+  }
+];
+
+const products = [
+  {
+    title: 'VICUS BUILDINGS',
+    description: 'Umfassende Software für die energetische Gebäudesimulation. Analysieren Sie thermisches Verhalten, Energieverbrauch und Raumkomfort.',
+    image: '/images/screenshots/vicus-buildings-main.png',
+    href: '/de/vicus-buildings',
+    features: [
+      'Thermische Gebäudesimulation',
+      'Energiebedarfsberechnung',
+      'Komfortanalysen',
+      'HVAC-Systemsimulation'
+    ]
+  },
+  {
+    title: 'VICUS DISTRICTS',
+    description: 'Spezialsoftware für die Planung und Simulation von Wärmenetzen und Quartiersenergie.',
+    image: '/images/screenshots/vicus-districts-main.png',
+    href: '/de/vicus-districts',
+    features: [
+      'Wärmenetzplanung',
+      'Thermohydraulische Simulation',
+      'GIS-Integration',
+      'Lastprofilanalyse'
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Startseite"
+  description="VICUS Software - Professionelle Software für nachhaltige Gebäudesimulation und Quartiersplanung. Energieeffizienz und Komfort durch Simulation."
+>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Products Section -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h2 class="text-foreground mb-4">Unsere Software</h2>
+        <p class="text-xl text-foreground/70 max-w-2xl mx-auto">
+          Professionelle Werkzeuge für nachhaltige Planung und Simulation
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        {products.map((product) => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <Features
+    title="Warum VICUS?"
+    subtitle="Unsere Software bietet Ihnen alle Werkzeuge für erfolgreiche nachhaltige Planung"
+    features={features}
+  />
+
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="card bg-gradient-to-r from-primary/20 to-tertiary/20 text-center py-16">
+        <h2 class="text-foreground mb-4">Bereit für nachhaltige Planung?</h2>
+        <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+          Kontaktieren Sie uns für eine persönliche Demo oder laden Sie die Software direkt herunter.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/de/demo" class="btn btn-primary">
+            {t('btn.demo')}
+          </a>
+          <a href="/de/kontakt" class="btn btn-secondary">
+            {t('btn.contact')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

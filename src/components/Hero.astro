@@ -1,0 +1,77 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  showCta?: boolean;
+}
+
+const { title, subtitle, showCta = true } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = useTranslations(lang);
+---
+
+<section class="relative min-h-[90vh] flex items-center overflow-hidden">
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-br from-background via-background to-tertiary/20"></div>
+
+  <!-- Animated grid pattern -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(106, 220, 173, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(106, 220, 173, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="container-custom relative z-10 pt-20">
+    <div class="max-w-4xl">
+      <h1 class="text-foreground mb-6 animate-fade-in">
+        {title || t('hero.tagline')}
+      </h1>
+      <p class="text-xl md:text-2xl text-foreground/70 mb-10 max-w-2xl animate-fade-in animation-delay-200">
+        {subtitle || t('hero.subtitle')}
+      </p>
+      {showCta && (
+        <div class="flex flex-wrap gap-4 animate-fade-in animation-delay-400">
+          <a href={`/${lang}/demo`} class="btn btn-primary">
+            {t('btn.demo')}
+          </a>
+          <a href={`/${lang}/vicus-buildings`} class="btn btn-secondary">
+            {t('btn.learnMore')}
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Decorative element -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full opacity-30 hidden lg:block">
+    <div class="absolute inset-0 bg-gradient-to-l from-primary/20 to-transparent rounded-l-full blur-3xl"></div>
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+</style>

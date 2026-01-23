@@ -1,0 +1,23 @@
+---
+interface Props {
+  class?: string;
+  background?: 'default' | 'dark' | 'gradient';
+  id?: string;
+}
+
+const { class: className = '', background = 'default', id } = Astro.props;
+
+const bgStyles = {
+  default: '',
+  dark: 'bg-secondary/30',
+  gradient: 'bg-gradient-to-b from-background to-secondary/20',
+};
+
+const classes = ['section', bgStyles[background], className].filter(Boolean).join(' ');
+---
+
+<section class={classes} id={id}>
+  <div class="container-custom">
+    <slot />
+  </div>
+</section>

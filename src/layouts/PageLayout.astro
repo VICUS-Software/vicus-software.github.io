@@ -1,0 +1,26 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  showHero?: boolean;
+  heroTitle?: string;
+  heroSubtitle?: string;
+}
+
+const { title, description, image, showHero = true, heroTitle, heroSubtitle } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  {showHero && (
+    <section class="bg-gradient-to-b from-background to-secondary/20 pt-24 pb-16">
+      <div class="container-custom">
+        <h1 class="text-foreground mb-4">{heroTitle || title}</h1>
+        {heroSubtitle && <p class="text-xl text-foreground/70 max-w-2xl">{heroSubtitle}</p>}
+      </div>
+    </section>
+  )}
+  <slot />
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  href: string;
+  features?: string[];
+}
+
+const { title, description, image, href, features = [] } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = useTranslations(lang);
+---
+
+<div class="card hover-lift group">
+  {image && (
+    <div class="relative overflow-hidden rounded-lg mb-6 aspect-video bg-background">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <h3 class="text-2xl font-bold text-foreground mb-3">{title}</h3>
+  <p class="text-foreground/70 mb-6">{description}</p>
+
+  {features.length > 0 && (
+    <ul class="space-y-2 mb-6">
+      {features.map((feature) => (
+        <li class="flex items-center gap-2 text-foreground/80">
+          <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          {feature}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <a href={href} class="btn btn-secondary w-full">
+    {t('btn.learnMore')}
+  </a>
+</div>

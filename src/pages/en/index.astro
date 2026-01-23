@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const features = [
+  {
+    icon: 'energy',
+    title: 'Energy Efficiency',
+    description: 'Optimize energy consumption of your buildings through precise simulations and data-driven analysis.'
+  },
+  {
+    icon: 'comfort',
+    title: 'Room Comfort',
+    description: 'Ensure optimal thermal comfort for building occupants while saving energy.'
+  },
+  {
+    icon: 'sustainability',
+    title: 'Sustainability',
+    description: 'Plan environmentally friendly buildings and districts with reduced CO2 emissions.'
+  },
+  {
+    icon: 'simulation',
+    title: 'Precise Simulation',
+    description: 'Use state-of-the-art thermodynamic simulation models for reliable results.'
+  },
+  {
+    icon: 'network',
+    title: 'Heat Networks',
+    description: 'Plan and optimize heat networks for efficient district supply.'
+  },
+  {
+    icon: 'gis',
+    title: 'GIS Integration',
+    description: 'Seamless integration of geodata for location-based analysis and planning.'
+  }
+];
+
+const products = [
+  {
+    title: 'VICUS BUILDINGS',
+    description: 'Comprehensive software for energy-efficient building simulation. Analyze thermal behavior, energy consumption, and room comfort.',
+    image: '/images/screenshots/vicus-buildings-main.png',
+    href: '/en/vicus-buildings',
+    features: [
+      'Thermal building simulation',
+      'Energy demand calculation',
+      'Comfort analysis',
+      'HVAC system simulation'
+    ]
+  },
+  {
+    title: 'VICUS DISTRICTS',
+    description: 'Specialized software for planning and simulating heat networks and district energy systems.',
+    image: '/images/screenshots/vicus-districts-main.png',
+    href: '/en/vicus-districts',
+    features: [
+      'Heat network planning',
+      'Thermohydraulic simulation',
+      'GIS integration',
+      'Load profile analysis'
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Home"
+  description="VICUS Software - Professional software for sustainable building simulation and district planning. Energy efficiency and comfort through simulation."
+>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Products Section -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h2 class="text-foreground mb-4">Our Software</h2>
+        <p class="text-xl text-foreground/70 max-w-2xl mx-auto">
+          Professional tools for sustainable planning and simulation
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        {products.map((product) => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <Features
+    title="Why VICUS?"
+    subtitle="Our software provides all the tools you need for successful sustainable planning"
+    features={features}
+  />
+
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="card bg-gradient-to-r from-primary/20 to-tertiary/20 text-center py-16">
+        <h2 class="text-foreground mb-4">Ready for Sustainable Planning?</h2>
+        <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+          Contact us for a personal demo or download the software directly.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/en/demo" class="btn btn-primary">
+            {t('btn.demo')}
+          </a>
+          <a href="/en/contact" class="btn btn-secondary">
+            {t('btn.contact')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const lang = 'en';
+
+// Get all English blog posts, sorted by date
+const posts = (await getCollection('blog', ({ data }) => {
+  return data.lang === 'en' && !data.draft;
+})).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<PageLayout
+  title="Blog"
+  description="News, tutorials, and insights about building simulation and sustainable planning."
+  heroSubtitle="News and insights"
+>
+  <section class="section">
+    <div class="container-custom">
+      {posts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              image={post.data.image}
+              href={`/en/blog/${post.slug.replace('en/', '')}`}
+              pubDate={post.data.pubDate}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-foreground/70 text-xl mb-4">No blog posts yet.</p>
+          <p class="text-foreground/50">Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</PageLayout>

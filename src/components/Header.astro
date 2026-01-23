@@ -1,0 +1,140 @@
+---
+import { getLangFromUrl, useTranslations, getTranslatedPath } from '../i18n/utils';
+import { languages, type Language } from '../i18n/languages';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+
+const navigation = [
+  {
+    label: t('nav.software'),
+    children: [
+      { label: t('nav.buildings'), href: `/${lang}/vicus-buildings` },
+      { label: t('nav.districts'), href: `/${lang}/vicus-districts` },
+    ]
+  },
+  { label: t('nav.tutorials'), href: `/${lang}/${lang === 'de' ? 'tutorials-hilfe' : 'tutorials-help'}` },
+  { label: t('nav.blog'), href: `/${lang}/blog` },
+  { label: t('nav.contact'), href: `/${lang}/${lang === 'de' ? 'kontakt' : 'contact'}` },
+  { label: t('nav.careers'), href: `/${lang}/${lang === 'de' ? 'karriere' : 'careers'}` },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-foreground/10">
+  <div class="container-custom">
+    <nav class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href={`/${lang}`} class="flex items-center">
+        <span class="text-2xl font-bold text-primary">VICUS</span>
+        <span class="text-2xl font-bold text-foreground ml-1">Software</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-8">
+        {navigation.map((item) => (
+          item.children ? (
+            <div class="relative group">
+              <button class="flex items-center gap-1 text-foreground/80 hover:text-primary transition-colors">
+                {item.label}
+                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="bg-secondary rounded-lg shadow-xl border border-foreground/10 py-2 min-w-48">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-2 text-foreground/80 hover:text-primary hover:bg-background/50 transition-colors"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class:list={[
+                "text-foreground/80 hover:text-primary transition-colors",
+                currentPath.startsWith(item.href!) && "text-primary"
+              ]}
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+      </div>
+
+      <!-- Right side: Language + CTA -->
+      <div class="hidden lg:flex items-center gap-4">
+        <LanguageSwitcher />
+        <a href={`/${lang}/demo`} class="btn btn-primary">
+          {t('btn.demo')}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden pb-6">
+      <div class="flex flex-col gap-4">
+        {navigation.map((item) => (
+          item.children ? (
+            <div class="space-y-2">
+              <span class="text-foreground/60 text-sm font-medium">{item.label}</span>
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class="block pl-4 py-2 text-foreground/80 hover:text-primary transition-colors"
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class="py-2 text-foreground/80 hover:text-primary transition-colors"
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+        <div class="pt-4 flex flex-col gap-4">
+          <LanguageSwitcher />
+          <a href={`/${lang}/demo`} class="btn btn-primary w-full">
+            {t('btn.demo')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+</script>

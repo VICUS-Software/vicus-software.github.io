@@ -1,0 +1,142 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DemoForm from '../../components/DemoForm.astro';
+import DownloadForm from '../../components/DownloadForm.astro';
+import LicenseForm from '../../components/LicenseForm.astro';
+
+const lang = 'de';
+---
+
+<PageLayout
+  title="Demo buchen"
+  description="Buchen Sie eine persönliche Demo, laden Sie die Software herunter oder fordern Sie eine Lizenz an."
+  heroSubtitle="Entdecken Sie VICUS Software"
+>
+  <section class="section">
+    <div class="container-custom">
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-2 mb-12 justify-center" role="tablist">
+        <button
+          role="tab"
+          aria-selected="true"
+          aria-controls="demo-panel"
+          id="demo-tab"
+          class="tab-btn active px-6 py-3 rounded-lg font-medium transition-all"
+        >
+          Demo buchen
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="download-panel"
+          id="download-tab"
+          class="tab-btn px-6 py-3 rounded-lg font-medium transition-all"
+        >
+          Download
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="license-panel"
+          id="license-tab"
+          class="tab-btn px-6 py-3 rounded-lg font-medium transition-all"
+        >
+          Lizenz anfragen
+        </button>
+      </div>
+
+      <!-- Tab Panels -->
+      <div class="max-w-2xl mx-auto">
+        <!-- Demo Panel -->
+        <div
+          role="tabpanel"
+          id="demo-panel"
+          aria-labelledby="demo-tab"
+          class="tab-panel"
+        >
+          <div class="card">
+            <h2 class="text-2xl font-bold text-foreground mb-2">Persönliche Demo</h2>
+            <p class="text-foreground/70 mb-8">
+              Erleben Sie VICUS in einer persönlichen Demo-Session. Wir zeigen Ihnen
+              die Möglichkeiten der Software und beantworten Ihre Fragen.
+            </p>
+            <DemoForm />
+          </div>
+        </div>
+
+        <!-- Download Panel -->
+        <div
+          role="tabpanel"
+          id="download-panel"
+          aria-labelledby="download-tab"
+          class="tab-panel hidden"
+        >
+          <div class="card">
+            <h2 class="text-2xl font-bold text-foreground mb-2">Software Download</h2>
+            <p class="text-foreground/70 mb-8">
+              Laden Sie die aktuelle Version von VICUS herunter.
+              Nach Ihrer Registrierung erhalten Sie den Download-Link per E-Mail.
+            </p>
+            <DownloadForm />
+          </div>
+        </div>
+
+        <!-- License Panel -->
+        <div
+          role="tabpanel"
+          id="license-panel"
+          aria-labelledby="license-tab"
+          class="tab-panel hidden"
+        >
+          <div class="card">
+            <h2 class="text-2xl font-bold text-foreground mb-2">Lizenz anfragen</h2>
+            <p class="text-foreground/70 mb-8">
+              Fordern Sie eine Lizenz für den produktiven Einsatz an.
+              Wir erstellen Ihnen ein individuelles Angebot.
+            </p>
+            <LicenseForm />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .tab-btn {
+    @apply bg-secondary/50 text-foreground/70 hover:text-foreground hover:bg-secondary;
+  }
+
+  .tab-btn.active {
+    @apply bg-primary text-background;
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      // Deactivate all tabs
+      tabs.forEach((t) => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('active');
+      });
+
+      // Hide all panels
+      panels.forEach((p) => {
+        p.classList.add('hidden');
+      });
+
+      // Activate clicked tab
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.add('active');
+
+      // Show corresponding panel
+      const panelId = tab.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId!);
+      panel?.classList.remove('hidden');
+    });
+  });
+</script>
