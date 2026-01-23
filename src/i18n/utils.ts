@@ -14,7 +14,16 @@ export function url(path: string): string {
 }
 
 export function getLangFromUrl(astroUrl: URL): Language {
-  const [, lang] = astroUrl.pathname.split('/');
+  // Remove base path before parsing language
+  const basePath = import.meta.env.BASE_URL || '/';
+  let pathname = astroUrl.pathname;
+
+  // Strip base path prefix if present
+  if (basePath !== '/' && pathname.startsWith(basePath)) {
+    pathname = pathname.slice(basePath.length - 1); // Keep leading slash
+  }
+
+  const [, lang] = pathname.split('/');
   if (lang in ui) return lang as Language;
   return defaultLang;
 }
