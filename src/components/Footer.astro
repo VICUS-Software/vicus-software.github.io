@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, url } from '../i18n/utils';
 import type { Language } from '../i18n/languages';
 
 const lang = getLangFromUrl(Astro.url) as Language;
@@ -8,19 +8,19 @@ const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   products: [
-    { label: 'VICUS BUILDINGS', href: `/${lang}/vicus-buildings` },
-    { label: 'VICUS DISTRICTS', href: `/${lang}/vicus-districts` },
+    { label: 'VICUS BUILDINGS', href: url(`/${lang}/vicus-buildings`) },
+    { label: 'VICUS DISTRICTS', href: url(`/${lang}/vicus-districts`) },
   ],
   company: [
-    { label: t('nav.tutorials'), href: `/${lang}/${lang === 'de' ? 'tutorials-hilfe' : 'tutorials-help'}` },
-    { label: t('nav.blog'), href: `/${lang}/blog` },
-    { label: t('nav.contact'), href: `/${lang}/${lang === 'de' ? 'kontakt' : 'contact'}` },
-    { label: t('nav.careers'), href: `/${lang}/${lang === 'de' ? 'karriere' : 'careers'}` },
+    { label: t('nav.tutorials'), href: url(`/${lang}/${lang === 'de' ? 'tutorials-hilfe' : 'tutorials-help'}`) },
+    { label: t('nav.blog'), href: url(`/${lang}/blog`) },
+    { label: t('nav.contact'), href: url(`/${lang}/${lang === 'de' ? 'kontakt' : 'contact'}`) },
+    { label: t('nav.careers'), href: url(`/${lang}/${lang === 'de' ? 'karriere' : 'careers'}`) },
   ],
   legal: [
-    { label: t('footer.impressum'), href: `/${lang}/${lang === 'de' ? 'impressum' : 'imprint'}` },
-    { label: t('footer.privacy'), href: `/${lang}/${lang === 'de' ? 'datenschutz' : 'privacy'}` },
-    { label: t('footer.newsletter'), href: `/${lang}/newsletter` },
+    { label: t('footer.impressum'), href: url(`/${lang}/${lang === 'de' ? 'impressum' : 'imprint'}`) },
+    { label: t('footer.privacy'), href: url(`/${lang}/${lang === 'de' ? 'datenschutz' : 'privacy'}`) },
+    { label: t('footer.newsletter'), href: url(`/${lang}/newsletter`) },
   ],
 };
 
@@ -36,7 +36,7 @@ const socialLinks = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
       <!-- Brand -->
       <div class="lg:col-span-2">
-        <a href={`/${lang}`} class="inline-flex items-center mb-6">
+        <a href={url(`/${lang}`)} class="inline-flex items-center mb-6">
           <span class="text-2xl font-bold text-primary">VICUS</span>
           <span class="text-2xl font-bold text-foreground ml-1">Software</span>
         </a>

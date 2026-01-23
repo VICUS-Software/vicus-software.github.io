@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import Features from '../../components/Features.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, url } from '../../i18n/utils';
 
 const lang = 'de';
 const t = useTranslations(lang);
@@ -45,8 +45,8 @@ const products = [
   {
     title: 'VICUS BUILDINGS',
     description: 'Umfassende Software für die energetische Gebäudesimulation. Analysieren Sie thermisches Verhalten, Energieverbrauch und Raumkomfort.',
-    image: '/images/screenshots/vicus-buildings-main.png',
-    href: '/de/vicus-buildings',
+    image: url('/images/screenshots/vicus-buildings-main.png'),
+    href: url('/de/vicus-buildings'),
     features: [
       'Thermische Gebäudesimulation',
       'Energiebedarfsberechnung',
@@ -57,8 +57,8 @@ const products = [
   {
     title: 'VICUS DISTRICTS',
     description: 'Spezialsoftware für die Planung und Simulation von Wärmenetzen und Quartiersenergie.',
-    image: '/images/screenshots/vicus-districts-main.png',
-    href: '/de/vicus-districts',
+    image: url('/images/screenshots/vicus-districts-main.png'),
+    href: url('/de/vicus-districts'),
     features: [
       'Wärmenetzplanung',
       'Thermohydraulische Simulation',
@@ -109,10 +109,10 @@ const products = [
           Kontaktieren Sie uns für eine persönliche Demo oder laden Sie die Software direkt herunter.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="/de/demo" class="btn btn-primary">
+          <a href={url('/de/demo')} class="btn btn-primary">
             {t('btn.demo')}
           </a>
-          <a href="/de/kontakt" class="btn btn-secondary">
+          <a href={url('/de/kontakt')} class="btn btn-secondary">
             {t('btn.contact')}
           </a>
         </div>

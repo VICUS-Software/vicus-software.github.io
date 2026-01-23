@@ -1,11 +1,16 @@
 ---
-import { getLangFromUrl, getTranslatedPath, getAlternateLanguage } from '../i18n/utils';
+import { getLangFromUrl, getTranslatedPath, getAlternateLanguage, url } from '../i18n/utils';
 import { languages, type Language } from '../i18n/languages';
 
 const lang = getLangFromUrl(Astro.url) as Language;
 const alternateLang = getAlternateLanguage(lang);
 const currentPath = Astro.url.pathname;
-const alternateHref = getTranslatedPath(currentPath, alternateLang);
+// Remove base path from current path before translating
+const basePath = import.meta.env.BASE_URL || '/';
+const pathWithoutBase = currentPath.startsWith(basePath)
+  ? currentPath.slice(basePath.length - 1)
+  : currentPath;
+const alternateHref = url(getTranslatedPath(pathWithoutBase, alternateLang));
 ---
 
 <a

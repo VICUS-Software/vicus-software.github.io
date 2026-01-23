@@ -1,8 +1,20 @@
 import { ui, type UIKey } from './ui';
 import { defaultLang, type Language } from './languages';
 
-export function getLangFromUrl(url: URL): Language {
-  const [, lang] = url.pathname.split('/');
+// Get base URL for links (handles GitHub Pages base path)
+export function getBaseUrl(): string {
+  return import.meta.env.BASE_URL || '/';
+}
+
+// Create a proper URL with base path
+export function url(path: string): string {
+  const base = getBaseUrl().replace(/\/$/, '');
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${base}${cleanPath}`;
+}
+
+export function getLangFromUrl(astroUrl: URL): Language {
+  const [, lang] = astroUrl.pathname.split('/');
   if (lang in ui) return lang as Language;
   return defaultLang;
 }

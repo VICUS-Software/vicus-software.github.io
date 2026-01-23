@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import Features from '../../components/Features.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations , url } from '../../i18n/utils';
 
 const lang = 'en';
 const t = useTranslations(lang);
@@ -45,8 +45,8 @@ const products = [
   {
     title: 'VICUS BUILDINGS',
     description: 'Comprehensive software for energy-efficient building simulation. Analyze thermal behavior, energy consumption, and room comfort.',
-    image: '/images/screenshots/vicus-buildings-main.png',
-    href: '/en/vicus-buildings',
+    image: url('/images/screenshots/vicus-buildings-main.png'),
+    href: url('/en/vicus-buildings'),
     features: [
       'Thermal building simulation',
       'Energy demand calculation',
@@ -57,8 +57,8 @@ const products = [
   {
     title: 'VICUS DISTRICTS',
     description: 'Specialized software for planning and simulating heat networks and district energy systems.',
-    image: '/images/screenshots/vicus-districts-main.png',
-    href: '/en/vicus-districts',
+    image: url('/images/screenshots/vicus-districts-main.png'),
+    href: url('/en/vicus-districts'),
     features: [
       'Heat network planning',
       'Thermohydraulic simulation',
@@ -109,10 +109,10 @@ const products = [
           Contact us for a personal demo or download the software directly.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="/en/demo" class="btn btn-primary">
+          <a href={url('/en/demo')} class="btn btn-primary">
             {t('btn.demo')}
           </a>
-          <a href="/en/contact" class="btn btn-secondary">
+          <a href={url('/en/contact')} class="btn btn-secondary">
             {t('btn.contact')}
           </a>
         </div>

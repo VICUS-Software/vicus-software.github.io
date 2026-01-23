@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import { url } from '../../i18n/utils';
 
 const sections = [
   {
@@ -7,10 +8,10 @@ const sections = [
     description: 'Installation und grundlegende Einrichtung der VICUS Software',
     icon: 'rocket',
     articles: [
-      { title: 'Installation unter Windows', href: '/de/dokumentation/installation-windows' },
-      { title: 'Installation unter Linux', href: '/de/dokumentation/installation-linux' },
-      { title: 'Erste Projekteinrichtung', href: '/de/dokumentation/erste-schritte' },
-      { title: 'Benutzeroberfläche kennenlernen', href: '/de/dokumentation/benutzeroberflaeche' },
+      { title: 'Installation unter Windows', href: url('/de/dokumentation/installation-windows') },
+      { title: 'Installation unter Linux', href: url('/de/dokumentation/installation-linux') },
+      { title: 'Erste Projekteinrichtung', href: url('/de/dokumentation/erste-schritte') },
+      { title: 'Benutzeroberfläche kennenlernen', href: url('/de/dokumentation/benutzeroberflaeche') },
     ]
   },
   {
@@ -18,12 +19,12 @@ const sections = [
     description: 'Anleitungen zur Gebäudesimulation',
     icon: 'building',
     articles: [
-      { title: 'Gebäudegeometrie erstellen', href: '/de/dokumentation/buildings/geometrie' },
-      { title: 'Baukonstruktionen definieren', href: '/de/dokumentation/buildings/konstruktionen' },
-      { title: 'Raumzonen und Nutzungsprofile', href: '/de/dokumentation/buildings/zonen' },
-      { title: 'Klimadaten und Standort', href: '/de/dokumentation/buildings/klima' },
-      { title: 'Simulation durchführen', href: '/de/dokumentation/buildings/simulation' },
-      { title: 'Ergebnisse auswerten', href: '/de/dokumentation/buildings/ergebnisse' },
+      { title: 'Gebäudegeometrie erstellen', href: url('/de/dokumentation/buildings/geometrie') },
+      { title: 'Baukonstruktionen definieren', href: url('/de/dokumentation/buildings/konstruktionen') },
+      { title: 'Raumzonen und Nutzungsprofile', href: url('/de/dokumentation/buildings/zonen') },
+      { title: 'Klimadaten und Standort', href: url('/de/dokumentation/buildings/klima') },
+      { title: 'Simulation durchführen', href: url('/de/dokumentation/buildings/simulation') },
+      { title: 'Ergebnisse auswerten', href: url('/de/dokumentation/buildings/ergebnisse') },
     ]
   },
   {
@@ -31,13 +32,13 @@ const sections = [
     description: 'Anleitungen zur Wärmenetzplanung',
     icon: 'network',
     articles: [
-      { title: 'Netzwerk erstellen', href: '/de/dokumentation/districts/netzwerk-erstellen' },
-      { title: 'Rohre dimensionieren', href: '/de/dokumentation/districts/rohrdimensionierung' },
-      { title: 'Wärmequellen definieren', href: '/de/dokumentation/districts/waermequellen' },
-      { title: 'Übergabestationen konfigurieren', href: '/de/dokumentation/districts/uebergabestationen' },
-      { title: 'Stationäre Berechnung', href: '/de/dokumentation/districts/stationaere-berechnung' },
-      { title: 'Dynamische Simulation', href: '/de/dokumentation/districts/dynamische-simulation' },
-      { title: 'Ergebnisanalyse', href: '/de/dokumentation/districts/ergebnisse' },
+      { title: 'Netzwerk erstellen', href: url('/de/dokumentation/districts/netzwerk-erstellen') },
+      { title: 'Rohre dimensionieren', href: url('/de/dokumentation/districts/rohrdimensionierung') },
+      { title: 'Wärmequellen definieren', href: url('/de/dokumentation/districts/waermequellen') },
+      { title: 'Übergabestationen konfigurieren', href: url('/de/dokumentation/districts/uebergabestationen') },
+      { title: 'Stationäre Berechnung', href: url('/de/dokumentation/districts/stationaere-berechnung') },
+      { title: 'Dynamische Simulation', href: url('/de/dokumentation/districts/dynamische-simulation') },
+      { title: 'Ergebnisanalyse', href: url('/de/dokumentation/districts/ergebnisse') },
     ]
   },
   {
@@ -45,10 +46,10 @@ const sections = [
     description: 'Datenformate und Schnittstellen',
     icon: 'exchange',
     articles: [
-      { title: 'DXF Import', href: '/de/dokumentation/import-export/dxf' },
-      { title: 'PDF Import', href: '/de/dokumentation/import-export/pdf' },
-      { title: 'GIS-Daten importieren', href: '/de/dokumentation/import-export/gis' },
-      { title: 'Ergebnisse exportieren', href: '/de/dokumentation/import-export/export' },
+      { title: 'DXF Import', href: url('/de/dokumentation/import-export/dxf') },
+      { title: 'PDF Import', href: url('/de/dokumentation/import-export/pdf') },
+      { title: 'GIS-Daten importieren', href: url('/de/dokumentation/import-export/gis') },
+      { title: 'Ergebnisse exportieren', href: url('/de/dokumentation/import-export/export') },
     ]
   },
   {
@@ -56,10 +57,10 @@ const sections = [
     description: 'Technische Referenz und Hintergrundinformationen',
     icon: 'book',
     articles: [
-      { title: 'Berechnungsmethoden', href: '/de/dokumentation/referenz/berechnungsmethoden' },
-      { title: 'Materialdatenbank', href: '/de/dokumentation/referenz/materialien' },
-      { title: 'Tastenkürzel', href: '/de/dokumentation/referenz/tastenkuerzel' },
-      { title: 'Fehlerbehebung', href: '/de/dokumentation/referenz/fehlerbehebung' },
+      { title: 'Berechnungsmethoden', href: url('/de/dokumentation/referenz/berechnungsmethoden') },
+      { title: 'Materialdatenbank', href: url('/de/dokumentation/referenz/materialien') },
+      { title: 'Tastenkürzel', href: url('/de/dokumentation/referenz/tastenkuerzel') },
+      { title: 'Fehlerbehebung', href: url('/de/dokumentation/referenz/fehlerbehebung') },
     ]
   },
 ];

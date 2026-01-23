@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import { url } from '../../i18n/utils';
 
 const sections = [
   {
@@ -7,10 +8,10 @@ const sections = [
     description: 'Installation and basic setup of VICUS software',
     icon: 'rocket',
     articles: [
-      { title: 'Installation on Windows', href: '/en/documentation/installation-windows' },
-      { title: 'Installation on Linux', href: '/en/documentation/installation-linux' },
-      { title: 'First Project Setup', href: '/en/documentation/getting-started' },
-      { title: 'User Interface Overview', href: '/en/documentation/user-interface' },
+      { title: 'Installation on Windows', href: url('/en/documentation/installation-windows') },
+      { title: 'Installation on Linux', href: url('/en/documentation/installation-linux') },
+      { title: 'First Project Setup', href: url('/en/documentation/getting-started') },
+      { title: 'User Interface Overview', href: url('/en/documentation/user-interface') },
     ]
   },
   {
@@ -18,12 +19,12 @@ const sections = [
     description: 'Guides for building simulation',
     icon: 'building',
     articles: [
-      { title: 'Creating Building Geometry', href: '/en/documentation/buildings/geometry' },
-      { title: 'Defining Constructions', href: '/en/documentation/buildings/constructions' },
-      { title: 'Room Zones and Usage Profiles', href: '/en/documentation/buildings/zones' },
-      { title: 'Climate Data and Location', href: '/en/documentation/buildings/climate' },
-      { title: 'Running Simulations', href: '/en/documentation/buildings/simulation' },
-      { title: 'Analyzing Results', href: '/en/documentation/buildings/results' },
+      { title: 'Creating Building Geometry', href: url('/en/documentation/buildings/geometry') },
+      { title: 'Defining Constructions', href: url('/en/documentation/buildings/constructions') },
+      { title: 'Room Zones and Usage Profiles', href: url('/en/documentation/buildings/zones') },
+      { title: 'Climate Data and Location', href: url('/en/documentation/buildings/climate') },
+      { title: 'Running Simulations', href: url('/en/documentation/buildings/simulation') },
+      { title: 'Analyzing Results', href: url('/en/documentation/buildings/results') },
     ]
   },
   {
@@ -31,13 +32,13 @@ const sections = [
     description: 'Guides for heat network planning',
     icon: 'network',
     articles: [
-      { title: 'Creating a Network', href: '/en/documentation/districts/create-network' },
-      { title: 'Pipe Sizing', href: '/en/documentation/districts/pipe-sizing' },
-      { title: 'Defining Heat Sources', href: '/en/documentation/districts/heat-sources' },
-      { title: 'Configuring Substations', href: '/en/documentation/districts/substations' },
-      { title: 'Steady-State Calculation', href: '/en/documentation/districts/steady-state' },
-      { title: 'Dynamic Simulation', href: '/en/documentation/districts/dynamic-simulation' },
-      { title: 'Result Analysis', href: '/en/documentation/districts/results' },
+      { title: 'Creating a Network', href: url('/en/documentation/districts/create-network') },
+      { title: 'Pipe Sizing', href: url('/en/documentation/districts/pipe-sizing') },
+      { title: 'Defining Heat Sources', href: url('/en/documentation/districts/heat-sources') },
+      { title: 'Configuring Substations', href: url('/en/documentation/districts/substations') },
+      { title: 'Steady-State Calculation', href: url('/en/documentation/districts/steady-state') },
+      { title: 'Dynamic Simulation', href: url('/en/documentation/districts/dynamic-simulation') },
+      { title: 'Result Analysis', href: url('/en/documentation/districts/results') },
     ]
   },
   {
@@ -45,10 +46,10 @@ const sections = [
     description: 'Data formats and interfaces',
     icon: 'exchange',
     articles: [
-      { title: 'DXF Import', href: '/en/documentation/import-export/dxf' },
-      { title: 'PDF Import', href: '/en/documentation/import-export/pdf' },
-      { title: 'GIS Data Import', href: '/en/documentation/import-export/gis' },
-      { title: 'Exporting Results', href: '/en/documentation/import-export/export' },
+      { title: 'DXF Import', href: url('/en/documentation/import-export/dxf') },
+      { title: 'PDF Import', href: url('/en/documentation/import-export/pdf') },
+      { title: 'GIS Data Import', href: url('/en/documentation/import-export/gis') },
+      { title: 'Exporting Results', href: url('/en/documentation/import-export/export') },
     ]
   },
   {
@@ -56,10 +57,10 @@ const sections = [
     description: 'Technical reference and background information',
     icon: 'book',
     articles: [
-      { title: 'Calculation Methods', href: '/en/documentation/reference/calculation-methods' },
-      { title: 'Material Database', href: '/en/documentation/reference/materials' },
-      { title: 'Keyboard Shortcuts', href: '/en/documentation/reference/shortcuts' },
-      { title: 'Troubleshooting', href: '/en/documentation/reference/troubleshooting' },
+      { title: 'Calculation Methods', href: url('/en/documentation/reference/calculation-methods') },
+      { title: 'Material Database', href: url('/en/documentation/reference/materials') },
+      { title: 'Keyboard Shortcuts', href: url('/en/documentation/reference/shortcuts') },
+      { title: 'Troubleshooting', href: url('/en/documentation/reference/troubleshooting') },
     ]
   },
 ];
