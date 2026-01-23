@@ -108,7 +108,7 @@ const t = useTranslations(lang);
 
     const statusEl = document.getElementById('form-status');
     const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const formData = new FormData(form);
+    const _formData = new FormData(form); // Will be used for HubSpot integration
 
     // Disable button during submission
     submitBtn.disabled = true;

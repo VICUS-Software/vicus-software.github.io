@@ -9,7 +9,7 @@ export function getLangFromUrl(url: URL): Language {
 
 export function useTranslations(lang: Language) {
   return function t(key: UIKey, params?: Record<string, string | number>): string {
-    let translation = ui[lang][key] || ui[defaultLang][key] || key;
+    let translation: string = ui[lang][key] || ui[defaultLang][key] || key;
 
     if (params) {
       Object.entries(params).forEach(([paramKey, value]) => {

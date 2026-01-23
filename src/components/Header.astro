@@ -1,6 +1,6 @@
 ---
-import { getLangFromUrl, useTranslations, getTranslatedPath } from '../i18n/utils';
-import { languages, type Language } from '../i18n/languages';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 
 const lang = getLangFromUrl(Astro.url) as Language;
@@ -133,7 +133,7 @@ const navigation = [
   const closeIcon = document.getElementById('close-icon');
 
   menuBtn?.addEventListener('click', () => {
-    const isOpen = mobileMenu?.classList.toggle('hidden');
+    mobileMenu?.classList.toggle('hidden');
     menuIcon?.classList.toggle('hidden');
     closeIcon?.classList.toggle('hidden');
   });

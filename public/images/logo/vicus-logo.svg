@@ -1,6 +1,173 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
-  <text x="0" y="30" font-family="system-ui, sans-serif" font-size="28" font-weight="bold">
-    <tspan fill="#6adcad">VICUS</tspan>
-    <tspan fill="#F2F6F6"> Software</tspan>
-  </text>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       xlink:href="#linearGradient19507"
+       id="linearGradient2354-8"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.9291021,0,0,0.92910246,163.369,138.22621)"
+       x1="74.083336"
+       y1="127.00001"
+       x2="91.28125"
+       y2="109.80208" />
+    <linearGradient
+       id="linearGradient19507">
+      <stop
+         style="stop-color:#6adcad;stop-opacity:1;"
+         offset="0"
+         id="stop19503" />
+      <stop
+         style="stop-color:#1446a0;stop-opacity:1;"
+         offset="1"
+         id="stop19505" />
+    </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath34390-7-2">
+      <path
+         style="fill:none;fill-opacity:0;stroke:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.595914"
+         d="m 95.486519,131.18992 3.96875,-7.9375 -5.528188,-4.18992 -3.96875,2.64583 2.645836,10.58333 2.882352,-1.10174"
+         id="path34392-5-0" />
+    </clipPath>
+  </defs>
+  <g
+     id="layer1">
+    <g
+       id="g3872-2"
+       transform="matrix(1.5015393,0,0,1.5015393,-336.51446,-343.1865)"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.86px;font-family:Manrope;-inkscape-font-specification:Manrope-Regular;letter-spacing:1.49233px;writing-mode:lr-tb;display:inline;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.211283"
+         id="text806-35-3"
+         x="251.49663"
+         y="253.94249"><tspan
+           id="tspan804-62-7"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Manrope;-inkscape-font-specification:'Manrope Bold';fill:#ffffff;fill-opacity:1;stroke-width:0.211283"
+           x="251.49663"
+           y="253.94249">VICUS</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Manrope;-inkscape-font-specification:'Manrope Bold';fill:#ffffff;fill-opacity:1;stroke-width:0.211283"
+           x="251.49663"
+           y="273.76749"
+           id="tspan15" /></text>
+      <text
+         xml:space="preserve"
+         style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.98715px;font-family:Manrope;-inkscape-font-specification:Manrope-Regular;letter-spacing:3.2222px;writing-mode:lr-tb;display:inline;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.133046"
+         id="text806-3-9-5"
+         x="231.88539"
+         y="265.63925"><tspan
+           id="tspan804-6-1-9"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Manrope;-inkscape-font-specification:'Manrope Light';fill:#ffffff;fill-opacity:1;stroke-width:0.133046"
+           x="231.88539"
+           y="265.63925">SOFTWARE</tspan></text>
+      <rect
+         style="display:inline;fill:url(#linearGradient2354-8);fill-opacity:1;stroke-width:0.342839;stroke-dasharray:none"
+         id="rect26562-2-2"
+         width="15.978619"
+         height="15.978625"
+         x="232.19998"
+         y="240.24359"
+         ry="2.6086299" />
+      <path
+         style="display:inline;fill:#d7d7d7;fill-opacity:1;stroke:#ffffff;stroke-width:2.76076;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 243.61328,244.8089 -3.42398,6.84799"
+         id="path27600-7-2" />
+      <path
+         style="display:inline;fill:#636363;fill-opacity:0;stroke:#ffffff;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:0.6"
+         d="m 93.927083,123.03125 3.96875,7.9375"
+         id="path27600-2-0-8"
+         clip-path="url(#clipPath34390-7-2)"
+         transform="matrix(0.86273773,0,0,0.86273773,155.73086,138.66521)" />
+      <rect
+         style="opacity:1;fill:#08090c;fill-opacity:1;stroke-width:0.176208"
+         id="rect4"
+         width="9.7529669"
+         height="9.7529669"
+         x="231.6416"
+         y="277.66351" />
+      <rect
+         style="opacity:1;fill:#2c2626;fill-opacity:1;stroke-width:0.176208"
+         id="rect5"
+         width="9.7529669"
+         height="9.7529669"
+         x="231.6416"
+         y="287.41647" />
+      <rect
+         style="opacity:1;fill:#bdd4e7;fill-opacity:1;stroke-width:0.176208"
+         id="rect6"
+         width="9.7529669"
+         height="9.7529669"
+         x="231.6416"
+         y="297.16943" />
+      <rect
+         style="opacity:1;fill:#6adcad;fill-opacity:1;stroke-width:0.176208"
+         id="rect7"
+         width="9.7529669"
+         height="9.7529669"
+         x="231.6416"
+         y="306.92239" />
+      <rect
+         style="opacity:1;fill:#6adcad;fill-opacity:1;stroke-width:0.176208"
+         id="rect8"
+         width="9.7529669"
+         height="9.7529669"
+         x="231.6416"
+         y="306.92239" />
+      <rect
+         style="opacity:1;fill:#1446a0;fill-opacity:1;stroke-width:0.176208"
+         id="rect9"
+         width="9.7529669"
+         height="9.7529669"
+         x="231.6416"
+         y="316.67535" />
+      <rect
+         style="opacity:1;fill:#f2b202;fill-opacity:1;stroke-width:0.176208"
+         id="rect10"
+         width="9.7529669"
+         height="9.7529669"
+         x="231.6416"
+         y="326.42831" />
+      <text
+         xml:space="preserve"
+         style="font-size:7.51821px;font-family:'DM Sans';-inkscape-font-specification:'DM Sans';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:1;fill:#08090c;fill-opacity:1;stroke-width:0.176208"
+         x="244.81667"
+         y="284.16547"
+         id="text10"><tspan
+           id="tspan10"
+           style="font-size:7.51821px;stroke-width:0.176208"
+           x="244.81667"
+           y="284.16547">#08090C</tspan><tspan
+           style="font-size:7.51821px;stroke-width:0.176208"
+           x="244.81667"
+           y="293.56323"
+           id="tspan11">#2C2626</tspan><tspan
+           style="font-size:7.51821px;stroke-width:0.176208"
+           x="244.81667"
+           y="302.961"
+           id="tspan12">#BDD4E7</tspan><tspan
+           style="font-size:7.51821px;stroke-width:0.176208"
+           x="244.81667"
+           y="312.35876"
+           id="tspan13">#6ADCAD</tspan><tspan
+           style="font-size:7.51821px;stroke-width:0.176208"
+           x="244.81667"
+           y="321.75653"
+           id="tspan14">#1446A0</tspan><tspan
+           style="font-size:7.51821px;stroke-width:0.176208"
+           x="244.81667"
+           y="331.15427"
+           id="tspan16">#F2B202</tspan></text>
+    </g>
+  </g>
 </svg>

@@ -3,7 +3,6 @@ import PageLayout from '../../../layouts/PageLayout.astro';
 import BlogCard from '../../../components/BlogCard.astro';
 import { getCollection } from 'astro:content';
 
-const lang = 'en';
 
 // Get all English blog posts, sorted by date
 const posts = (await getCollection('blog', ({ data }) => {
