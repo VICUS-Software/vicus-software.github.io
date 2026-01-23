@@ -46,6 +46,8 @@ const routeMappings: Record<string, Record<Language, string>> = {
   'privacy': { de: 'datenschutz', en: 'privacy' },
   'tutorials-hilfe': { de: 'tutorials-hilfe', en: 'tutorials-help' },
   'tutorials-help': { de: 'tutorials-hilfe', en: 'tutorials-help' },
+  'dokumentation': { de: 'dokumentation', en: 'documentation' },
+  'documentation': { de: 'dokumentation', en: 'documentation' },
 };
 
 export function getTranslatedPath(currentPath: string, targetLang: Language): string {
