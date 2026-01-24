@@ -1,0 +1,92 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import TeamMember from '../../components/TeamMember.astro';
+import { useTranslations, url } from '../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const teamMembers = [
+  {
+    name: 'Dr. Max Mustermann',
+    title: 'Managing Director',
+    image: '/images/team/placeholder.svg',
+    bio: 'Max leads VICUS Software with his expertise in building simulation and sustainable planning.',
+    email: 'max.mustermann@vicus-software.de',
+    linkedin: 'https://linkedin.com/in/example'
+  },
+  {
+    name: 'Anna Schmidt',
+    title: 'Head of Development',
+    image: '/images/team/placeholder.svg',
+    bio: 'Anna is responsible for the technical development of our simulation software.',
+    email: 'anna.schmidt@vicus-software.de'
+  },
+  {
+    name: 'Thomas Weber',
+    title: 'Senior Software Developer',
+    image: '/images/team/placeholder.svg',
+    bio: 'Thomas develops the core algorithms for our thermal simulations.',
+    email: 'thomas.weber@vicus-software.de'
+  },
+  {
+    name: 'Lisa Müller',
+    title: 'Civil Engineer',
+    image: '/images/team/placeholder.svg',
+    bio: 'Lisa supports our customers in using the software and develops best practices.',
+    email: 'lisa.mueller@vicus-software.de'
+  },
+  {
+    name: 'Michael Braun',
+    title: 'Software Developer',
+    image: '/images/team/placeholder.svg',
+    bio: 'Michael works on the user interface and ensures intuitive operation.',
+    email: 'michael.braun@vicus-software.de'
+  },
+  {
+    name: 'Sarah Klein',
+    title: 'Marketing & Sales',
+    image: '/images/team/placeholder.svg',
+    bio: 'Sarah takes care of marketing, sales, and communication with our customers.',
+    email: 'sarah.klein@vicus-software.de',
+    linkedin: 'https://linkedin.com/in/example'
+  }
+];
+---
+
+<PageLayout
+  title={t('page.team.title')}
+  description="Meet the team behind VICUS Software."
+  heroSubtitle={t('page.team.subtitle')}
+>
+  <!-- Team Grid -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {teamMembers.map((member) => (
+          <TeamMember
+            name={member.name}
+            title={member.title}
+            image={member.image}
+            bio={member.bio}
+            email={member.email}
+            linkedin={member.linkedin}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">{t('page.team.joinUs')}</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        {t('page.team.joinUsText')}
+      </p>
+      <a href={url(`/${lang}/careers`)} class="btn btn-primary">
+        {t('nav.careers')}
+      </a>
+    </div>
+  </section>
+</PageLayout>

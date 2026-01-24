@@ -11,6 +11,7 @@ export const ui = {
     'nav.contact': 'Kontakt',
     'nav.demo': 'Demo buchen',
     'nav.careers': 'Karriere',
+    'nav.team': 'Team',
 
     // Buttons
     'btn.demo': 'Demo buchen',
@@ -58,6 +59,10 @@ export const ui = {
     'page.privacy.title': 'Datenschutz',
     'page.newsletter.title': 'Newsletter',
     'page.application.title': 'Bewerbung',
+    'page.team.title': 'Unser Team',
+    'page.team.subtitle': 'Die Menschen hinter VICUS Software',
+    'page.team.joinUs': 'Werden Sie Teil unseres Teams',
+    'page.team.joinUsText': 'Wir suchen motivierte Talente, die gemeinsam mit uns die Zukunft der nachhaltigen Gebäudeplanung gestalten.',
 
     // Misc
     'misc.postedOn': 'Veröffentlicht am',
@@ -93,6 +98,7 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.demo': 'Book Demo',
     'nav.careers': 'Careers',
+    'nav.team': 'Team',
 
     // Buttons
     'btn.demo': 'Book Demo',
@@ -140,6 +146,10 @@ export const ui = {
     'page.privacy.title': 'Privacy Policy',
     'page.newsletter.title': 'Newsletter',
     'page.application.title': 'Application',
+    'page.team.title': 'Our Team',
+    'page.team.subtitle': 'The people behind VICUS Software',
+    'page.team.joinUs': 'Join Our Team',
+    'page.team.joinUsText': 'We are looking for motivated talents to shape the future of sustainable building planning together with us.',
 
     // Misc
     'misc.postedOn': 'Posted on',
