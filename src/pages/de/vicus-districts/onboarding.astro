@@ -14,32 +14,11 @@ const subNavItems = [
   { label: t('districts.comparison'), href: url(`/${lang}/vicus-districts/vergleich`) },
   { label: t('districts.faq'), href: url(`/${lang}/vicus-districts/faq`) },
 ];
-
-const onboardingSteps = [
-  {
-    number: '1',
-    title: '30-Tage-Testlizenz',
-    description: 'Starten Sie mit einer kostenlosen Testversion. Voller Funktionsumfang, keine Einschränkungen.',
-    icon: 'download'
-  },
-  {
-    number: '2',
-    title: 'Kostenloses Kickoff-Meeting',
-    description: 'Unser Team führt Sie in einem persönlichen Online-Meeting durch die Software und beantwortet Ihre Fragen.',
-    icon: 'video'
-  },
-  {
-    number: '3',
-    title: 'Individueller Support',
-    description: 'Während der Testphase und danach steht Ihnen unser Support-Team für Fragen zur Verfügung.',
-    icon: 'support'
-  },
-];
 ---
 
 <PageLayout
   title="Onboarding | VICUS DISTRICTS"
-  description="Starten Sie mit VICUS DISTRICTS: 30-Tage-Testlizenz, kostenloses Kickoff-Meeting und individueller Support."
+  description="Starten Sie mit VICUS DISTRICTS: 30-Tage-Testlizenz, Easy Onboarding und individueller Support."
   showHero={false}
 >
   <!-- Header -->
@@ -54,64 +33,217 @@ const onboardingSteps = [
 
   <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
 
-  <!-- Onboarding Steps -->
+  <!-- Quick Start Section -->
   <section class="section">
     <div class="container-custom">
       <div class="text-center mb-12">
-        <h2 class="text-foreground mb-4">So starten Sie mit VICUS DISTRICTS</h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-foreground mb-4">
+          Schneller Einstieg. Klare Ergebnisse. Kein Risiko.
+        </h2>
+        <p class="text-foreground/70 max-w-3xl mx-auto">
+          Starten Sie mit unserer <strong>30-Tage-Testlizenz</strong> und lassen Sie sich bei den ersten Schritten von unseren Experten begleiten.
+          So erreichen Sie in kürzester Zeit verwertbare Simulationsergebnisse – ohne lange Einarbeitung.
+        </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {onboardingSteps.map((step) => (
-          <div class="relative">
-            <div class="card h-full">
-              <div class="flex items-center gap-4 mb-4">
-                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl">
-                  {step.number}
-                </div>
+      <!-- Tab Buttons -->
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex rounded-lg border border-foreground/20 p-1 bg-secondary/30">
+          <button
+            id="tab-trial"
+            class="onboarding-tab px-6 py-3 rounded-md font-medium transition-all bg-primary text-background"
+            data-tab="trial"
+          >
+            Testversion
+          </button>
+          <button
+            id="tab-onboarding"
+            class="onboarding-tab px-6 py-3 rounded-md font-medium transition-all text-foreground/70 hover:text-foreground"
+            data-tab="onboarding"
+          >
+            Easy onboarding
+          </button>
+        </div>
+      </div>
+
+      <!-- Trial Version Content -->
+      <div id="content-trial" class="onboarding-content">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-semibold text-primary mb-2">Kostenlose 30-Tage-Testversion</h3>
+            <p class="text-foreground/70">Testen Sie den vollen Funktionsumfang ohne Einschränkungen</p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="card text-center">
+              <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl mx-auto mb-4">
+                1
               </div>
-              <h3 class="text-xl font-semibold text-foreground mb-3">{step.title}</h3>
-              <p class="text-foreground/70">{step.description}</p>
+              <h4 class="font-semibold text-foreground mb-2">Download</h4>
+              <p class="text-foreground/70 text-sm">Software herunterladen und installieren</p>
+            </div>
+            <div class="card text-center">
+              <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl mx-auto mb-4">
+                2
+              </div>
+              <h4 class="font-semibold text-foreground mb-2">Registrieren</h4>
+              <p class="text-foreground/70 text-sm">Testlizenz aktivieren und loslegen</p>
+            </div>
+            <div class="card text-center">
+              <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl mx-auto mb-4">
+                3
+              </div>
+              <h4 class="font-semibold text-foreground mb-2">Testen</h4>
+              <p class="text-foreground/70 text-sm">30 Tage alle Funktionen nutzen</p>
             </div>
           </div>
-        ))}
+
+          <div class="card bg-background border-primary/30 text-center">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-lg bg-primary/20 flex items-center justify-center">
+                  <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                </div>
+                <div class="text-left">
+                  <div class="font-semibold text-foreground">VICUS DISTRICTS</div>
+                  <div class="text-sm text-foreground/60">Windows 10/11 | 64-bit</div>
+                </div>
+              </div>
+              <a href={url(`/${lang}/demo`)} class="btn btn-primary whitespace-nowrap">
+                Testversion anfragen
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Easy Onboarding Content -->
+      <div id="content-onboarding" class="onboarding-content hidden">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-semibold text-primary mb-2">Ihr individuelles Onboarding (600 €)</h3>
+            <p class="text-foreground/70">Von unseren Experten begleitet zum Erfolg</p>
+          </div>
+
+          <div class="card mb-8">
+            <h4 class="text-xl font-semibold text-foreground mb-6">Einfacher Start – Von unseren Experten begleitet</h4>
+
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-start gap-3">
+                <span class="font-semibold text-primary min-w-[80px]">Woche 1:</span>
+                <span class="text-foreground/80">Einfacher Start dank umfangreicher Schulungsvideos</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="font-semibold text-primary min-w-[80px]">Woche 2:</span>
+                <span class="text-foreground/80">Follow-up & Fragen (1 Stunde)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="font-semibold text-primary min-w-[80px]">Woche 4:</span>
+                <span class="text-foreground/80">Follow-up & Fragen (1 Stunde)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="font-semibold text-primary min-w-[80px]">Woche 5-6:</span>
+                <span class="text-foreground/80">Sie entscheiden</span>
+              </li>
+            </ul>
+
+            <div class="space-y-3 mb-8">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-foreground/80">
+                  <strong class="text-primary">Sie entscheiden sich für eine Jahreslizenz?</strong> → Das Onboarding wird vollständig angerechnet.
+                </span>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-foreground/80">
+                  <strong class="text-red-400">Sie sind nicht überzeugt?</strong> → Das Onboarding wird als Dienstleistung abgerechnet.
+                </span>
+              </div>
+            </div>
+
+            <div class="border-t border-foreground/10 pt-6">
+              <h5 class="font-semibold text-foreground mb-4">Maximale Sicherheit – Geringer Aufwand</h5>
+              <ul class="space-y-2">
+                <li class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-foreground/80">Volle Kostentransparenz</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-foreground/80">Minimale Risiken</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8">
+              <a href={url(`/${lang}/kontakt`)} class="btn btn-primary">
+                Onboarding buchen
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Download Section -->
+  <!-- Individual Support Section -->
   <section class="section bg-secondary/30">
     <div class="container-custom">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-foreground mb-4">Jetzt Testversion herunterladen</h2>
-        <p class="text-xl text-foreground/70 mb-8">
-          Laden Sie VICUS DISTRICTS herunter und testen Sie alle Funktionen 30 Tage kostenlos.
-          Keine Kreditkarte erforderlich.
+      <div class="text-center mb-8">
+        <p class="text-primary text-sm font-medium mb-2">Individueller Support</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-foreground mb-4">
+          Wir unterstützen Sie bei Ihrer Wärmenetzplanung
+        </h2>
+        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+        <p class="text-foreground/70 max-w-3xl mx-auto">
+          Sie benötigen Unterstützung bei Ihrem Wärmenetzprojekt? Wir beraten Sie gern direkt mit unserem Expertenteam.
         </p>
+      </div>
 
-        <div class="card bg-background border-primary/30 inline-block">
-          <div class="flex flex-col sm:flex-row items-center gap-6 p-4">
-            <div class="flex items-center gap-4">
-              <div class="w-16 h-16 rounded-lg bg-primary/20 flex items-center justify-center">
-                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </div>
-              <div class="text-left">
-                <div class="font-semibold text-foreground">VICUS DISTRICTS</div>
-                <div class="text-sm text-foreground/60">Windows 10/11 | 64-bit</div>
-              </div>
-            </div>
-            <a href={url(`/${lang}/demo`)} class="btn btn-primary whitespace-nowrap">
-              Download starten
-            </a>
-          </div>
+      <div class="max-w-4xl mx-auto">
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-foreground/80">
+              Wir erstellen ein <strong>rechenfähiges Wärmenetzmodell Ihres Bestandsnetzes</strong> (Digitaler Zwilling)
+            </span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-foreground/80">
+              Wir führen <strong>Variantenstudien</strong> für Sie durch
+            </span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-foreground/80">
+              Wir erstellen <strong>BEW-konforme Machbarkeitsstudien</strong>
+            </span>
+          </li>
+        </ul>
+
+        <div class="mt-8 text-center">
+          <a href={url(`/${lang}/kontakt`)} class="btn btn-primary">
+            Beratung anfragen
+          </a>
         </div>
-
-        <p class="text-sm text-foreground/50 mt-6">
-          Mit dem Download akzeptieren Sie unsere <a href={url(`/${lang}/datenschutz`)} class="text-primary hover:underline">Datenschutzerklärung</a>
-          und <a href={url(`/${lang}/impressum`)} class="text-primary hover:underline">Nutzungsbedingungen</a>.
-        </p>
       </div>
     </div>
   </section>
@@ -157,9 +289,9 @@ const onboardingSteps = [
         </div>
 
         <div>
-          <h2 class="text-foreground mb-6">Kickoff-Meeting buchen</h2>
+          <h2 class="text-foreground mb-6">Kontakt aufnehmen</h2>
           <p class="text-foreground/70 mb-8">
-            Vereinbaren Sie ein kostenloses Online-Meeting für eine persönliche Einführung in VICUS DISTRICTS.
+            Schreiben Sie uns – wir melden uns zeitnah bei Ihnen.
           </p>
 
           <div class="card">
@@ -185,7 +317,7 @@ const onboardingSteps = [
               </div>
 
               <button type="submit" class="btn btn-primary w-full">
-                Meeting anfragen
+                Nachricht senden
               </button>
             </form>
           </div>
@@ -236,3 +368,34 @@ const onboardingSteps = [
     </div>
   </section>
 </PageLayout>
+
+<script>
+  const tabs = document.querySelectorAll('.onboarding-tab');
+  const contents = document.querySelectorAll('.onboarding-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.getAttribute('data-tab');
+
+      // Update tab styles
+      tabs.forEach(t => {
+        if (t.getAttribute('data-tab') === targetTab) {
+          t.classList.add('bg-primary', 'text-background');
+          t.classList.remove('text-foreground/70', 'hover:text-foreground');
+        } else {
+          t.classList.remove('bg-primary', 'text-background');
+          t.classList.add('text-foreground/70', 'hover:text-foreground');
+        }
+      });
+
+      // Update content visibility
+      contents.forEach(content => {
+        if (content.id === `content-${targetTab}`) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
