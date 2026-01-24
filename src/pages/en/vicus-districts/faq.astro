@@ -1,0 +1,204 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import FAQ from '../../../components/FAQ.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('districts.overview'), href: url(`/${lang}/vicus-districts`) },
+  { label: t('districts.features'), href: url(`/${lang}/vicus-districts/features`) },
+  { label: t('districts.license'), href: url(`/${lang}/vicus-districts/license`) },
+  { label: t('districts.onboarding'), href: url(`/${lang}/vicus-districts/onboarding`) },
+  { label: t('districts.comparison'), href: url(`/${lang}/vicus-districts/comparison`) },
+  { label: t('districts.faq'), href: url(`/${lang}/vicus-districts/faq`) },
+];
+
+const faqItems = [
+  {
+    question: 'What does "dynamic/thermo-hydraulic simulation" mean?',
+    answer: `<p>Unlike steady-state calculations that only look at a single point in time, VICUS DISTRICTS simulates the entire year
+    in hourly resolution (8760 time steps). Temperatures, mass flows and pressures are calculated over time.</p>
+    <p class="mt-2">This enables:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Realistic heat loss calculation considering ground temperature</li>
+      <li>• Analysis of peak loads and simultaneity effects</li>
+      <li>• Optimization of network temperatures throughout the year</li>
+    </ul>`
+  },
+  {
+    question: 'Is VICUS DISTRICTS easy to use?',
+    answer: `<p>Yes, VICUS DISTRICTS was developed with a focus on intuitive operation. The modern user interface enables
+    a quick start, even without extensive prior knowledge in network calculations.</p>
+    <p class="mt-2">Additionally, we offer:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Free kickoff meetings for new users</li>
+      <li>• Video tutorials and comprehensive documentation</li>
+      <li>• Personal support for questions</li>
+    </ul>`
+  },
+  {
+    question: 'What data can I import?',
+    answer: `<p>VICUS DISTRICTS supports various import formats:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>GIS data:</strong> Shapefile, GeoJSON for network geometries</li>
+      <li>• <strong>Load profiles:</strong> CSV, Excel for time-resolved heat demands</li>
+      <li>• <strong>Pipe databases:</strong> Manufacturer data can be added</li>
+      <li>• <strong>Background maps:</strong> OpenStreetMap integration</li>
+    </ul>`
+  },
+  {
+    question: 'Are pipes from typical manufacturers in the database?',
+    answer: `<p>Yes, VICUS DISTRICTS contains a comprehensive pipe database with products from leading manufacturers such as:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• REHAU</li>
+      <li>• Logstor</li>
+      <li>• Isoplus</li>
+      <li>• Other manufacturers</li>
+    </ul>
+    <p class="mt-2">The database can be extended with custom pipe types at any time.</p>`
+  },
+  {
+    question: 'How are heat losses calculated?',
+    answer: `<p>Heat loss calculation in VICUS DISTRICTS considers:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Dynamic ground model with seasonal temperature variation</li>
+      <li>• Pipe insulation and material parameters</li>
+      <li>• Installation depth and soil type</li>
+      <li>• Supply and return temperatures over time</li>
+    </ul>
+    <p class="mt-2">The results show heat losses for every hour of the year.</p>`
+  },
+  {
+    question: 'Are elevation differences considered?',
+    answer: `<p>Yes, VICUS DISTRICTS fully considers elevation differences:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Geodetic pressure differences are considered in hydraulics</li>
+      <li>• Elevation data can be imported from GIS data</li>
+      <li>• 3D visualization of the network possible</li>
+    </ul>`
+  },
+  {
+    question: 'Is economic analysis integrated?',
+    answer: `<p>VICUS DISTRICTS focuses on technical planning and simulation. For economic analysis
+    we offer:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Export of all relevant data (bill of materials, heat losses, etc.)</li>
+      <li>• Compatibility with common economic analysis tools</li>
+      <li>• Structured result reports for funding applications</li>
+    </ul>`
+  },
+  {
+    question: 'Are pipe fittings (branches, bends) considered?',
+    answer: `<p>Yes, fittings and valves are considered:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Pressure losses from bends, T-pieces and branches</li>
+      <li>• Valves and control fittings</li>
+      <li>• Consumer substations</li>
+    </ul>`
+  },
+  {
+    question: 'Can I create a feasibility study with this?',
+    answer: `<p>VICUS DISTRICTS provides all technical data needed for a feasibility study:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Detailed network design with pipe lengths and dimensions</li>
+      <li>• Heat loss calculation</li>
+      <li>• Bill of materials for cost estimation</li>
+      <li>• Load profiles and supply concept</li>
+    </ul>
+    <p class="mt-2">Economic calculations themselves are done in external tools.</p>`
+  },
+  {
+    question: 'Can I display and export plans?',
+    answer: `<p>Yes, VICUS DISTRICTS offers extensive visualization and export options:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• 2D and 3D network display</li>
+      <li>• Color-coded results display (temperatures, pressures, etc.)</li>
+      <li>• Export as image (PNG, PDF)</li>
+      <li>• Detailed reports in PDF format</li>
+    </ul>`
+  },
+  {
+    question: 'How does the bill of materials and pressure loss calculation work?',
+    answer: `<p>After network planning and simulation you can:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>Bill of materials:</strong> Export of all pipe lengths, dimensions and components to Excel</li>
+      <li>• <strong>Pressure loss calculation:</strong> Automatic calculation for each branch with visualization of critical paths</li>
+      <li>• Detailed result reports for each network section</li>
+    </ul>`
+  },
+  {
+    question: 'How are consumer load profiles determined?',
+    answer: `<p>VICUS DISTRICTS offers several options for load profile creation:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>Standard load profiles:</strong> VDI, SIA and other standards</li>
+      <li>• <strong>Import:</strong> Custom load profiles as CSV or Excel</li>
+      <li>• <strong>Scaling:</strong> Adjustment to annual consumption or peak load</li>
+      <li>• <strong>Simultaneity:</strong> Automatic consideration for many consumers</li>
+    </ul>`
+  },
+  {
+    question: 'Can ground source probes and solar collectors be simulated?',
+    answer: `<p>Yes, VICUS DISTRICTS supports various renewable heat sources:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>Ground source probes:</strong> Simulation of source temperatures throughout the year</li>
+      <li>• <strong>Solar thermal:</strong> Integration of collector fields</li>
+      <li>• <strong>Waste heat:</strong> Integration of industrial waste heat sources</li>
+      <li>• <strong>Heat pumps:</strong> Bidirectional networks for low-temperature heating</li>
+    </ul>`
+  },
+  {
+    question: 'Can multiple energy plants be modeled?',
+    answer: `<p>Yes, VICUS DISTRICTS supports complex network structures:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Multiple feed points/energy plants</li>
+      <li>• Ring structures and meshed networks</li>
+      <li>• Cascaded networks with different temperature levels</li>
+      <li>• Distributed generation with decentralized sources</li>
+    </ul>`
+  },
+];
+---
+
+<PageLayout
+  title="FAQ | VICUS DISTRICTS"
+  description="Frequently asked questions about VICUS DISTRICTS - software for heating network planning and thermo-hydraulic simulation."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        Answers to the most important questions about VICUS DISTRICTS and heating network planning.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- FAQ -->
+  <FAQ items={faqItems} />
+
+  <!-- Contact CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-foreground mb-4">Your question not listed?</h2>
+        <p class="text-xl text-foreground/70 mb-8">
+          Contact us directly - we're happy to help.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={url(`/${lang}/contact`)} class="btn btn-primary">
+            {t('btn.contact')}
+          </a>
+          <a href={url(`/${lang}/vicus-districts/onboarding`)} class="btn btn-secondary">
+            {t('districts.testLicense')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

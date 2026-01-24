@@ -12,7 +12,18 @@ const navigation = [
     label: t('nav.software'),
     children: [
       { label: t('nav.buildings'), href: url(`/${lang}/vicus-buildings`) },
-      { label: t('nav.districts'), href: url(`/${lang}/vicus-districts`) },
+      {
+        label: t('nav.districts'),
+        href: url(`/${lang}/vicus-districts`),
+        children: [
+          { label: t('districts.overview'), href: url(`/${lang}/vicus-districts`) },
+          { label: t('districts.features'), href: url(`/${lang}/vicus-districts/${lang === 'de' ? 'funktionen' : 'features'}`) },
+          { label: t('districts.license'), href: url(`/${lang}/vicus-districts/${lang === 'de' ? 'lizenz' : 'license'}`) },
+          { label: t('districts.onboarding'), href: url(`/${lang}/vicus-districts/onboarding`) },
+          { label: t('districts.comparison'), href: url(`/${lang}/vicus-districts/${lang === 'de' ? 'vergleich' : 'comparison'}`) },
+          { label: t('districts.faq'), href: url(`/${lang}/vicus-districts/faq`) },
+        ]
+      },
     ]
   },
   { label: t('nav.docs'), href: url(`/${lang}/${lang === 'de' ? 'dokumentation' : 'documentation'}`) },
@@ -45,12 +56,38 @@ const navigation = [
               <div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div class="bg-secondary rounded-lg shadow-xl border border-foreground/10 py-2 min-w-48">
                   {item.children.map((child) => (
-                    <a
-                      href={child.href}
-                      class="block px-4 py-2 text-foreground/80 hover:text-primary hover:bg-background/50 transition-colors"
-                    >
-                      {child.label}
-                    </a>
+                    child.children ? (
+                      <div class="relative group/sub">
+                        <a
+                          href={child.href}
+                          class="flex items-center justify-between px-4 py-2 text-foreground/80 hover:text-primary hover:bg-background/50 transition-colors"
+                        >
+                          {child.label}
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </a>
+                        <div class="absolute left-full top-0 pl-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                          <div class="bg-secondary rounded-lg shadow-xl border border-foreground/10 py-2 min-w-48">
+                            {child.children.map((subChild) => (
+                              <a
+                                href={subChild.href}
+                                class="block px-4 py-2 text-foreground/80 hover:text-primary hover:bg-background/50 transition-colors"
+                              >
+                                {subChild.label}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <a
+                        href={child.href}
+                        class="block px-4 py-2 text-foreground/80 hover:text-primary hover:bg-background/50 transition-colors"
+                      >
+                        {child.label}
+                      </a>
+                    )
                   ))}
                 </div>
               </div>
@@ -98,12 +135,31 @@ const navigation = [
             <div class="space-y-2">
               <span class="text-foreground/60 text-sm font-medium">{item.label}</span>
               {item.children.map((child) => (
-                <a
-                  href={child.href}
-                  class="block pl-4 py-2 text-foreground/80 hover:text-primary transition-colors"
-                >
-                  {child.label}
-                </a>
+                child.children ? (
+                  <div class="space-y-1">
+                    <a
+                      href={child.href}
+                      class="block pl-4 py-2 text-foreground/80 hover:text-primary transition-colors font-medium"
+                    >
+                      {child.label}
+                    </a>
+                    {child.children.map((subChild) => (
+                      <a
+                        href={subChild.href}
+                        class="block pl-8 py-1.5 text-sm text-foreground/60 hover:text-primary transition-colors"
+                      >
+                        {subChild.label}
+                      </a>
+                    ))}
+                  </div>
+                ) : (
+                  <a
+                    href={child.href}
+                    class="block pl-4 py-2 text-foreground/80 hover:text-primary transition-colors"
+                  >
+                    {child.label}
+                  </a>
+                )
               ))}
             </div>
           ) : (

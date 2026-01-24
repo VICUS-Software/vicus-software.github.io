@@ -1,0 +1,83 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+
+interface ComparisonItem {
+  feature: string;
+  values: (boolean | string)[];
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  headers: string[];
+  items: ComparisonItem[];
+  footnote?: string;
+}
+
+const { title, subtitle, headers, items, footnote } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+---
+
+<section class="section">
+  <div class="container-custom">
+    {(title || subtitle) && (
+      <div class="text-center mb-12">
+        {title && <h2 class="text-foreground mb-4">{title}</h2>}
+        {subtitle && <p class="text-xl text-foreground/70 max-w-3xl mx-auto">{subtitle}</p>}
+      </div>
+    )}
+
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="text-left p-4 bg-secondary/50 border-b border-foreground/10 rounded-tl-lg">
+              <span class="text-foreground font-semibold">{lang === 'de' ? 'Funktion' : 'Feature'}</span>
+            </th>
+            {headers.map((header, index) => (
+              <th class:list={[
+                "text-center p-4 bg-secondary/50 border-b border-foreground/10",
+                index === headers.length - 1 && "rounded-tr-lg"
+              ]}>
+                <span class="text-foreground font-semibold">{header}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, rowIndex) => (
+            <tr class:list={[
+              rowIndex % 2 === 0 ? "bg-background" : "bg-secondary/20"
+            ]}>
+              <td class="p-4 border-b border-foreground/5">
+                <span class="text-foreground/80">{item.feature}</span>
+              </td>
+              {item.values.map((value) => (
+                <td class="text-center p-4 border-b border-foreground/5">
+                  {typeof value === 'boolean' ? (
+                    value ? (
+                      <svg class="w-6 h-6 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      <svg class="w-6 h-6 text-foreground/30 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    )
+                  ) : (
+                    <span class="text-foreground/80">{value}</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    {footnote && (
+      <p class="text-sm text-foreground/50 mt-4 text-center">{footnote}</p>
+    )}
+  </div>
+</section>

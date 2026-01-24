@@ -69,6 +69,13 @@ const routeMappings: Record<string, Record<Language, string>> = {
   'tutorials-help': { de: 'tutorials-hilfe', en: 'tutorials-help' },
   'dokumentation': { de: 'dokumentation', en: 'documentation' },
   'documentation': { de: 'dokumentation', en: 'documentation' },
+  // VICUS Districts subpages
+  'funktionen': { de: 'funktionen', en: 'features' },
+  'features': { de: 'funktionen', en: 'features' },
+  'lizenz': { de: 'lizenz', en: 'license' },
+  'license': { de: 'lizenz', en: 'license' },
+  'vergleich': { de: 'vergleich', en: 'comparison' },
+  'comparison': { de: 'vergleich', en: 'comparison' },
 };
 
 export function getTranslatedPath(currentPath: string, targetLang: Language): string {

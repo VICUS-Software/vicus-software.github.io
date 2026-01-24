@@ -1,0 +1,47 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: NavItem[];
+  currentPath: string;
+}
+
+const { items, currentPath } = Astro.props;
+---
+
+<nav class="sticky top-20 z-40 bg-background/95 backdrop-blur-sm border-b border-foreground/10">
+  <div class="container-custom">
+    <div class="flex items-center gap-1 overflow-x-auto py-3 scrollbar-hide">
+      {items.map((item) => {
+        const isActive = currentPath === item.href ||
+          (item.href.endsWith('vicus-districts') && currentPath.endsWith('vicus-districts/'));
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              "px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors",
+              isActive
+                ? "bg-primary/20 text-primary"
+                : "text-foreground/70 hover:text-foreground hover:bg-foreground/5"
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</nav>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>

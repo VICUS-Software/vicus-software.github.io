@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  features?: string[];
+  reversed?: boolean;
+}
+
+const { title, description, image, imageAlt, features, reversed = false } = Astro.props;
+---
+
+<div class:list={[
+  "grid lg:grid-cols-2 gap-8 lg:gap-12 items-center",
+  reversed && "lg:[&>*:first-child]:order-2"
+]}>
+  <div>
+    <h3 class="text-2xl font-semibold text-foreground mb-4">{title}</h3>
+
+    {description && (
+      <p class="text-foreground/70 mb-6">{description}</p>
+    )}
+
+    {features && features.length > 0 && (
+      <ul class="space-y-3">
+        {features.map((feature) => (
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-foreground/80">{feature}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <slot name="content" />
+  </div>
+
+  <div class="relative">
+    {image ? (
+      <div class="aspect-video rounded-xl overflow-hidden bg-secondary/50 border border-primary/20">
+        <img
+          src={image}
+          alt={imageAlt || title}
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    ) : (
+      <slot name="image" />
+    )}
+  </div>
+</div>

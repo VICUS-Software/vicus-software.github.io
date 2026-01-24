@@ -1,0 +1,204 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import FAQ from '../../../components/FAQ.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('districts.overview'), href: url(`/${lang}/vicus-districts`) },
+  { label: t('districts.features'), href: url(`/${lang}/vicus-districts/funktionen`) },
+  { label: t('districts.license'), href: url(`/${lang}/vicus-districts/lizenz`) },
+  { label: t('districts.onboarding'), href: url(`/${lang}/vicus-districts/onboarding`) },
+  { label: t('districts.comparison'), href: url(`/${lang}/vicus-districts/vergleich`) },
+  { label: t('districts.faq'), href: url(`/${lang}/vicus-districts/faq`) },
+];
+
+const faqItems = [
+  {
+    question: 'Was bedeutet "dynamische/thermo-hydraulische Simulation"?',
+    answer: `<p>Im Gegensatz zu stationären Berechnungen, die nur einen Zeitpunkt betrachten, simuliert VICUS DISTRICTS das gesamte Jahr
+    in stündlicher Auflösung (8760 Zeitschritte). Dabei werden Temperaturen, Massenströme und Drücke im zeitlichen Verlauf berechnet.</p>
+    <p class="mt-2">Dies ermöglicht:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Realistische Wärmeverlustberechnung unter Berücksichtigung der Erdreichtemperatur</li>
+      <li>• Analyse von Spitzenlasten und Gleichzeitigkeitseffekten</li>
+      <li>• Optimierung der Netztemperaturen über das Jahr</li>
+    </ul>`
+  },
+  {
+    question: 'Ist VICUS DISTRICTS einfach bedienbar?',
+    answer: `<p>Ja, VICUS DISTRICTS wurde mit dem Fokus auf intuitive Bedienung entwickelt. Die moderne Benutzeroberfläche ermöglicht
+    einen schnellen Einstieg, auch ohne umfangreiche Vorkenntnisse in der Netzberechnung.</p>
+    <p class="mt-2">Zusätzlich bieten wir:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Kostenlose Kickoff-Meetings für neue Nutzer</li>
+      <li>• Video-Tutorials und ausführliche Dokumentation</li>
+      <li>• Persönlichen Support bei Fragen</li>
+    </ul>`
+  },
+  {
+    question: 'Was für Daten kann ich importieren?',
+    answer: `<p>VICUS DISTRICTS unterstützt verschiedene Importformate:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>GIS-Daten:</strong> Shapefile, GeoJSON für Netzgeometrien</li>
+      <li>• <strong>Lastprofile:</strong> CSV, Excel für zeitaufgelöste Wärmebedarfe</li>
+      <li>• <strong>Rohrdatenbanken:</strong> Herstellerdaten können ergänzt werden</li>
+      <li>• <strong>Hintergrundkarten:</strong> OpenStreetMap-Anbindung</li>
+    </ul>`
+  },
+  {
+    question: 'Sind Rohre typischer Hersteller in der Datenbank?',
+    answer: `<p>Ja, VICUS DISTRICTS enthält eine umfangreiche Rohrdatenbank mit Produkten führender Hersteller wie:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• REHAU</li>
+      <li>• Logstor</li>
+      <li>• Isoplus</li>
+      <li>• Weitere Hersteller</li>
+    </ul>
+    <p class="mt-2">Die Datenbank kann jederzeit mit eigenen Rohrtypen erweitert werden.</p>`
+  },
+  {
+    question: 'Wie werden Wärmeverluste berechnet?',
+    answer: `<p>Die Wärmeverlustberechnung in VICUS DISTRICTS berücksichtigt:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Dynamisches Erdreichmodell mit jahreszeitlicher Temperaturvariation</li>
+      <li>• Rohrdämmung und Materialparameter</li>
+      <li>• Verlegetiefe und Bodenart</li>
+      <li>• Vor- und Rücklauftemperaturen im zeitlichen Verlauf</li>
+    </ul>
+    <p class="mt-2">Die Ergebnisse zeigen die Wärmeverluste für jede Stunde des Jahres.</p>`
+  },
+  {
+    question: 'Werden Höhenunterschiede berücksichtigt?',
+    answer: `<p>Ja, VICUS DISTRICTS berücksichtigt Höhenunterschiede vollständig:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Geodätische Druckdifferenzen werden in der Hydraulik berücksichtigt</li>
+      <li>• Höhendaten können aus GIS-Daten importiert werden</li>
+      <li>• 3D-Visualisierung des Netzes möglich</li>
+    </ul>`
+  },
+  {
+    question: 'Ist eine Wirtschaftlichkeitsberechnung integriert?',
+    answer: `<p>VICUS DISTRICTS konzentriert sich auf die technische Planung und Simulation. Für die Wirtschaftlichkeitsberechnung
+    bieten wir:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Export aller relevanten Daten (Massenauszüge, Wärmeverluste, etc.)</li>
+      <li>• Kompatibilität mit gängigen Wirtschaftlichkeitstools</li>
+      <li>• Strukturierte Ergebnisberichte für Fördermittelanträge</li>
+    </ul>`
+  },
+  {
+    question: 'Werden Rohrfittinge (Abzweige, Bögen) berücksichtigt?',
+    answer: `<p>Ja, Formstücke und Armaturen werden berücksichtigt:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Druckverluste durch Bögen, T-Stücke und Abzweige</li>
+      <li>• Ventile und Regelarmaturen</li>
+      <li>• Übergabestationen der Abnehmer</li>
+    </ul>`
+  },
+  {
+    question: 'Kann ich eine BEW-Machbarkeitsstudie damit erstellen?',
+    answer: `<p>VICUS DISTRICTS liefert alle technischen Daten, die für eine BEW-Machbarkeitsstudie benötigt werden:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Detaillierte Netzauslegung mit Rohrlängen und -dimensionen</li>
+      <li>• Wärmeverlustberechnung</li>
+      <li>• Massenauszüge für Kostenabschätzung</li>
+      <li>• Lastprofile und Versorgungskonzept</li>
+    </ul>
+    <p class="mt-2">Die Wirtschaftlichkeitsberechnung selbst erfolgt in externen Tools.</p>`
+  },
+  {
+    question: 'Kann ich Pläne darstellen und exportieren?',
+    answer: `<p>Ja, VICUS DISTRICTS bietet umfangreiche Visualisierungs- und Exportmöglichkeiten:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• 2D und 3D Netzdarstellung</li>
+      <li>• Farbcodierte Ergebnisdarstellung (Temperaturen, Drücke, etc.)</li>
+      <li>• Export als Bild (PNG, PDF)</li>
+      <li>• Detaillierte Berichte im PDF-Format</li>
+    </ul>`
+  },
+  {
+    question: 'Wie funktioniert der Massenauszug und die Druckverlustberechnung?',
+    answer: `<p>Nach der Netzplanung und Simulation können Sie:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>Massenauszug:</strong> Export aller Rohrlängen, Dimensionen und Komponenten nach Excel</li>
+      <li>• <strong>Druckverlustberechnung:</strong> Automatische Berechnung für jeden Strang mit Visualisierung der kritischen Pfade</li>
+      <li>• Detaillierte Ergebnisberichte für jeden Netzabschnitt</li>
+    </ul>`
+  },
+  {
+    question: 'Wie werden die Lastprofile der Abnehmer bestimmt?',
+    answer: `<p>VICUS DISTRICTS bietet mehrere Möglichkeiten zur Lastprofilerstellung:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>Standardlastprofile:</strong> VDI, SIA und weitere Normen</li>
+      <li>• <strong>Import:</strong> Eigene Lastprofile als CSV oder Excel</li>
+      <li>• <strong>Skalierung:</strong> Anpassung an Jahresverbrauch oder Spitzenlast</li>
+      <li>• <strong>Gleichzeitigkeit:</strong> Automatische Berücksichtigung bei vielen Abnehmern</li>
+    </ul>`
+  },
+  {
+    question: 'Können Erdsonden und Solarkollektoren simuliert werden?',
+    answer: `<p>Ja, VICUS DISTRICTS unterstützt verschiedene erneuerbare Wärmequellen:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• <strong>Erdwärmesonden:</strong> Simulation der Quelltemperaturen über das Jahr</li>
+      <li>• <strong>Solarthermie:</strong> Integration von Kollektorfeldern</li>
+      <li>• <strong>Abwärme:</strong> Einbindung industrieller Abwärmequellen</li>
+      <li>• <strong>Wärmepumpen:</strong> Bidirektionale Netze für kalte Nahwärme</li>
+    </ul>`
+  },
+  {
+    question: 'Können mehrere Energiezentralen modelliert werden?',
+    answer: `<p>Ja, VICUS DISTRICTS unterstützt komplexe Netzstrukturen:</p>
+    <ul class="mt-2 space-y-1">
+      <li>• Mehrere Einspeisepunkte/Energiezentralen</li>
+      <li>• Ringstrukturen und vermaschte Netze</li>
+      <li>• Kaskadierte Netze mit verschiedenen Temperaturniveaus</li>
+      <li>• Verteilte Erzeugung mit dezentralen Quellen</li>
+    </ul>`
+  },
+];
+---
+
+<PageLayout
+  title="FAQ | VICUS DISTRICTS"
+  description="Häufig gestellte Fragen zu VICUS DISTRICTS - Software für Wärmenetzplanung und thermo-hydraulische Simulation."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Häufig gestellte Fragen</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        Antworten auf die wichtigsten Fragen zu VICUS DISTRICTS und der Wärmenetzplanung.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- FAQ -->
+  <FAQ items={faqItems} />
+
+  <!-- Contact CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-foreground mb-4">Ihre Frage nicht dabei?</h2>
+        <p class="text-xl text-foreground/70 mb-8">
+          Kontaktieren Sie uns direkt - wir helfen Ihnen gerne weiter.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={url(`/${lang}/kontakt`)} class="btn btn-primary">
+            {t('btn.contact')}
+          </a>
+          <a href={url(`/${lang}/vicus-districts/onboarding`)} class="btn btn-secondary">
+            {t('districts.testLicense')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -63,6 +63,23 @@ export const ui = {
     'misc.postedOn': 'Veröffentlicht am',
     'misc.readTime': '{min} Min. Lesezeit',
     'misc.backToBlog': 'Zurück zum Blog',
+
+    // Districts Subpages
+    'districts.overview': 'Übersicht',
+    'districts.features': 'Funktionen',
+    'districts.license': 'Lizenz',
+    'districts.onboarding': 'Onboarding',
+    'districts.comparison': 'Vergleich',
+    'districts.faq': 'FAQ',
+    'districts.hero.title': 'Die Software für Ihre Wärmenetzplanung',
+    'districts.hero.subtitle': 'Intuitiv. Schnell. Simulationsgestützt.',
+    'districts.testLicense': '30 Tage kostenlos testen',
+    'districts.perMonth': 'Monat',
+    'districts.upTo': 'bis zu',
+    'districts.consumers': 'Abnehmer',
+    'districts.studentsNote': 'Kostenlose Lizenzen für Studenten und Lehre verfügbar',
+    'districts.contactSales': 'Vertrieb kontaktieren',
+    'districts.startTrial': 'Testversion starten',
   },
   en: {
     // Navigation
@@ -128,6 +145,23 @@ export const ui = {
     'misc.postedOn': 'Posted on',
     'misc.readTime': '{min} min read',
     'misc.backToBlog': 'Back to Blog',
+
+    // Districts Subpages
+    'districts.overview': 'Overview',
+    'districts.features': 'Features',
+    'districts.license': 'License',
+    'districts.onboarding': 'Onboarding',
+    'districts.comparison': 'Comparison',
+    'districts.faq': 'FAQ',
+    'districts.hero.title': 'The Software for Your Heat Network Planning',
+    'districts.hero.subtitle': 'Intuitive. Fast. Simulation-based.',
+    'districts.testLicense': '30 days free trial',
+    'districts.perMonth': 'month',
+    'districts.upTo': 'up to',
+    'districts.consumers': 'consumers',
+    'districts.studentsNote': 'Free licenses available for students and education',
+    'districts.contactSales': 'Contact Sales',
+    'districts.startTrial': 'Start Trial',
   },
 } as const;
 

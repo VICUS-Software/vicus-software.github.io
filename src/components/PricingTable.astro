@@ -1,0 +1,87 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+
+interface PricingTier {
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  features: string[];
+  highlighted?: boolean;
+  cta: string;
+  ctaHref: string;
+}
+
+interface Props {
+  tiers: PricingTier[];
+  title?: string;
+  subtitle?: string;
+}
+
+const { tiers, title, subtitle } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+---
+
+<section class="section">
+  <div class="container-custom">
+    {(title || subtitle) && (
+      <div class="text-center mb-12">
+        {title && <h2 class="text-foreground mb-4">{title}</h2>}
+        {subtitle && <p class="text-xl text-foreground/70 max-w-3xl mx-auto">{subtitle}</p>}
+      </div>
+    )}
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {tiers.map((tier) => (
+        <div class:list={[
+          "relative rounded-2xl p-8 border transition-all",
+          tier.highlighted
+            ? "bg-primary/10 border-primary shadow-lg shadow-primary/10 scale-[1.02]"
+            : "bg-secondary/50 border-foreground/10 hover:border-primary/30"
+        ]}>
+          {tier.highlighted && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+              <span class="bg-primary text-background px-4 py-1 rounded-full text-sm font-medium">
+                {lang === 'de' ? 'Empfohlen' : 'Recommended'}
+              </span>
+            </div>
+          )}
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-foreground mb-2">{tier.name}</h3>
+            <p class="text-foreground/60 text-sm">{tier.description}</p>
+          </div>
+
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-foreground">{tier.price}</span>
+            <span class="text-foreground/60">/{tier.period}</span>
+          </div>
+
+          <ul class="space-y-3 mb-8">
+            {tier.features.map((feature) => (
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-foreground/80 text-sm">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={tier.ctaHref}
+            class:list={[
+              "block w-full text-center py-3 px-6 rounded-lg font-medium transition-colors",
+              tier.highlighted
+                ? "bg-primary text-background hover:bg-primary/90"
+                : "bg-foreground/10 text-foreground hover:bg-foreground/20"
+            ]}
+          >
+            {tier.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

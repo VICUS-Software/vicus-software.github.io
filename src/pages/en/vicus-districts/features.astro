@@ -1,0 +1,190 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import FeatureCard from '../../../components/FeatureCard.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('districts.overview'), href: url(`/${lang}/vicus-districts`) },
+  { label: t('districts.features'), href: url(`/${lang}/vicus-districts/features`) },
+  { label: t('districts.license'), href: url(`/${lang}/vicus-districts/license`) },
+  { label: t('districts.onboarding'), href: url(`/${lang}/vicus-districts/onboarding`) },
+  { label: t('districts.comparison'), href: url(`/${lang}/vicus-districts/comparison`) },
+  { label: t('districts.faq'), href: url(`/${lang}/vicus-districts/faq`) },
+];
+
+const featureSections = [
+  {
+    title: 'Easy and Fast Heating Network Planning',
+    description: 'With VICUS DISTRICTS you create network plans quickly and intuitively. The modern interface enables efficient work even on complex projects.',
+    image: '/images/screenshots/vicus-districts-planning.png',
+    features: [
+      'Graphical network creation with drag & drop',
+      'Import of GIS data (Shapefile, GeoJSON)',
+      'Automatic route finding and pipe laying',
+      'OpenStreetMap integration for background maps',
+      'Flexible network structures (radial, ring, mesh)',
+      'Quick variant comparisons'
+    ]
+  },
+  {
+    title: 'Pressure Loss Calculation and Pump Sizing',
+    description: 'Precise hydraulic calculations for optimal network design. From pressure loss calculation to pump selection.',
+    image: '/images/screenshots/vicus-districts-hydraulics.png',
+    features: [
+      'Automatic pressure loss calculation',
+      'Consideration of elevation differences',
+      'Pump sizing and selection',
+      'Valve and fitting calculations',
+      'Bill of materials for all components',
+      'Detailed result reports'
+    ]
+  },
+  {
+    title: 'Low-Temperature Networks / Anergy Networks',
+    description: 'VICUS DISTRICTS also supports innovative network concepts such as low-temperature heating and anergy networks with bidirectional operation.',
+    image: '/images/screenshots/vicus-districts-anergy.png',
+    features: [
+      'Bidirectional networks with heat pumps',
+      'Integration of ground source probes',
+      'Waste heat utilization and heat recovery',
+      'Seasonal storage concepts',
+      'Cooling load simulation',
+      'Temperature level optimization'
+    ]
+  },
+  {
+    title: 'Thermo-Hydraulic Simulation',
+    description: 'The dynamic annual simulation provides precise results for temperatures, mass flows and heat losses over time.',
+    image: '/images/screenshots/vicus-districts-simulation.png',
+    features: [
+      'Dynamic annual simulation (8760 hours)',
+      'Time-resolved temperature distribution in the network',
+      'Heat loss calculation with ground model',
+      'Analysis of peak loads and simultaneity',
+      'Interactive results visualization',
+      'Export for economic calculations'
+    ]
+  }
+];
+---
+
+<PageLayout
+  title="Features | VICUS DISTRICTS"
+  description="Detailed overview of all VICUS DISTRICTS features for professional heating network planning."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Features</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        VICUS DISTRICTS offers all the tools for professional planning and simulation of heating networks.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Feature Sections -->
+  {featureSections.map((section, index) => (
+    <section class:list={["section", index % 2 === 1 && "bg-secondary/30"]}>
+      <div class="container-custom">
+        <FeatureCard
+          title={section.title}
+          description={section.description}
+          image={section.image}
+          imageAlt={section.title}
+          features={section.features}
+          reversed={index % 2 === 1}
+        />
+      </div>
+    </section>
+  ))}
+
+  <!-- Additional Features Grid -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Additional Features</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Data Import</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• GIS data (Shapefile, GeoJSON)</li>
+            <li>• Load profiles (CSV, Excel)</li>
+            <li>• Manufacturer pipe databases</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Visualization</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• 2D and 3D network display</li>
+            <li>• Color-coded results</li>
+            <li>• Interactive diagrams</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Export & Documentation</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Detailed reports (PDF)</li>
+            <li>• Bill of materials (Excel)</li>
+            <li>• Results for economic analysis</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Pipe Database</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Pre-installed manufacturer data</li>
+            <li>• Plastic and steel pipes</li>
+            <li>• Custom pipes can be added</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Load Profiles</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Standard load profiles (VDI, SIA)</li>
+            <li>• Custom profiles importable</li>
+            <li>• Simultaneity factors</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Multiple Plants</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Distributed generation</li>
+            <li>• Cascaded networks</li>
+            <li>• Ring structures</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">See for yourself</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Test all features free for 30 days with no obligation.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={url(`/${lang}/vicus-districts/onboarding`)} class="btn btn-primary">
+          {t('districts.testLicense')}
+        </a>
+        <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
+          {t('btn.demo')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

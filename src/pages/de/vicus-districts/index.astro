@@ -1,0 +1,221 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('districts.overview'), href: url(`/${lang}/vicus-districts`) },
+  { label: t('districts.features'), href: url(`/${lang}/vicus-districts/funktionen`) },
+  { label: t('districts.license'), href: url(`/${lang}/vicus-districts/lizenz`) },
+  { label: t('districts.onboarding'), href: url(`/${lang}/vicus-districts/onboarding`) },
+  { label: t('districts.comparison'), href: url(`/${lang}/vicus-districts/vergleich`) },
+  { label: t('districts.faq'), href: url(`/${lang}/vicus-districts/faq`) },
+];
+
+const mainBenefits = [
+  {
+    title: 'Digitale Schnittstellen',
+    description: 'Import von GIS-Daten, Lastprofilen und Rohrdatenbanken. Export für Dokumentation und Weiterverarbeitung.',
+    icon: 'data'
+  },
+  {
+    title: 'Einfache Planung',
+    description: 'Intuitive Oberfläche für schnelle Netzplanung. Von der Skizze zum fertigen Konzept in kürzester Zeit.',
+    icon: 'design'
+  },
+  {
+    title: 'Dynamische Simulation',
+    description: 'Thermo-hydraulische Jahressimulation für präzise Auslegung und Optimierung Ihres Wärmenetzes.',
+    icon: 'simulation'
+  },
+  {
+    title: 'Moderne Oberfläche',
+    description: 'Übersichtliche Darstellung komplexer Netze. 3D-Visualisierung und interaktive Ergebnisauswertung.',
+    icon: 'interface'
+  }
+];
+
+const customerLogos = [
+  { name: 'REHAU', src: '/images/logos/rehau.png' },
+  { name: 'T&K', src: '/images/logos/tk.png' },
+  { name: 'Stadtwerke Meiningen', src: '/images/logos/stadtwerke-meiningen.png' },
+  { name: 'Goodmen Energy', src: '/images/logos/goodmen.png' },
+  { name: 'I pro K', src: '/images/logos/iprok.png' },
+];
+---
+
+<PageLayout
+  title="VICUS DISTRICTS"
+  description="Die Software für Ihre Wärmenetzplanung. Intuitiv. Schnell. Simulationsgestützt."
+  showHero={false}
+>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+          {t('districts.hero.title')}
+        </h1>
+        <p class="text-xl md:text-2xl text-primary font-medium mb-8">
+          {t('districts.hero.subtitle')}
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={url(`/${lang}/vicus-districts/onboarding`)} class="btn btn-primary">
+            {t('districts.testLicense')}
+          </a>
+          <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
+            {t('btn.demo')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Customer Logos -->
+  <section class="py-12 border-b border-foreground/10">
+    <div class="container-custom">
+      <p class="text-center text-foreground/50 text-sm mb-8">Vertrauen von führenden Unternehmen</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-70">
+        {customerLogos.map((logo) => (
+          <div class="h-8 md:h-10 grayscale hover:grayscale-0 transition-all">
+            <img src={logo.src} alt={logo.name} class="h-full w-auto object-contain" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Benefits -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Warum VICUS DISTRICTS?</h2>
+        <p class="text-xl text-foreground/70 max-w-3xl mx-auto">
+          Alles was Sie für die professionelle Wärmenetzplanung brauchen - in einer Software.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {mainBenefits.map((benefit) => (
+          <div class="card hover-lift group">
+            <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {benefit.icon === 'data' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                )}
+                {benefit.icon === 'design' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                )}
+                {benefit.icon === 'simulation' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                )}
+                {benefit.icon === 'interface' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                )}
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
+            <p class="text-foreground/70 text-sm">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshot Section -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-foreground mb-6">Intelligente Wärmenetzplanung</h2>
+          <p class="text-foreground/70 mb-6">
+            VICUS DISTRICTS ist die spezialisierte Lösung für die Planung und Simulation von Wärmenetzen.
+            Von der ersten Konzeptphase bis zur detaillierten Netzauslegung unterstützt Sie die Software
+            bei allen Schritten der Quartiersplanung.
+          </p>
+          <p class="text-foreground/70 mb-8">
+            Die integrierte GIS-Funktionalität ermöglicht die direkte Arbeit mit Geodaten.
+            Kombiniert mit der leistungsstarken thermohydraulischen Simulation erhalten Sie
+            präzise Ergebnisse für Ihre Netzplanung.
+          </p>
+          <a href={url(`/${lang}/vicus-districts/funktionen`)} class="btn btn-primary">
+            Alle Funktionen entdecken
+          </a>
+        </div>
+        <div class="relative">
+          <div class="aspect-video rounded-xl overflow-hidden bg-secondary/50 border border-primary/20">
+            <img
+              src="/images/screenshots/vicus-districts-main.png"
+              alt="VICUS DISTRICTS Screenshot"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links to Subpages -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Mehr erfahren</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href={url(`/${lang}/vicus-districts/funktionen`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Funktionen
+          </h3>
+          <p class="text-foreground/70 text-sm">Detaillierte Übersicht aller Features und Möglichkeiten.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-districts/lizenz`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Preise & Lizenzen
+          </h3>
+          <p class="text-foreground/70 text-sm">Flexible Lizenzmodelle für jede Projektgröße.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-districts/vergleich`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Vergleich
+          </h3>
+          <p class="text-foreground/70 text-sm">Wie sich VICUS von anderen Tools unterscheidet.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-districts/faq`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            FAQ
+          </h3>
+          <p class="text-foreground/70 text-sm">Antworten auf häufig gestellte Fragen.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Bereit für bessere Wärmenetzplanung?</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Starten Sie mit einer kostenlosen 30-Tage-Testversion und überzeugen Sie sich selbst.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={url(`/${lang}/vicus-districts/onboarding`)} class="btn btn-primary">
+          {t('districts.testLicense')}
+        </a>
+        <a href={url(`/${lang}/kontakt`)} class="btn btn-secondary">
+          {t('btn.contact')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

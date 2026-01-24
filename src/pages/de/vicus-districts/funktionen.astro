@@ -1,0 +1,190 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import FeatureCard from '../../../components/FeatureCard.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('districts.overview'), href: url(`/${lang}/vicus-districts`) },
+  { label: t('districts.features'), href: url(`/${lang}/vicus-districts/funktionen`) },
+  { label: t('districts.license'), href: url(`/${lang}/vicus-districts/lizenz`) },
+  { label: t('districts.onboarding'), href: url(`/${lang}/vicus-districts/onboarding`) },
+  { label: t('districts.comparison'), href: url(`/${lang}/vicus-districts/vergleich`) },
+  { label: t('districts.faq'), href: url(`/${lang}/vicus-districts/faq`) },
+];
+
+const featureSections = [
+  {
+    title: 'Einfache und schnelle Wärmenetzplanung',
+    description: 'Mit VICUS DISTRICTS erstellen Sie Netzpläne schnell und intuitiv. Die moderne Oberfläche ermöglicht effizientes Arbeiten auch bei komplexen Projekten.',
+    image: '/images/screenshots/vicus-districts-planning.png',
+    features: [
+      'Grafische Netzerstellung mit Drag & Drop',
+      'Import von GIS-Daten (Shapefile, GeoJSON)',
+      'Automatische Trassenführung und Rohrleitungsverlegung',
+      'Anbindung an OpenStreetMap für Hintergrundkarten',
+      'Flexible Netzstrukturen (Strang, Ring, Masche)',
+      'Schnelle Variantenvergleiche'
+    ]
+  },
+  {
+    title: 'Druckverlustberechnung und Pumpendimensionierung',
+    description: 'Präzise hydraulische Berechnungen für optimale Netzauslegung. Von der Druckverlustberechnung bis zur Pumpenauswahl.',
+    image: '/images/screenshots/vicus-districts-hydraulics.png',
+    features: [
+      'Automatische Druckverlustberechnung',
+      'Berücksichtigung von Höhenunterschieden',
+      'Pumpendimensionierung und -auswahl',
+      'Ventil- und Armaturenberechnung',
+      'Massenauszug für alle Komponenten',
+      'Detaillierte Ergebnisberichte'
+    ]
+  },
+  {
+    title: 'Kalte Nahwärme / Anergienetze',
+    description: 'VICUS DISTRICTS unterstützt auch innovative Netzkonzepte wie kalte Nahwärme und Anergienetze mit bidirektionalem Betrieb.',
+    image: '/images/screenshots/vicus-districts-anergy.png',
+    features: [
+      'Bidirektionale Netze mit Wärmepumpen',
+      'Integration von Erdwärmesonden',
+      'Abwärmenutzung und Wärmerückgewinnung',
+      'Saisonale Speicherkonzepte',
+      'Simulation von Kühllasten',
+      'Temperaturniveauoptimierung'
+    ]
+  },
+  {
+    title: 'Thermo-hydraulische Simulation',
+    description: 'Die dynamische Jahressimulation liefert präzise Ergebnisse für Temperaturen, Massenströme und Wärmeverluste im zeitlichen Verlauf.',
+    image: '/images/screenshots/vicus-districts-simulation.png',
+    features: [
+      'Dynamische Jahressimulation (8760 Stunden)',
+      'Zeitaufgelöste Temperaturverteilung im Netz',
+      'Wärmeverlustberechnung mit Erdreichmodell',
+      'Analyse von Spitzenlasten und Gleichzeitigkeit',
+      'Interaktive Ergebnisvisualisierung',
+      'Export für Wirtschaftlichkeitsberechnungen'
+    ]
+  }
+];
+---
+
+<PageLayout
+  title="Funktionen | VICUS DISTRICTS"
+  description="Detaillierte Übersicht aller Funktionen von VICUS DISTRICTS für die professionelle Wärmenetzplanung."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Funktionen</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        VICUS DISTRICTS bietet alle Werkzeuge für die professionelle Planung und Simulation von Wärmenetzen.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Feature Sections -->
+  {featureSections.map((section, index) => (
+    <section class:list={["section", index % 2 === 1 && "bg-secondary/30"]}>
+      <div class="container-custom">
+        <FeatureCard
+          title={section.title}
+          description={section.description}
+          image={section.image}
+          imageAlt={section.title}
+          features={section.features}
+          reversed={index % 2 === 1}
+        />
+      </div>
+    </section>
+  ))}
+
+  <!-- Additional Features Grid -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Weitere Funktionen</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Datenimport</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• GIS-Daten (Shapefile, GeoJSON)</li>
+            <li>• Lastprofile (CSV, Excel)</li>
+            <li>• Rohrdatenbanken der Hersteller</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Visualisierung</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• 2D und 3D Netzdarstellung</li>
+            <li>• Farbcodierte Ergebnisse</li>
+            <li>• Interaktive Diagramme</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Export & Dokumentation</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Detaillierte Berichte (PDF)</li>
+            <li>• Massenauszüge (Excel)</li>
+            <li>• Ergebnisse für Wirtschaftlichkeit</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Rohrdatenbank</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Vorinstallierte Herstellerdaten</li>
+            <li>• Kunststoff- und Stahlrohre</li>
+            <li>• Eigene Rohre ergänzbar</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Lastprofile</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Standardlastprofile (VDI, SIA)</li>
+            <li>• Eigene Profile importierbar</li>
+            <li>• Gleichzeitigkeitsfaktoren</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Mehrere Zentralen</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Verteilte Erzeugung</li>
+            <li>• Kaskadierte Netze</li>
+            <li>• Ringstrukturen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Überzeugen Sie sich selbst</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Testen Sie alle Funktionen 30 Tage kostenlos und unverbindlich.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={url(`/${lang}/vicus-districts/onboarding`)} class="btn btn-primary">
+          {t('districts.testLicense')}
+        </a>
+        <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
+          {t('btn.demo')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
