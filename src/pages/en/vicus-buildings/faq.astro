@@ -1,0 +1,93 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import FAQ from '../../../components/FAQ.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/features`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/license`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/comparison`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const faqs = [
+  {
+    question: 'What is VICUS BUILDINGS?',
+    answer: 'VICUS BUILDINGS is professional software for dynamic thermal building simulation. It enables precise analyses of energy consumption, thermal comfort and HVAC systems.'
+  },
+  {
+    question: 'Which operating systems are supported?',
+    answer: 'VICUS BUILDINGS is available for Windows, Linux and macOS. The software runs on all common 64-bit operating systems.'
+  },
+  {
+    question: 'Can I import IFC files?',
+    answer: 'Yes, VICUS BUILDINGS supports importing IFC files as well as gbXML. This allows you to use existing BIM models directly.'
+  },
+  {
+    question: 'Is an internet connection required?',
+    answer: 'No, VICUS BUILDINGS runs completely locally. An internet connection is only required for license activation and updates.'
+  },
+  {
+    question: 'How long does a typical simulation take?',
+    answer: 'Simulation duration depends on model complexity. Simple buildings are calculated in seconds, complex models may take several minutes.'
+  },
+  {
+    question: 'Are there training courses or tutorials?',
+    answer: 'Yes, we offer comprehensive documentation, video tutorials and individual training sessions on request.'
+  },
+  {
+    question: 'Is VICUS BUILDINGS Open Source?',
+    answer: 'Yes, the source code of VICUS BUILDINGS is freely available. However, commercial use requires a license.'
+  },
+  {
+    question: 'Which standards are supported?',
+    answer: 'VICUS BUILDINGS supports DIN 4108-2 for summer thermal protection, GEG compliance and various international standards.'
+  }
+];
+---
+
+<PageLayout
+  title="FAQ | VICUS BUILDINGS"
+  description="Frequently asked questions about VICUS BUILDINGS - Building simulation and thermal analysis."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        Answers to the most important questions about VICUS BUILDINGS.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <FAQ items={faqs} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Still have questions?</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Our team is happy to help.
+      </p>
+      <a href={url(`/${lang}/contact`)} class="btn btn-primary">
+        {t('btn.contact')}
+      </a>
+    </div>
+  </section>
+</PageLayout>

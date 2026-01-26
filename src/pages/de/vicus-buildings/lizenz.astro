@@ -1,0 +1,141 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import PricingTable from '../../../components/PricingTable.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/funktionen`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/lizenz`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/vergleich`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const pricingPlans = [
+  {
+    name: 'Starter',
+    price: '49',
+    period: 'Monat',
+    description: 'Für kleine Projekte und Einsteiger',
+    features: [
+      'Einzelplatzlizenz',
+      'Bis zu 10 Zonen',
+      'Basis-Support per E-Mail',
+      'Alle Kernfunktionen',
+    ],
+    cta: 'Jetzt starten',
+    ctaLink: url(`/${lang}/vicus-buildings/onboarding`),
+  },
+  {
+    name: 'Professional',
+    price: '149',
+    period: 'Monat',
+    description: 'Für professionelle Anwender',
+    features: [
+      'Einzelplatzlizenz',
+      'Unbegrenzte Zonen',
+      'Prioritäts-Support',
+      'Alle Funktionen inkl. HVAC',
+      'IFC/gbXML Import',
+    ],
+    cta: 'Jetzt starten',
+    ctaLink: url(`/${lang}/vicus-buildings/onboarding`),
+    highlighted: true,
+  },
+  {
+    name: 'Enterprise',
+    price: 'Auf Anfrage',
+    period: '',
+    description: 'Für Teams und Unternehmen',
+    features: [
+      'Mehrplatzlizenzen',
+      'Unbegrenzte Projekte',
+      'Dedizierter Support',
+      'Schulungen inklusive',
+      'Individuelle Anpassungen',
+    ],
+    cta: 'Kontakt aufnehmen',
+    ctaLink: url(`/${lang}/kontakt`),
+  },
+];
+---
+
+<PageLayout
+  title="Lizenz | VICUS BUILDINGS"
+  description="Flexible Lizenzmodelle für VICUS BUILDINGS. Von Einzelplatz bis Unternehmenslizenz."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Preise & Lizenzen</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        Flexible Lizenzmodelle für jede Anforderung - von Einzelanwendern bis zu Unternehmen.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Pricing -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8">
+        {pricingPlans.map((plan) => (
+          <div class:list={[
+            "card flex flex-col",
+            plan.highlighted && "border-primary ring-2 ring-primary/20"
+          ]}>
+            {plan.highlighted && (
+              <div class="text-center text-sm font-medium text-primary mb-4">Empfohlen</div>
+            )}
+            <h3 class="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+            <div class="mb-4">
+              <span class="text-4xl font-bold text-foreground">{plan.price.includes('Anfrage') ? '' : '€'}{plan.price}</span>
+              {plan.period && <span class="text-foreground/70">/{plan.period}</span>}
+            </div>
+            <p class="text-foreground/70 mb-6">{plan.description}</p>
+            <ul class="space-y-3 mb-8 flex-grow">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-2 text-foreground/80">
+                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={plan.ctaLink}
+              class:list={[
+                "btn w-full",
+                plan.highlighted ? "btn-primary" : "btn-secondary"
+              ]}
+            >
+              {plan.cta}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Students Note -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Studenten & Lehre</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Kostenlose Lizenzen für Studenten und Lehreinrichtungen verfügbar.
+        Kontaktieren Sie uns für weitere Informationen.
+      </p>
+      <a href={url(`/${lang}/kontakt`)} class="btn btn-primary">
+        {t('btn.contact')}
+      </a>
+    </div>
+  </section>
+</PageLayout>

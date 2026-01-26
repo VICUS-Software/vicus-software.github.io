@@ -11,7 +11,18 @@ const navigation = [
   {
     label: t('nav.software'),
     children: [
-      { label: t('nav.buildings'), href: url(`/${lang}/vicus-buildings`) },
+      {
+        label: t('nav.buildings'),
+        href: url(`/${lang}/vicus-buildings`),
+        children: [
+          { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+          { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/${lang === 'de' ? 'funktionen' : 'features'}`) },
+          { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/${lang === 'de' ? 'lizenz' : 'license'}`) },
+          { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+          { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/${lang === 'de' ? 'vergleich' : 'comparison'}`) },
+          { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+        ]
+      },
       {
         label: t('nav.districts'),
         href: url(`/${lang}/vicus-districts`),
@@ -40,8 +51,7 @@ const navigation = [
     <nav class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href={url(`/${lang}`)} class="flex items-center">
-        <span class="text-2xl font-bold text-primary">VICUS</span>
-        <span class="text-2xl font-bold text-foreground ml-1">Software</span>
+        <img src="/images/logo/vicus-logo.svg" alt="VICUS Software" class="h-8 w-auto" />
       </a>
 
       <!-- Desktop Navigation -->

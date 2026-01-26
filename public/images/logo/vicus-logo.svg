@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="108.63094mm"
+   height="40.474186mm"
+   viewBox="0 0 108.63094 40.474186"
    version="1.1"
    id="svg1"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -42,7 +42,8 @@
     </clipPath>
   </defs>
   <g
-     id="layer1">
+     id="layer1"
+     transform="translate(-12.142938,-17.548694)">
     <g
        id="g3872-2"
        transform="matrix(1.5015393,0,0,1.5015393,-336.51446,-343.1865)"
@@ -66,11 +67,11 @@
          style="font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.98715px;font-family:Manrope;-inkscape-font-specification:Manrope-Regular;letter-spacing:3.2222px;writing-mode:lr-tb;display:inline;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.133046"
          id="text806-3-9-5"
          x="231.88539"
-         y="265.63925"><tspan
+         y="267.04892"><tspan
            id="tspan804-6-1-9"
            style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Manrope;-inkscape-font-specification:'Manrope Light';fill:#ffffff;fill-opacity:1;stroke-width:0.133046"
            x="231.88539"
-           y="265.63925">SOFTWARE</tspan></text>
+           y="267.04892">SOFTWARE</tspan></text>
       <rect
          style="display:inline;fill:url(#linearGradient2354-8);fill-opacity:1;stroke-width:0.342839;stroke-dasharray:none"
          id="rect26562-2-2"

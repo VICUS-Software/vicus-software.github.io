@@ -1,0 +1,24 @@
+<svg viewBox="0 0 800 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laptop Screen Frame -->
+  <rect x="40" y="10" width="720" height="450" rx="16" fill="#1a1a1a"/>
+  <rect x="50" y="20" width="700" height="430" rx="8" fill="#0a0a0a"/>
+  <!-- Camera -->
+  <circle cx="400" cy="15" r="4" fill="#2a2a2a"/>
+  <!-- Screen area (transparent for image placement) -->
+  <rect x="55" y="25" width="690" height="420" rx="4" fill="#000"/>
+
+  <!-- Laptop Base -->
+  <path d="M0 460 L40 460 Q50 460 50 470 L50 480 Q50 490 60 490 L740 490 Q750 490 750 480 L750 470 Q750 460 760 460 L800 460 L800 500 Q800 510 790 510 L10 510 Q0 510 0 500 Z" fill="url(#baseGradient)"/>
+
+  <!-- Notch -->
+  <rect x="320" y="460" width="160" height="8" rx="4" fill="#0a0a0a"/>
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="baseGradient" x1="400" y1="460" x2="400" y2="510" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="50%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,190 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import FeatureCard from '../../../components/FeatureCard.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/features`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/license`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/comparison`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const featureSections = [
+  {
+    title: 'Dynamic Thermal Simulation',
+    description: 'Precise calculation of thermal behavior of buildings throughout the year with the proven NANDRAD simulation kernel.',
+    image: '/images/screenshots/vicus-buildings-main.png',
+    features: [
+      'Hourly simulation for 8760 hours/year',
+      'Detailed heat flows through all components',
+      'Consideration of thermal mass',
+      'Solar gains and shading',
+      'Internal heat loads and usage profiles',
+      'Natural and mechanical ventilation'
+    ]
+  },
+  {
+    title: '3D Modeling and BIM Integration',
+    description: 'Create building models efficiently with the integrated 3D environment or import existing BIM models.',
+    image: '/images/screenshots/vicus-buildings-results.png',
+    features: [
+      'Intuitive 3D geometry creation',
+      'IFC file import',
+      'gbXML file import',
+      'Automatic zone detection',
+      'Component library with standard constructions',
+      'Export for documentation'
+    ]
+  },
+  {
+    title: 'Comfort Assessment',
+    description: 'Analyze thermal comfort according to current standards and norms.',
+    image: '/images/screenshots/vicus-buildings-main.png',
+    features: [
+      'Operative temperature and PMV/PPD',
+      'Summer thermal protection according to DIN 4108-2',
+      'Overheating hours and comfort bands',
+      'Room-by-room evaluation',
+      'Time-resolved results',
+      'Graphical representation'
+    ]
+  },
+  {
+    title: 'HVAC System Simulation',
+    description: 'Model heating, ventilation and air conditioning systems for optimal system design.',
+    image: '/images/screenshots/vicus-buildings-results.png',
+    features: [
+      'Ideal and real plant models',
+      'Heating with various heat generators',
+      'Cooling and air conditioning',
+      'Mechanical ventilation with heat recovery',
+      'Control strategies',
+      'Energy carrier balancing'
+    ]
+  }
+];
+---
+
+<PageLayout
+  title="Features | VICUS BUILDINGS"
+  description="Detailed overview of all VICUS BUILDINGS features for professional building simulation."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Features</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        VICUS BUILDINGS provides all tools for professional thermal building simulation.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Feature Sections -->
+  {featureSections.map((section, index) => (
+    <section class:list={["section", index % 2 === 1 && "bg-secondary/30"]}>
+      <div class="container-custom">
+        <FeatureCard
+          title={section.title}
+          description={section.description}
+          image={section.image}
+          imageAlt={section.title}
+          features={section.features}
+          reversed={index % 2 === 1}
+        />
+      </div>
+    </section>
+  ))}
+
+  <!-- Additional Features Grid -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">More Features</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Thermal Bridges</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Linear and point thermal bridges</li>
+            <li>• Catalog with standard values</li>
+            <li>• Import of calculations</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Shading</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Self-shading of the building</li>
+            <li>• External shading from surroundings</li>
+            <li>• Sun protection devices</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Results Analysis</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Interactive diagrams</li>
+            <li>• Tabular evaluation</li>
+            <li>• Export (CSV, Excel)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Climate Data</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Test reference years (TRY)</li>
+            <li>• International weather data</li>
+            <li>• Import custom data</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Component Catalog</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Comprehensive material database</li>
+            <li>• Standard constructions</li>
+            <li>• Custom components can be added</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Certifications</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• EnEV / GEG compliance</li>
+            <li>• DIN 4108-2 summer thermal protection</li>
+            <li>• Report generation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">See for yourself</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Test all features free for 30 days with no obligation.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+          {t('buildings.testLicense')}
+        </a>
+        <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
+          {t('btn.demo')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

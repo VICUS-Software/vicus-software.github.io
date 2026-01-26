@@ -1,0 +1,117 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import LicenseForm from '../../../components/LicenseForm.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/funktionen`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/lizenz`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/vergleich`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const steps = [
+  {
+    number: '1',
+    title: 'Testlizenz anfordern',
+    description: 'Füllen Sie das Formular aus und erhalten Sie Ihre kostenlose 30-Tage-Testlizenz per E-Mail.'
+  },
+  {
+    number: '2',
+    title: 'Software herunterladen',
+    description: 'Laden Sie VICUS BUILDINGS für Ihr Betriebssystem herunter und installieren Sie die Software.'
+  },
+  {
+    number: '3',
+    title: 'Lizenz aktivieren',
+    description: 'Geben Sie Ihren Lizenzschlüssel ein und beginnen Sie mit der professionellen Gebäudesimulation.'
+  }
+];
+---
+
+<PageLayout
+  title="Onboarding | VICUS BUILDINGS"
+  description="Starten Sie mit VICUS BUILDINGS. Kostenlose 30-Tage-Testversion anfordern."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Jetzt starten</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        In wenigen Schritten zur professionellen Gebäudesimulation mit VICUS BUILDINGS.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Steps -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        {steps.map((step) => (
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-primary">{step.number}</span>
+            </div>
+            <h3 class="text-xl font-semibold text-foreground mb-2">{step.title}</h3>
+            <p class="text-foreground/70">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- License Form -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-foreground mb-4">Testlizenz anfordern</h2>
+          <p class="text-foreground/70">
+            Erhalten Sie Ihre kostenlose 30-Tage-Testlizenz für VICUS BUILDINGS.
+          </p>
+        </div>
+        <div class="card">
+          <LicenseForm product="VICUS BUILDINGS" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- System Requirements -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-foreground text-center mb-8">Systemanforderungen</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card">
+            <h3 class="text-lg font-semibold text-foreground mb-4">Minimum</h3>
+            <ul class="space-y-2 text-foreground/70">
+              <li>• Windows 10 / Linux / macOS</li>
+              <li>• 8 GB RAM</li>
+              <li>• 2 GB freier Festplattenspeicher</li>
+              <li>• OpenGL 3.3 kompatible Grafikkarte</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 class="text-lg font-semibold text-foreground mb-4">Empfohlen</h3>
+            <ul class="space-y-2 text-foreground/70">
+              <li>• Windows 11 / Ubuntu 22.04 / macOS 13</li>
+              <li>• 16 GB RAM oder mehr</li>
+              <li>• SSD mit 10 GB freiem Speicher</li>
+              <li>• Dedizierte Grafikkarte mit 4 GB VRAM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

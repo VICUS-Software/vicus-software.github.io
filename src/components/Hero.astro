@@ -1,52 +1,77 @@
 ---
-import { getLangFromUrl, useTranslations , url } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, url } from '../i18n/utils';
 import type { Language } from '../i18n/languages';
 
-interface Props {
-  title?: string;
-  subtitle?: string;
-  showCta?: boolean;
-}
-
-const { title, subtitle, showCta = true } = Astro.props;
 const lang = getLangFromUrl(Astro.url) as Language;
 const t = useTranslations(lang);
+
+const content = {
+  de: {
+    headline: 'Software für die Gebäude– und Wärmenetzplanung.',
+    subheadline: 'Schnell. Sicher. Simulationsgestützt.',
+    description: 'Mit <strong>VICUS Buildings</strong> und <strong>VICUS Districts</strong> planen Sie <strong>energieeffiziente Gebäude</strong> und <strong>nachhaltige Wärmenetze</strong> schnell, präzise und zuverlässig. Unsere <strong>simulationsgestützte Software</strong> unterstützt Sie dabei einfach und intuitiv – für eine erfolgreiche Umsetzung der <strong>Energiewende</strong>.',
+    demoBtn: 'Demo buchen',
+    contactBtn: 'Kontaktiere uns'
+  },
+  en: {
+    headline: 'Software for Building and Heat Network Planning.',
+    subheadline: 'Fast. Reliable. Simulation-based.',
+    description: 'With <strong>VICUS Buildings</strong> and <strong>VICUS Districts</strong> you plan <strong>energy-efficient buildings</strong> and <strong>sustainable heat networks</strong> quickly, precisely and reliably. Our <strong>simulation-based software</strong> supports you easily and intuitively – for a successful implementation of the <strong>energy transition</strong>.',
+    demoBtn: 'Book Demo',
+    contactBtn: 'Contact Us'
+  }
+};
+
+const c = content[lang];
 ---
 
-<section class="relative min-h-[90vh] flex items-center overflow-hidden">
+<section class="relative min-h-screen flex items-center overflow-hidden">
   <!-- Background gradient -->
-  <div class="absolute inset-0 bg-gradient-to-br from-background via-background to-tertiary/20"></div>
-
-  <!-- Animated grid pattern -->
-  <div class="absolute inset-0 opacity-20">
-    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(106, 220, 173, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(106, 220, 173, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
-  </div>
+  <div class="absolute inset-0 bg-gradient-to-br from-background via-background to-tertiary/10"></div>
 
   <!-- Content -->
-  <div class="container-custom relative z-10 pt-20">
-    <div class="max-w-4xl">
-      <h1 class="text-foreground mb-6 animate-fade-in">
-        {title || t('hero.tagline')}
-      </h1>
-      <p class="text-xl md:text-2xl text-foreground/70 mb-10 max-w-2xl animate-fade-in animation-delay-200">
-        {subtitle || t('hero.subtitle')}
-      </p>
-      {showCta && (
+  <div class="container-custom relative z-10 pt-24 pb-16">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <!-- Left: Text Content -->
+      <div class="max-w-xl">
+        <h1 class="text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-tight mb-4 animate-fade-in">
+          {c.headline}
+        </h1>
+        <p class="text-2xl md:text-3xl font-bold text-primary mb-6 animate-fade-in animation-delay-200">
+          {c.subheadline}
+        </p>
+        <p class="text-lg text-foreground/80 mb-10 leading-relaxed animate-fade-in animation-delay-300" set:html={c.description} />
+
         <div class="flex flex-wrap gap-4 animate-fade-in animation-delay-400">
-          <a href={`/${lang}/demo`} class="btn btn-primary">
-            {t('btn.demo')}
+          <a href={url(`/${lang}/demo`)} class="btn btn-primary inline-flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {c.demoBtn}
           </a>
-          <a href={`/${lang}/vicus-buildings`} class="btn btn-secondary">
-            {t('btn.learnMore')}
+          <a href={url(`/${lang}/${lang === 'de' ? 'kontakt' : 'contact'}`)} class="btn btn-secondary inline-flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            {c.contactBtn}
           </a>
         </div>
-      )}
-    </div>
-  </div>
+      </div>
 
-  <!-- Decorative element -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full opacity-30 hidden lg:block">
-    <div class="absolute inset-0 bg-gradient-to-l from-primary/20 to-transparent rounded-l-full blur-3xl"></div>
+      <!-- Right: Laptop Mockup -->
+      <div class="relative animate-fade-in animation-delay-300 hidden lg:block">
+        <div class="laptop-wrapper">
+          <!-- Laptop Frame -->
+          <img src="/images/laptop-frame.svg" alt="" class="laptop-frame" />
+          <!-- Screenshot inside laptop -->
+          <img
+            src="/images/screenshots/vicus-districts-main.png"
+            alt="VICUS Districts Software"
+            class="laptop-screenshot"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -71,7 +96,34 @@ const t = useTranslations(lang);
     animation-delay: 0.2s;
   }
 
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
   .animation-delay-400 {
     animation-delay: 0.4s;
+  }
+
+  /* Laptop Mockup Styles */
+  .laptop-wrapper {
+    position: relative;
+    max-width: 650px;
+    margin-left: auto;
+  }
+
+  .laptop-frame {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
+  }
+
+  .laptop-screenshot {
+    position: absolute;
+    top: 4.8%;
+    left: 6.9%;
+    width: 86.2%;
+    height: auto;
+    border-radius: 4px;
   }
 </style>

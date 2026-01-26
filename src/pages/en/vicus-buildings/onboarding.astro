@@ -1,0 +1,117 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import LicenseForm from '../../../components/LicenseForm.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/features`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/license`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/comparison`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const steps = [
+  {
+    number: '1',
+    title: 'Request trial license',
+    description: 'Fill out the form and receive your free 30-day trial license via email.'
+  },
+  {
+    number: '2',
+    title: 'Download software',
+    description: 'Download VICUS BUILDINGS for your operating system and install the software.'
+  },
+  {
+    number: '3',
+    title: 'Activate license',
+    description: 'Enter your license key and start with professional building simulation.'
+  }
+];
+---
+
+<PageLayout
+  title="Onboarding | VICUS BUILDINGS"
+  description="Get started with VICUS BUILDINGS. Request a free 30-day trial."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Get Started</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        Start professional building simulation with VICUS BUILDINGS in just a few steps.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Steps -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        {steps.map((step) => (
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-primary">{step.number}</span>
+            </div>
+            <h3 class="text-xl font-semibold text-foreground mb-2">{step.title}</h3>
+            <p class="text-foreground/70">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- License Form -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-foreground mb-4">Request Trial License</h2>
+          <p class="text-foreground/70">
+            Get your free 30-day trial license for VICUS BUILDINGS.
+          </p>
+        </div>
+        <div class="card">
+          <LicenseForm product="VICUS BUILDINGS" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- System Requirements -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-foreground text-center mb-8">System Requirements</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card">
+            <h3 class="text-lg font-semibold text-foreground mb-4">Minimum</h3>
+            <ul class="space-y-2 text-foreground/70">
+              <li>• Windows 10 / Linux / macOS</li>
+              <li>• 8 GB RAM</li>
+              <li>• 2 GB free disk space</li>
+              <li>• OpenGL 3.3 compatible graphics card</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 class="text-lg font-semibold text-foreground mb-4">Recommended</h3>
+            <ul class="space-y-2 text-foreground/70">
+              <li>• Windows 11 / Ubuntu 22.04 / macOS 13</li>
+              <li>• 16 GB RAM or more</li>
+              <li>• SSD with 10 GB free space</li>
+              <li>• Dedicated graphics card with 4 GB VRAM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

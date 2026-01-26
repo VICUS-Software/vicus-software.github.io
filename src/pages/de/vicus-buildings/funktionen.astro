@@ -1,0 +1,190 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import FeatureCard from '../../../components/FeatureCard.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/funktionen`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/lizenz`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/vergleich`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const featureSections = [
+  {
+    title: 'Dynamische thermische Simulation',
+    description: 'Präzise Berechnung des thermischen Verhaltens von Gebäuden über das gesamte Jahr mit dem bewährten NANDRAD-Simulationskern.',
+    image: '/images/screenshots/vicus-buildings-main.png',
+    features: [
+      'Stündliche Simulation für 8760 Stunden/Jahr',
+      'Detaillierte Wärmeströme durch alle Bauteile',
+      'Berücksichtigung von Speichermassen',
+      'Solare Gewinne und Verschattung',
+      'Interne Wärmelasten und Nutzungsprofile',
+      'Natürliche und mechanische Lüftung'
+    ]
+  },
+  {
+    title: '3D-Modellierung und BIM-Integration',
+    description: 'Erstellen Sie Gebäudemodelle effizient mit der integrierten 3D-Umgebung oder importieren Sie bestehende BIM-Modelle.',
+    image: '/images/screenshots/vicus-buildings-results.png',
+    features: [
+      'Intuitive 3D-Geometrieerstellung',
+      'Import von IFC-Dateien',
+      'Import von gbXML-Dateien',
+      'Automatische Zonenerkennung',
+      'Bauteilbibliothek mit Standardkonstruktionen',
+      'Export für Dokumentation'
+    ]
+  },
+  {
+    title: 'Komfortbewertung',
+    description: 'Analysieren Sie den thermischen Komfort nach aktuellen Normen und Standards.',
+    image: '/images/screenshots/vicus-buildings-main.png',
+    features: [
+      'Operative Temperatur und PMV/PPD',
+      'Sommerlicher Wärmeschutz nach DIN 4108-2',
+      'Überhitzungsstunden und Komfortbänder',
+      'Raumweise Auswertung',
+      'Zeitaufgelöste Ergebnisse',
+      'Grafische Darstellung'
+    ]
+  },
+  {
+    title: 'HVAC-Systemsimulation',
+    description: 'Modellieren Sie Heizungs-, Lüftungs- und Klimaanlagen für optimale Systemauslegung.',
+    image: '/images/screenshots/vicus-buildings-results.png',
+    features: [
+      'Ideale und reale Anlagenmodelle',
+      'Heizung mit verschiedenen Wärmeerzeugern',
+      'Kühlung und Klimatisierung',
+      'Mechanische Lüftung mit Wärmerückgewinnung',
+      'Regelungsstrategien',
+      'Energieträgerbilanzierung'
+    ]
+  }
+];
+---
+
+<PageLayout
+  title="Funktionen | VICUS BUILDINGS"
+  description="Detaillierte Übersicht aller Funktionen von VICUS BUILDINGS für die professionelle Gebäudesimulation."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Funktionen</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        VICUS BUILDINGS bietet alle Werkzeuge für die professionelle thermische Gebäudesimulation.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Feature Sections -->
+  {featureSections.map((section, index) => (
+    <section class:list={["section", index % 2 === 1 && "bg-secondary/30"]}>
+      <div class="container-custom">
+        <FeatureCard
+          title={section.title}
+          description={section.description}
+          image={section.image}
+          imageAlt={section.title}
+          features={section.features}
+          reversed={index % 2 === 1}
+        />
+      </div>
+    </section>
+  ))}
+
+  <!-- Additional Features Grid -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Weitere Funktionen</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Wärmebrücken</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Lineare und punktuelle Wärmebrücken</li>
+            <li>• Katalog mit Standardwerten</li>
+            <li>• Import von Berechnungen</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Verschattung</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Eigenverschattung des Gebäudes</li>
+            <li>• Fremdverschattung durch Umgebung</li>
+            <li>• Sonnenschutzvorrichtungen</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Ergebnisauswertung</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Interaktive Diagramme</li>
+            <li>• Tabellarische Auswertung</li>
+            <li>• Export (CSV, Excel)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Klimadaten</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Testreferenzjahre (TRY)</li>
+            <li>• Internationale Wetterdaten</li>
+            <li>• Import eigener Daten</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Bauteilkatalog</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• Umfangreiche Materialdatenbank</li>
+            <li>• Standardkonstruktionen</li>
+            <li>• Eigene Bauteile ergänzbar</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-lg font-semibold text-foreground mb-2">Nachweise</h3>
+          <ul class="space-y-2 text-foreground/70 text-sm">
+            <li>• EnEV / GEG-Nachweise</li>
+            <li>• DIN 4108-2 Sommerlicher Wärmeschutz</li>
+            <li>• Berichterstellung</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Überzeugen Sie sich selbst</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Testen Sie alle Funktionen 30 Tage kostenlos und unverbindlich.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+          {t('buildings.testLicense')}
+        </a>
+        <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
+          {t('btn.demo')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,198 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/features`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/license`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/comparison`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const mainBenefits = [
+  {
+    title: 'Precise Simulation',
+    description: 'Dynamic thermal building simulation with the proven NANDRAD kernel for reliable results.',
+    icon: 'simulation'
+  },
+  {
+    title: '3D Modeling',
+    description: 'Intuitive 3D geometry creation and import from IFC/gbXML for seamless BIM workflows.',
+    icon: 'design'
+  },
+  {
+    title: 'Comfort Analysis',
+    description: 'Detailed assessment of room temperatures, humidity and thermal comfort.',
+    icon: 'comfort'
+  },
+  {
+    title: 'Energy Balance',
+    description: 'Precise calculation of heating and cooling demand for optimal energy efficiency.',
+    icon: 'energy'
+  }
+];
+---
+
+<PageLayout
+  title="VICUS BUILDINGS"
+  description="The software for your building simulation. Precise. Efficient. Sustainable."
+  showHero={false}
+>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+          {t('buildings.hero.title')}
+        </h1>
+        <p class="text-xl md:text-2xl text-primary font-medium mb-8">
+          {t('buildings.hero.subtitle')}
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+            {t('buildings.testLicense')}
+          </a>
+          <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
+            {t('btn.demo')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Main Benefits -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Why VICUS BUILDINGS?</h2>
+        <p class="text-xl text-foreground/70 max-w-3xl mx-auto">
+          Everything you need for professional building simulation - in one software.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {mainBenefits.map((benefit) => (
+          <div class="card hover-lift group">
+            <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {benefit.icon === 'simulation' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                )}
+                {benefit.icon === 'design' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                )}
+                {benefit.icon === 'comfort' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                )}
+                {benefit.icon === 'energy' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                )}
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
+            <p class="text-foreground/70 text-sm">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshot Section -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-foreground mb-6">Powerful Building Simulation</h2>
+          <p class="text-foreground/70 mb-6">
+            VICUS BUILDINGS is a professional software for dynamic thermal building simulation.
+            Based on the proven NANDRAD simulation kernel, it enables precise analyses of
+            energy consumption and thermal comfort.
+          </p>
+          <p class="text-foreground/70 mb-8">
+            With the integrated 3D modeling environment, you create building models efficiently and intuitively.
+            The software supports import of IFC and gbXML files for seamless BIM workflows.
+          </p>
+          <a href={url(`/${lang}/vicus-buildings/features`)} class="btn btn-primary">
+            Discover all features
+          </a>
+        </div>
+        <div class="relative">
+          <div class="aspect-video rounded-xl overflow-hidden bg-secondary/50 border border-primary/20">
+            <img
+              src="/images/screenshots/vicus-buildings-main.png"
+              alt="VICUS BUILDINGS Screenshot"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links to Subpages -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Learn more</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href={url(`/${lang}/vicus-buildings/features`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Features
+          </h3>
+          <p class="text-foreground/70 text-sm">Detailed overview of all features and capabilities.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-buildings/license`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Pricing & Licenses
+          </h3>
+          <p class="text-foreground/70 text-sm">Flexible licensing models for every project size.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-buildings/comparison`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Comparison
+          </h3>
+          <p class="text-foreground/70 text-sm">How VICUS differs from other tools.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-buildings/faq`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            FAQ
+          </h3>
+          <p class="text-foreground/70 text-sm">Answers to frequently asked questions.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Ready for better building simulation?</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Start with a free 30-day trial and see for yourself.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+          {t('buildings.testLicense')}
+        </a>
+        <a href={url(`/${lang}/contact`)} class="btn btn-secondary">
+          {t('btn.contact')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

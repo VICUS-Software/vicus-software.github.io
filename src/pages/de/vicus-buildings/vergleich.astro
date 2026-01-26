@@ -1,0 +1,114 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import ComparisonTable from '../../../components/ComparisonTable.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/funktionen`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/lizenz`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/vergleich`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const comparisonHeaders = ['VICUS', 'Alternative A', 'Alternative B'];
+
+const comparisonItems = [
+  { feature: 'Dynamische Simulation', values: [true, true, false] },
+  { feature: '3D-Modellierung', values: [true, false, true] },
+  { feature: 'IFC Import', values: [true, true, true] },
+  { feature: 'HVAC Simulation', values: [true, true, false] },
+  { feature: 'Open Source', values: [true, false, false] },
+  { feature: 'Deutsche Oberfläche', values: [true, false, true] },
+  { feature: 'Lokale Installation', values: [true, true, false] },
+  { feature: 'Keine Cloud erforderlich', values: [true, true, false] },
+];
+
+const advantages = [
+  {
+    title: 'Open Source',
+    description: 'VICUS BUILDINGS ist Open Source. Der Quellcode ist frei verfügbar und kann angepasst werden.'
+  },
+  {
+    title: 'Bewährter Simulationskern',
+    description: 'Der NANDRAD-Kern wurde in zahlreichen Forschungsprojekten validiert und wird seit Jahren erfolgreich eingesetzt.'
+  },
+  {
+    title: 'Deutsche Entwicklung',
+    description: 'Entwickelt an der TU Dresden mit deutschsprachiger Dokumentation und Support.'
+  },
+  {
+    title: 'Keine Abhängigkeiten',
+    description: 'Lokale Installation ohne Cloud-Zwang. Ihre Daten bleiben bei Ihnen.'
+  },
+  {
+    title: 'Flexible Lizenzierung',
+    description: 'Von kostenloser Testversion bis zur Unternehmenslizenz - für jeden Bedarf.'
+  },
+  {
+    title: 'Aktive Entwicklung',
+    description: 'Kontinuierliche Weiterentwicklung mit regelmäßigen Updates und neuen Funktionen.'
+  }
+];
+---
+
+<PageLayout
+  title="Vergleich | VICUS BUILDINGS"
+  description="Vergleichen Sie VICUS BUILDINGS mit anderen Gebäudesimulationsprogrammen."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Vergleich</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        Wie sich VICUS BUILDINGS von anderen Gebäudesimulationsprogrammen unterscheidet.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Comparison Table -->
+  <ComparisonTable
+    title="Funktionsvergleich"
+    subtitle="VICUS BUILDINGS im Vergleich zu anderen Lösungen"
+    headers={comparisonHeaders}
+    items={comparisonItems}
+  />
+
+  <!-- Advantages -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Ihre Vorteile mit VICUS</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {advantages.map((advantage) => (
+          <div class="card">
+            <h3 class="text-lg font-semibold text-foreground mb-2">{advantage.title}</h3>
+            <p class="text-foreground/70">{advantage.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Überzeugen Sie sich selbst</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Testen Sie VICUS BUILDINGS 30 Tage kostenlos und vergleichen Sie selbst.
+      </p>
+      <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+        {t('buildings.testLicense')}
+      </a>
+    </div>
+  </section>
+</PageLayout>

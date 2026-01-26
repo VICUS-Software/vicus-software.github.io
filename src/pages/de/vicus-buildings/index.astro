@@ -1,0 +1,198 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'de';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/funktionen`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/lizenz`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/vergleich`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const mainBenefits = [
+  {
+    title: 'Präzise Simulation',
+    description: 'Dynamische thermische Gebäudesimulation mit dem bewährten NANDRAD-Kern für zuverlässige Ergebnisse.',
+    icon: 'simulation'
+  },
+  {
+    title: '3D-Modellierung',
+    description: 'Intuitive 3D-Geometrieerstellung und Import aus IFC/gbXML für nahtlose BIM-Workflows.',
+    icon: 'design'
+  },
+  {
+    title: 'Komfortanalyse',
+    description: 'Detaillierte Bewertung von Raumtemperaturen, Luftfeuchte und thermischem Komfort.',
+    icon: 'comfort'
+  },
+  {
+    title: 'Energiebilanz',
+    description: 'Präzise Berechnung von Heiz- und Kühlbedarf für optimale Energieeffizienz.',
+    icon: 'energy'
+  }
+];
+---
+
+<PageLayout
+  title="VICUS BUILDINGS"
+  description="Die Software für Ihre Gebäudesimulation. Präzise. Effizient. Nachhaltig."
+  showHero={false}
+>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+          {t('buildings.hero.title')}
+        </h1>
+        <p class="text-xl md:text-2xl text-primary font-medium mb-8">
+          {t('buildings.hero.subtitle')}
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+            {t('buildings.testLicense')}
+          </a>
+          <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
+            {t('btn.demo')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Main Benefits -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Warum VICUS BUILDINGS?</h2>
+        <p class="text-xl text-foreground/70 max-w-3xl mx-auto">
+          Alles was Sie für die professionelle Gebäudesimulation brauchen - in einer Software.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {mainBenefits.map((benefit) => (
+          <div class="card hover-lift group">
+            <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {benefit.icon === 'simulation' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                )}
+                {benefit.icon === 'design' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                )}
+                {benefit.icon === 'comfort' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                )}
+                {benefit.icon === 'energy' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                )}
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
+            <p class="text-foreground/70 text-sm">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshot Section -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-foreground mb-6">Leistungsstarke Gebäudesimulation</h2>
+          <p class="text-foreground/70 mb-6">
+            VICUS BUILDINGS ist eine professionelle Software für die dynamische thermische Gebäudesimulation.
+            Basierend auf dem bewährten NANDRAD-Simulationskern ermöglicht sie präzise Analysen des
+            Energieverbrauchs und des thermischen Komforts.
+          </p>
+          <p class="text-foreground/70 mb-8">
+            Mit der integrierten 3D-Modellierungsumgebung erstellen Sie Gebäudemodelle effizient und intuitiv.
+            Die Software unterstützt den Import von IFC- und gbXML-Dateien für nahtlose BIM-Workflows.
+          </p>
+          <a href={url(`/${lang}/vicus-buildings/funktionen`)} class="btn btn-primary">
+            Alle Funktionen entdecken
+          </a>
+        </div>
+        <div class="relative">
+          <div class="aspect-video rounded-xl overflow-hidden bg-secondary/50 border border-primary/20">
+            <img
+              src="/images/screenshots/vicus-buildings-main.png"
+              alt="VICUS BUILDINGS Screenshot"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links to Subpages -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Mehr erfahren</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href={url(`/${lang}/vicus-buildings/funktionen`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Funktionen
+          </h3>
+          <p class="text-foreground/70 text-sm">Detaillierte Übersicht aller Features und Möglichkeiten.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-buildings/lizenz`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Preise & Lizenzen
+          </h3>
+          <p class="text-foreground/70 text-sm">Flexible Lizenzmodelle für jede Projektgröße.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-buildings/vergleich`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            Vergleich
+          </h3>
+          <p class="text-foreground/70 text-sm">Wie sich VICUS von anderen Tools unterscheidet.</p>
+        </a>
+
+        <a href={url(`/${lang}/vicus-buildings/faq`)} class="card hover-lift group">
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            FAQ
+          </h3>
+          <p class="text-foreground/70 text-sm">Antworten auf häufig gestellte Fragen.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">Bereit für bessere Gebäudesimulation?</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Starten Sie mit einer kostenlosen 30-Tage-Testversion und überzeugen Sie sich selbst.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+          {t('buildings.testLicense')}
+        </a>
+        <a href={url(`/${lang}/kontakt`)} class="btn btn-secondary">
+          {t('btn.contact')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

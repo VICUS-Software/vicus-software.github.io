@@ -136,3 +136,17 @@
 :focus-visible {
   @apply outline-2 outline-offset-2 outline-primary;
 }
+
+/* Partner ticker animation */
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+}

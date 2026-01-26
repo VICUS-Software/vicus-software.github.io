@@ -1,0 +1,114 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import SubNavigation from '../../../components/SubNavigation.astro';
+import ComparisonTable from '../../../components/ComparisonTable.astro';
+import { useTranslations, url } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const subNavItems = [
+  { label: t('buildings.overview'), href: url(`/${lang}/vicus-buildings`) },
+  { label: t('buildings.features'), href: url(`/${lang}/vicus-buildings/features`) },
+  { label: t('buildings.license'), href: url(`/${lang}/vicus-buildings/license`) },
+  { label: t('buildings.onboarding'), href: url(`/${lang}/vicus-buildings/onboarding`) },
+  { label: t('buildings.comparison'), href: url(`/${lang}/vicus-buildings/comparison`) },
+  { label: t('buildings.faq'), href: url(`/${lang}/vicus-buildings/faq`) },
+];
+
+const comparisonHeaders = ['VICUS', 'Alternative A', 'Alternative B'];
+
+const comparisonItems = [
+  { feature: 'Dynamic Simulation', values: [true, true, false] },
+  { feature: '3D Modeling', values: [true, false, true] },
+  { feature: 'IFC Import', values: [true, true, true] },
+  { feature: 'HVAC Simulation', values: [true, true, false] },
+  { feature: 'Open Source', values: [true, false, false] },
+  { feature: 'German Interface', values: [true, false, true] },
+  { feature: 'Local Installation', values: [true, true, false] },
+  { feature: 'No Cloud Required', values: [true, true, false] },
+];
+
+const advantages = [
+  {
+    title: 'Open Source',
+    description: 'VICUS BUILDINGS is Open Source. The source code is freely available and can be customized.'
+  },
+  {
+    title: 'Proven Simulation Kernel',
+    description: 'The NANDRAD kernel has been validated in numerous research projects and successfully used for years.'
+  },
+  {
+    title: 'German Development',
+    description: 'Developed at TU Dresden with German documentation and support.'
+  },
+  {
+    title: 'No Dependencies',
+    description: 'Local installation without cloud requirement. Your data stays with you.'
+  },
+  {
+    title: 'Flexible Licensing',
+    description: 'From free trial to enterprise license - for every need.'
+  },
+  {
+    title: 'Active Development',
+    description: 'Continuous development with regular updates and new features.'
+  }
+];
+---
+
+<PageLayout
+  title="Comparison | VICUS BUILDINGS"
+  description="Compare VICUS BUILDINGS with other building simulation programs."
+  showHero={false}
+>
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="container-custom">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Comparison</h1>
+      <p class="text-xl text-foreground/70 max-w-3xl">
+        How VICUS BUILDINGS differs from other building simulation programs.
+      </p>
+    </div>
+  </section>
+
+  <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
+
+  <!-- Comparison Table -->
+  <ComparisonTable
+    title="Feature Comparison"
+    subtitle="VICUS BUILDINGS compared to other solutions"
+    headers={comparisonHeaders}
+    items={comparisonItems}
+  />
+
+  <!-- Advantages -->
+  <section class="section bg-secondary/30">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-foreground mb-4">Your advantages with VICUS</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {advantages.map((advantage) => (
+          <div class="card">
+            <h3 class="text-lg font-semibold text-foreground mb-2">{advantage.title}</h3>
+            <p class="text-foreground/70">{advantage.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container-custom text-center">
+      <h2 class="text-foreground mb-4">See for yourself</h2>
+      <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
+        Test VICUS BUILDINGS free for 30 days and compare for yourself.
+      </p>
+      <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
+        {t('buildings.testLicense')}
+      </a>
+    </div>
+  </section>
+</PageLayout>

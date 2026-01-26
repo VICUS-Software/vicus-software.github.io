@@ -69,6 +69,17 @@ export const ui = {
     'misc.readTime': '{min} Min. Lesezeit',
     'misc.backToBlog': 'Zurück zum Blog',
 
+    // Buildings Subpages
+    'buildings.overview': 'Übersicht',
+    'buildings.features': 'Funktionen',
+    'buildings.license': 'Lizenz',
+    'buildings.onboarding': 'Onboarding',
+    'buildings.comparison': 'Vergleich',
+    'buildings.faq': 'FAQ',
+    'buildings.hero.title': 'Die Software für Ihre Gebäudesimulation',
+    'buildings.hero.subtitle': 'Präzise. Effizient. Nachhaltig.',
+    'buildings.testLicense': '30 Tage kostenlos testen',
+
     // Districts Subpages
     'districts.overview': 'Übersicht',
     'districts.features': 'Funktionen',
@@ -155,6 +166,17 @@ export const ui = {
     'misc.postedOn': 'Posted on',
     'misc.readTime': '{min} min read',
     'misc.backToBlog': 'Back to Blog',
+
+    // Buildings Subpages
+    'buildings.overview': 'Overview',
+    'buildings.features': 'Features',
+    'buildings.license': 'License',
+    'buildings.onboarding': 'Onboarding',
+    'buildings.comparison': 'Comparison',
+    'buildings.faq': 'FAQ',
+    'buildings.hero.title': 'The Software for Your Building Simulation',
+    'buildings.hero.subtitle': 'Precise. Efficient. Sustainable.',
+    'buildings.testLicense': '30 days free trial',
 
     // Districts Subpages
     'districts.overview': 'Overview',
