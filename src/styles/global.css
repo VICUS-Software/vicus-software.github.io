@@ -7,10 +7,10 @@
     --color-primary: #6adcad;
     --color-secondary: #2c2626;
     --color-tertiary: #1446a0;
-    --color-background: #05232C;
+    --color-background: #041d25;
     --color-foreground: #F2F6F6;
   }
-
+                                           
   html {
     scroll-behavior: smooth;
   }

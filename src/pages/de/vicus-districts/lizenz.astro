@@ -24,6 +24,16 @@ const dynamicTiers = [
     period: 'Monat',
     description: 'Kalte Nahwärme oder kleine konventionelle Nahwärmenetze',
     maxConsumers: 'Bis 100',
+    features: [
+      { text: 'Import und Export von GIS, PDF, DXF', included: true },
+      { text: 'Einfache Netzplanung und -dimensionierung', included: true },
+      { text: 'Stationäre Druckverlustberechnung', included: true },
+      { text: 'Mehrere Energiezentralen / Wärmequellen', included: false },
+      { text: 'Thermo-hydraulische Simulation', included: true },
+      { text: 'Wärmeverluste / -gewinne bestimmen', included: true },
+      { text: 'Dimensionierung geothermischer Quellen', included: true },
+      { text: '3 Stunden Onboarding', included: false },
+    ],
     cta: 'Lizenzanfrage stellen',
     ctaHref: url(`/${lang}/kontakt`),
   },
@@ -33,6 +43,16 @@ const dynamicTiers = [
     period: 'Monat',
     description: 'Mittelgroße Nahwärmenetze',
     maxConsumers: 'Bis 300',
+    features: [
+      { text: 'Import und Export von GIS, PDF, DXF', included: true },
+      { text: 'Einfache Netzplanung und -dimensionierung', included: true },
+      { text: 'Stationäre Druckverlustberechnung', included: true },
+      { text: 'Mehrere Energiezentralen / Wärmequellen', included: true },
+      { text: 'Thermo-hydraulische Simulation', included: true },
+      { text: 'Wärmeverluste / -gewinne bestimmen', included: true },
+      { text: 'Dimensionierung geothermischer Quellen', included: true },
+      { text: '3 Stunden Onboarding *', included: true },
+    ],
     highlighted: true,
     cta: 'Lizenzanfrage stellen',
     ctaHref: url(`/${lang}/kontakt`),
@@ -43,6 +63,16 @@ const dynamicTiers = [
     period: 'Monat',
     description: 'Fernwärmenetze',
     maxConsumers: 'Bis 1.000 **',
+    features: [
+      { text: 'Import und Export von GIS, PDF, DXF', included: true },
+      { text: 'Einfache Netzplanung und -dimensionierung', included: true },
+      { text: 'Stationäre Druckverlustberechnung', included: true },
+      { text: 'Mehrere Energiezentralen / Wärmequellen', included: true },
+      { text: 'Thermo-hydraulische Simulation', included: true },
+      { text: 'Wärmeverluste / -gewinne bestimmen', included: true },
+      { text: 'Dimensionierung geothermischer Quellen', included: true },
+      { text: '3 Stunden Onboarding *', included: true },
+    ],
     cta: 'Lizenzanfrage stellen',
     ctaHref: url(`/${lang}/kontakt`),
   },
@@ -56,6 +86,16 @@ const staticTiers = [
     period: 'Monat',
     description: 'Kalte Nahwärme oder kleine konventionelle Nahwärmenetze',
     maxConsumers: 'Bis 100',
+    features: [
+      { text: 'Import und Export von GIS, PDF, DXF', included: true },
+      { text: 'Einfache Netzplanung und -dimensionierung', included: true },
+      { text: 'Stationäre Druckverlustberechnung', included: true },
+      { text: 'Mehrere Energiezentralen / Wärmequellen', included: false },
+      { text: 'Thermo-hydraulische Simulation', included: false },
+      { text: 'Wärmeverluste / -gewinne bestimmen', included: false },
+      { text: 'Dimensionierung geothermischer Quellen', included: false },
+      { text: '3 Stunden Onboarding', included: false },
+    ],
     cta: 'Lizenzanfrage stellen',
     ctaHref: url(`/${lang}/kontakt`),
   },
@@ -65,6 +105,16 @@ const staticTiers = [
     period: '',
     description: 'Mittelgroße Nahwärmenetze',
     maxConsumers: 'Bis 300',
+    features: [
+      { text: 'Import und Export von GIS, PDF, DXF', included: true },
+      { text: 'Einfache Netzplanung und -dimensionierung', included: true },
+      { text: 'Stationäre Druckverlustberechnung', included: true },
+      { text: 'Mehrere Energiezentralen / Wärmequellen', included: true },
+      { text: 'Thermo-hydraulische Simulation', included: false },
+      { text: 'Wärmeverluste / -gewinne bestimmen', included: false },
+      { text: 'Dimensionierung geothermischer Quellen', included: false },
+      { text: '3 Stunden Onboarding *', included: true },
+    ],
     highlighted: true,
     cta: 'Kontakt aufnehmen',
     ctaHref: url(`/${lang}/kontakt`),
@@ -75,6 +125,16 @@ const staticTiers = [
     period: '',
     description: 'Fernwärmenetze',
     maxConsumers: 'Bis 1.000 **',
+    features: [
+      { text: 'Import und Export von GIS, PDF, DXF', included: true },
+      { text: 'Einfache Netzplanung und -dimensionierung', included: true },
+      { text: 'Stationäre Druckverlustberechnung', included: true },
+      { text: 'Mehrere Energiezentralen / Wärmequellen', included: true },
+      { text: 'Thermo-hydraulische Simulation', included: false },
+      { text: 'Wärmeverluste / -gewinne bestimmen', included: false },
+      { text: 'Dimensionierung geothermischer Quellen', included: false },
+      { text: '3 Stunden Onboarding *', included: true },
+    ],
     cta: 'Kontakt aufnehmen',
     ctaHref: url(`/${lang}/kontakt`),
   },
@@ -154,6 +214,57 @@ const staticFeatures = [
         <div class="text-center mb-8">
           <h2 class="text-2xl font-semibold text-foreground mb-2">Districts Dynamic</h2>
           <p class="text-foreground/70">Mit thermo-hydraulischer Jahressimulation</p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          {dynamicTiers.map((plan) => (
+            <div class:list={[
+              "card flex flex-col",
+              plan.highlighted && "border-primary ring-2 ring-primary/20"
+            ]}>
+              {plan.highlighted && (
+                <div class="text-center text-sm font-medium text-primary mb-4">Empfohlen</div>
+              )}
+              <h3 class="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+              <div class="mb-4">
+                <span class="text-4xl font-bold text-foreground">{plan.price}</span>
+                {plan.period && <span class="text-foreground/70">/{plan.period}</span>}
+              </div>
+              <p class="text-foreground/70 mb-4">{plan.description}</p>
+              <div class="mb-4 p-3 bg-secondary/50 rounded-lg">
+                <span class="text-sm text-foreground/60">Max. Abnehmer:</span>
+                <span class="font-semibold text-foreground ml-2">{plan.maxConsumers}</span>
+              </div>
+              <ul class="space-y-2 mb-6 flex-grow">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-2 text-sm">
+                    {feature.included ? (
+                      <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    )}
+                    <span class:list={[feature.included ? "text-foreground/80" : "text-foreground/50"]}>{feature.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-auto">
+                <a
+                  href={plan.ctaHref}
+                  class:list={[
+                    "btn w-full",
+                    plan.highlighted ? "btn-primary" : "btn-secondary"
+                  ]}
+                >
+                  {plan.cta}
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
 
         <!-- Feature Comparison Table -->
@@ -241,6 +352,60 @@ const staticFeatures = [
         <div class="text-center mb-8">
           <h2 class="text-2xl font-semibold text-foreground mb-2">Districts Static</h2>
           <p class="text-foreground/70">Mit stationärer Berechnung (ohne dynamische Simulation)</p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          {staticTiers.map((plan) => (
+            <div class:list={[
+              "card flex flex-col",
+              plan.highlighted && "border-primary ring-2 ring-primary/20"
+            ]}>
+              {plan.highlighted && (
+                <div class="text-center text-sm font-medium text-primary mb-4">Empfohlen</div>
+              )}
+              <h3 class="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+              <div class="mb-4">
+                <span class:list={[
+                  "text-4xl font-bold",
+                  plan.price === 'coming soon' ? "text-foreground/50 italic text-2xl" : "text-foreground"
+                ]}>{plan.price}</span>
+                {plan.period && <span class="text-foreground/70">/{plan.period}</span>}
+              </div>
+              <p class="text-foreground/70 mb-4">{plan.description}</p>
+              <div class="mb-4 p-3 bg-secondary/50 rounded-lg">
+                <span class="text-sm text-foreground/60">Max. Abnehmer:</span>
+                <span class="font-semibold text-foreground ml-2">{plan.maxConsumers}</span>
+              </div>
+              <ul class="space-y-2 mb-6 flex-grow">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-2 text-sm">
+                    {feature.included ? (
+                      <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    )}
+                    <span class:list={[feature.included ? "text-foreground/80" : "text-foreground/50"]}>{feature.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-auto">
+                <a
+                  href={plan.ctaHref}
+                  class:list={[
+                    "btn w-full",
+                    plan.highlighted ? "btn-primary" : "btn-secondary"
+                  ]}
+                >
+                  {plan.cta}
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
 
         <!-- Feature Comparison Table -->

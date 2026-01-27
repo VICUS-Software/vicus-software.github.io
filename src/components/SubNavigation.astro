@@ -14,7 +14,7 @@ const { items, currentPath } = Astro.props;
 
 <nav class="sticky top-20 z-40 bg-background/95 backdrop-blur-sm border-b border-foreground/10">
   <div class="container-custom">
-    <div class="flex items-center gap-1 overflow-x-auto py-3 scrollbar-hide">
+    <div class="flex items-center justify-center gap-1 overflow-x-auto py-3 scrollbar-hide">
       {items.map((item) => {
         const isActive = currentPath === item.href ||
           (item.href.endsWith('vicus-districts') && currentPath.endsWith('vicus-districts/'));

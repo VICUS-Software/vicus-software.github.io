@@ -7,7 +7,7 @@ export default {
         primary: '#6adcad',
         secondary: '#2c2626',
         tertiary: '#1446a0',
-        background: '#05232C',
+        background: '#041d25',
         foreground: '#F2F6F6',
       },
       fontFamily: {

@@ -2,6 +2,8 @@
 import PageLayout from '../../../layouts/PageLayout.astro';
 import SubNavigation from '../../../components/SubNavigation.astro';
 import { useTranslations, url } from '../../../i18n/utils';
+import Hero from '../../../components/Hero.astro';
+
 
 const lang = 'de';
 const t = useTranslations(lang);
@@ -44,28 +46,8 @@ const mainBenefits = [
   description="Die Software für Ihre Gebäudesimulation. Präzise. Effizient. Nachhaltig."
   showHero={false}
 >
-  <!-- Hero Section -->
-  <section class="relative pt-32 pb-16 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
-    <div class="container-custom relative">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-          {t('buildings.hero.title')}
-        </h1>
-        <p class="text-xl md:text-2xl text-primary font-medium mb-8">
-          {t('buildings.hero.subtitle')}
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
-            {t('buildings.testLicense')}
-          </a>
-          <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
-            {t('btn.demo')}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Hero Section -->
+  <Hero />
 
   <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
 

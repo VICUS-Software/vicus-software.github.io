@@ -47,22 +47,110 @@ Defined in `src/styles/global.css` using `@apply`:
 
 ## Project Color Palette
 
-These colors are defined in both `tailwind.config.mjs` and `global.css`:
+### Color Definitions
 
-| Name         | Value     | Usage                          |
-|--------------|-----------|--------------------------------|
-| `primary`    | `#6adcad` | Buttons, links, accents (teal) |
-| `secondary`  | `#2c2626` | Dark text, backgrounds         |
-| `tertiary`   | `#1446a0` | Alternative accent (blue)      |
-| `background` | `#05232C` | Page background (dark blue)    |
-| `foreground` | `#F2F6F6` | Light text on dark backgrounds |
+Colors are defined in **two places** (keep them in sync!):
 
-Usage:
+**1. Tailwind Config** (`tailwind.config.mjs`) - for Tailwind classes:
+```js
+colors: {
+  primary: '#6adcad',
+  secondary: '#2c2626',
+  tertiary: '#1446a0',
+  background: '#05232C',
+  foreground: '#F2F6F6',
+}
+```
+
+**2. CSS Variables** (`src/styles/global.css`) - for CSS custom properties:
+```css
+:root {
+  --color-primary: #6adcad;
+  --color-secondary: #2c2626;
+  --color-tertiary: #1446a0;
+  --color-background: #001514;
+  --color-foreground: #F2F6F6;
+}
+```
+
+### Color Reference
+
+| Name         | Hex       | Preview | Usage                          |
+|--------------|-----------|---------|--------------------------------|
+| `primary`    | `#6adcad` | 🟢      | Buttons, links, accents (teal/mint) |
+| `secondary`  | `#2c2626` | 🟤      | Card backgrounds, subtle elements |
+| `tertiary`   | `#1446a0` | 🔵      | Alternative accent (blue)      |
+| `background` | `#05232C` | ⬛      | Page background (dark teal)    |
+| `foreground` | `#F2F6F6` | ⬜      | Light text on dark backgrounds |
+
+### Using Colors with Tailwind
+
 ```html
-<div class="bg-background text-foreground">
-  <h1 class="text-primary">Hello</h1>
-  <button class="bg-tertiary">Click</button>
-</div>
+<!-- Text color -->
+<p class="text-primary">Teal text</p>
+<p class="text-foreground">Light text</p>
+<p class="text-foreground/70">70% opacity light text</p>
+
+<!-- Background color -->
+<div class="bg-background">Dark background</div>
+<div class="bg-secondary">Card background</div>
+<div class="bg-primary/20">20% teal tint</div>
+
+<!-- Border color -->
+<div class="border border-primary">Teal border</div>
+<div class="border border-foreground/10">Subtle border</div>
+
+<!-- Gradients -->
+<div class="bg-gradient-to-r from-primary to-tertiary">Gradient</div>
+```
+
+### Opacity Modifiers
+
+Add `/{value}` to any color for transparency:
+
+```html
+<div class="bg-primary/10">10% opacity</div>
+<div class="bg-primary/20">20% opacity</div>
+<div class="bg-primary/30">30% opacity</div>
+<div class="bg-primary/50">50% opacity</div>
+<div class="bg-primary/70">70% opacity</div>
+<div class="bg-primary/90">90% opacity</div>
+<div class="text-foreground/70">70% text opacity</div>
+```
+
+### Using CSS Variables
+
+For custom CSS or inline styles:
+
+```css
+.my-element {
+  color: var(--color-primary);
+  background: var(--color-background);
+  border: 1px solid var(--color-foreground);
+}
+```
+
+### Changing Colors
+
+To update the color palette:
+
+1. **Edit `tailwind.config.mjs`** - change the hex values in `theme.extend.colors`
+2. **Edit `src/styles/global.css`** - change the CSS variables in `:root`
+3. **Keep both in sync!**
+
+Example - changing primary to a different green:
+```js
+// tailwind.config.mjs
+colors: {
+  primary: '#22c55e',  // Changed from #6adcad
+  // ...
+}
+```
+```css
+/* global.css */
+:root {
+  --color-primary: #22c55e;  /* Changed from #6adcad */
+}
 ```
 
 ## Essential Tailwind Classes
