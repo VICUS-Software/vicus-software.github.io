@@ -11,24 +11,36 @@ interface Props {
 const { name, title, image, bio, email, linkedin } = Astro.props;
 ---
 
-<div class="card hover-lift text-center">
-  <div class="mb-6">
-    <img
-      src={image}
-      alt={name}
-      class="w-32 h-32 rounded-full mx-auto object-cover bg-background"
-      loading="lazy"
-    />
+<div class="group relative bg-secondary/50 backdrop-blur-sm rounded-2xl p-8 border border-foreground/5 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
+  <!-- Image with gradient ring -->
+  <div class="relative mb-8">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-xl scale-90 group-hover:scale-100 transition-transform duration-300"></div>
+    <div class="relative">
+      <div class="w-56 h-56 mx-auto rounded-full p-1 bg-gradient-to-br from-primary/50 to-primary/10">
+        <img
+          src={image}
+          alt={name}
+          class="w-full h-full rounded-full object-cover bg-background grayscale group-hover:grayscale-0 transition-all duration-500"
+          loading="lazy"
+        />
+      </div>
+    </div>
   </div>
-  <h3 class="text-xl font-semibold text-foreground mb-1">{name}</h3>
-  <p class="text-primary font-medium mb-4">{title}</p>
-  <p class="text-foreground/70 mb-6">{bio}</p>
+
+  <!-- Content -->
+  <div class="text-center">
+    <h3 class="text-2xl font-semibold text-foreground mb-2">{name}</h3>
+    <p class="text-primary font-medium mb-4 text-lg">{title}</p>
+    <p class="text-foreground/60 leading-relaxed">{bio}</p>
+  </div>
+
+  <!-- Contact links -->
   {(email || linkedin) && (
-    <div class="flex justify-center gap-4">
+    <div class="flex justify-center gap-3 mt-6 pt-6 border-t border-foreground/10">
       {email && (
         <a
           href={`mailto:${email}`}
-          class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors"
+          class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-200 hover:scale-110"
           title={`E-Mail an ${name}`}
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +53,7 @@ const { name, title, image, bio, email, linkedin } = Astro.props;
           href={linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors"
+          class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-200 hover:scale-110"
           title={`${name} auf LinkedIn`}
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

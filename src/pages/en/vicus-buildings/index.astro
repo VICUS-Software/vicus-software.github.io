@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
 import SubNavigation from '../../../components/SubNavigation.astro';
+import ProductHero from '../../../components/ProductHero.astro';
 import { useTranslations, url } from '../../../i18n/utils';
 
 const lang = 'en';
@@ -44,28 +45,18 @@ const mainBenefits = [
   description="The software for your building simulation. Precise. Efficient. Sustainable."
   showHero={false}
 >
-  <!-- Hero Section -->
-  <section class="relative pt-32 pb-16 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
-    <div class="container-custom relative">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-          {t('buildings.hero.title')}
-        </h1>
-        <p class="text-xl md:text-2xl text-primary font-medium mb-8">
-          {t('buildings.hero.subtitle')}
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href={url(`/${lang}/vicus-buildings/onboarding`)} class="btn btn-primary">
-            {t('buildings.testLicense')}
-          </a>
-          <a href={url(`/${lang}/demo`)} class="btn btn-secondary">
-            {t('btn.demo')}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <ProductHero
+    product="buildings"
+    headline="Dynamic Building Simulation"
+    subheadline="Precise. Efficient. Sustainable."
+    description="With <strong>VICUS BUILDINGS</strong> you simulate energy demand and thermal comfort of your buildings – based on the proven <strong>NANDRAD simulation kernel</strong>."
+    screenshot="/images/screenshots/vicus-buildings-gui.png"
+    screenshotAlt="VICUS BUILDINGS Screenshot"
+    primaryBtnText={t('buildings.testLicense')}
+    primaryBtnHref={url(`/${lang}/vicus-buildings/onboarding`)}
+    secondaryBtnText={t('btn.demo')}
+    secondaryBtnHref={url(`/${lang}/demo`)}
+  />
 
   <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
 
@@ -128,7 +119,7 @@ const mainBenefits = [
         <div class="relative">
           <div class="aspect-video rounded-xl overflow-hidden bg-secondary/50 border border-primary/20">
             <img
-              src="/images/screenshots/vicus-buildings-main.png"
+              src="/images/screenshots/vicus-buildings-example.png"
               alt="VICUS BUILDINGS Screenshot"
               class="w-full h-full object-cover"
               loading="lazy"

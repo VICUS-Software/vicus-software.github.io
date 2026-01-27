@@ -8,17 +8,49 @@ interface Props {
   showHero?: boolean;
   heroTitle?: string;
   heroSubtitle?: string;
+  heroCenter?: boolean;
+  primaryBtn?: { text: string; href: string };
+  secondaryBtn?: { text: string; href: string };
 }
 
-const { title, description, image, showHero = true, heroTitle, heroSubtitle } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  showHero = true,
+  heroTitle,
+  heroSubtitle,
+  heroCenter = false,
+  primaryBtn,
+  secondaryBtn
+} = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} image={image}>
   {showHero && (
-    <section class="bg-gradient-to-b from-background to-secondary/20 pt-24 pb-16">
-      <div class="container-custom">
-        <h1 class="text-foreground mb-4">{heroTitle || title}</h1>
-        {heroSubtitle && <p class="text-xl text-foreground/70 max-w-2xl">{heroSubtitle}</p>}
+    <section class="relative pt-32 pb-16 overflow-hidden">
+      <!-- Gradient background -->
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
+
+      <div class="container-custom relative">
+        <div class:list={["max-w-4xl", heroCenter && "mx-auto text-center"]}>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 tracking-tight">
+            {heroTitle || title}
+          </h1>
+          {heroSubtitle && (
+            <p class="text-xl md:text-2xl text-primary font-medium mb-8">{heroSubtitle}</p>
+          )}
+          {(primaryBtn || secondaryBtn) && (
+            <div class:list={["flex flex-wrap gap-4", heroCenter && "justify-center"]}>
+              {primaryBtn && (
+                <a href={primaryBtn.href} class="btn btn-primary">{primaryBtn.text}</a>
+              )}
+              {secondaryBtn && (
+                <a href={secondaryBtn.href} class="btn btn-secondary">{secondaryBtn.text}</a>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )}

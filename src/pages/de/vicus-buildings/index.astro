@@ -1,9 +1,8 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
 import SubNavigation from '../../../components/SubNavigation.astro';
+import ProductHero from '../../../components/ProductHero.astro';
 import { useTranslations, url } from '../../../i18n/utils';
-import Hero from '../../../components/Hero.astro';
-
 
 const lang = 'de';
 const t = useTranslations(lang);
@@ -46,8 +45,18 @@ const mainBenefits = [
   description="Die Software für Ihre Gebäudesimulation. Präzise. Effizient. Nachhaltig."
   showHero={false}
 >
-    <!-- Hero Section -->
-  <Hero />
+  <ProductHero
+    product="buildings"
+    headline="Dynamische Gebäudesimulation"
+    subheadline="Präzise. Effizient. Nachhaltig."
+    description="Mit <strong>VICUS BUILDINGS</strong> simulieren Sie Energiebedarf und thermischen Komfort Ihrer Gebäude – basierend auf dem bewährten <strong>NANDRAD-Simulationskern</strong>."
+    screenshot="/images/screenshots/vicus-buildings-gui.png"
+    screenshotAlt="VICUS BUILDINGS Screenshot"
+    primaryBtnText={t('buildings.testLicense')}
+    primaryBtnHref={url(`/${lang}/vicus-buildings/onboarding`)}
+    secondaryBtnText={t('btn.demo')}
+    secondaryBtnHref={url(`/${lang}/demo`)}
+  />
 
   <SubNavigation items={subNavItems} currentPath={Astro.url.pathname} />
 

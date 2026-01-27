@@ -8,48 +8,46 @@ const t = useTranslations(lang);
 
 const teamMembers = [
   {
-    name: 'Dr. Max Mustermann',
-    title: 'Geschäftsführer',
-    image: '/images/team/placeholder.svg',
-    bio: 'Max leitet VICUS Software mit seiner Expertise in Gebäudesimulation und nachhaltiger Planung.',
-    email: 'max.mustermann@vicus-software.de',
-    linkedin: 'https://linkedin.com/in/example'
+    name: 'Dr. Hauke Hirsch',
+    title: 'Geschäftsführer (CEO)',
+    image: '/images/team/hauke-hirsch.jpg',
+    bio: 'Experte für Wärmenetz-Simulation und Softwareentwicklung. Hauke leitet VICUS Software mit Leidenschaft für Energieeffizienz und nachhaltige Energieversorgung.',
+    email: 'hauke.hirsch@vicus-software.de'
   },
   {
-    name: 'Anna Schmidt',
-    title: 'Leiterin Entwicklung',
-    image: '/images/team/placeholder.svg',
-    bio: 'Anna verantwortet die technische Entwicklung unserer Simulationssoftware.',
-    email: 'anna.schmidt@vicus-software.de'
+    name: 'Dr. Andreas Nicolai',
+    title: 'Technischer Leiter (CTO)',
+    image: '/images/team/andreas-nicolai.jpg',
+    bio: 'Entwickler des Solvers und der 3D-Engine. Andreas bringt jahrelange Erfahrung in numerischer Simulation und Softwarearchitektur mit.',
+    email: 'andreas.nicolai@vicus-software.de'
   },
   {
-    name: 'Thomas Weber',
-    title: 'Senior Softwareentwickler',
-    image: '/images/team/placeholder.svg',
-    bio: 'Thomas entwickelt die Kernalgorithmen für unsere thermischen Simulationen.',
-    email: 'thomas.weber@vicus-software.de'
+    name: 'Dr. Christoph Morbitzer',
+    title: 'Vertriebsleiter (CBDO)',
+    image: '/images/team/christoph-morbitzer.jpg',
+    bio: 'Verantwortlich für Business Development und Vertrieb. Christoph verbindet technisches Know-how mit Kundenorientierung.',
+    email: 'christoph.morbitzer@vicus-software.de'
   },
   {
-    name: 'Lisa Müller',
-    title: 'Bauingenieurin',
-    image: '/images/team/placeholder.svg',
-    bio: 'Lisa unterstützt unsere Kunden bei der Anwendung der Software und entwickelt Best Practices.',
-    email: 'lisa.mueller@vicus-software.de'
+    name: 'Stephan Hirth',
+    title: 'Software- & Simulationsexperte',
+    image: '/images/team/stephan-hirth.jpg',
+    bio: 'Zuständig für Grafik, Design und Softwareentwicklung. Stephan sorgt für eine intuitive Benutzeroberfläche und ansprechende Visualisierungen.',
+    email: 'stephan.hirth@vicus-software.de'
   },
   {
-    name: 'Michael Braun',
-    title: 'Softwareentwickler',
-    image: '/images/team/placeholder.svg',
-    bio: 'Michael arbeitet an der Benutzeroberfläche und sorgt für eine intuitive Bedienung.',
-    email: 'michael.braun@vicus-software.de'
+    name: 'Heiko Fechner',
+    title: 'Senior Simulationsexperte',
+    image: '/images/team/heiko-fechner.jpg',
+    bio: 'Mit über 30 Jahren Erfahrung in der Gebäudesimulation bringt Heiko wertvolle Expertise in komplexe Simulationsprojekte ein.',
+    email: 'heiko.fechner@vicus-software.de'
   },
   {
-    name: 'Sarah Klein',
-    title: 'Marketing & Vertrieb',
-    image: '/images/team/placeholder.svg',
-    bio: 'Sarah kümmert sich um Marketing, Vertrieb und die Kommunikation mit unseren Kunden.',
-    email: 'sarah.klein@vicus-software.de',
-    linkedin: 'https://linkedin.com/in/example'
+    name: 'Dirk Weiß',
+    title: 'Gebäudesimulationsexperte',
+    image: '/images/team/dirk-weiss.jpg',
+    bio: 'Spezialist für Gebäudesimulation und thermische Analysen. Dirk unterstützt bei der Entwicklung und Validierung unserer Simulationsmodelle.',
+    email: 'dirk.weiss@vicus-software.de'
   }
 ];
 ---
@@ -58,6 +56,7 @@ const teamMembers = [
   title={t('page.team.title')}
   description="Lernen Sie das Team hinter VICUS Software kennen."
   heroSubtitle={t('page.team.subtitle')}
+  heroCenter={true}
 >
   <!-- Team Grid -->
   <section class="section">
