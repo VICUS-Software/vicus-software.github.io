@@ -25,26 +25,31 @@ const formattedDate = pubDate.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-U
 
 <BaseLayout title={title} description={description} image={image}>
   <article class="pt-24 pb-16">
-    <div class="container-custom max-w-4xl">
+    <div class="container-custom max-w-3xl">
       <!-- Back link -->
-      <a href={`/${lang}/blog`} class="inline-flex items-center text-primary hover:text-primary/80 mb-8">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <a href={`/${lang}/blog`} class="inline-flex items-center text-primary hover:text-primary/80 mb-8 text-sm font-medium">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
         {t('misc.backToBlog')}
       </a>
 
       <!-- Article header -->
-      <header class="mb-12">
-        <h1 class="text-foreground mb-6">{title}</h1>
-        <div class="flex items-center gap-4 text-foreground/60 text-sm">
-          <span>{author}</span>
-          <span>•</span>
-          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+      <header class="mb-10 pb-8 border-b border-primary/20">
+        <h1 class="text-foreground text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">{title}</h1>
+        <div class="flex flex-wrap items-center gap-3 text-foreground/60 text-sm">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+              <span class="text-primary text-xs font-bold">{author.charAt(0)}</span>
+            </div>
+            <span class="font-medium text-foreground/80">{author}</span>
+          </div>
+          <span class="text-foreground/40">•</span>
+          <time datetime={pubDate.toISOString()} class="text-foreground/60">{formattedDate}</time>
           {readTime && (
             <>
-              <span>•</span>
-              <span>{t('misc.readTime', { min: readTime })}</span>
+              <span class="text-foreground/40">•</span>
+              <span class="text-foreground/60">{t('misc.readTime', { min: readTime })}</span>
             </>
           )}
         </div>

@@ -86,14 +86,89 @@
   }
 
   .prose-custom {
-    @apply prose prose-invert prose-lg max-w-none;
-    @apply prose-headings:text-foreground prose-headings:font-bold;
-    @apply prose-p:text-foreground/80;
-    @apply prose-a:text-primary prose-a:no-underline hover:prose-a:underline;
-    @apply prose-strong:text-foreground;
-    @apply prose-ul:text-foreground/80 prose-ol:text-foreground/80;
-    @apply prose-li:marker:text-primary;
+    @apply prose prose-invert max-w-none;
+
+    /* Base text styling - improved readability */
+    @apply prose-p:text-foreground/85 prose-p:text-base prose-p:leading-relaxed prose-p:mb-6;
+
+    /* Headings */
+    @apply prose-headings:text-foreground prose-headings:font-bold prose-headings:tracking-tight;
+    @apply prose-h1:text-3xl prose-h1:md:text-4xl prose-h1:mt-12 prose-h1:mb-6;
+    @apply prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-b prose-h2:border-primary/20 prose-h2:pb-3;
+    @apply prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-primary;
+    @apply prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-6 prose-h4:mb-2;
+
+    /* Links */
+    @apply prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-a:decoration-primary/50;
+    @apply hover:prose-a:decoration-primary hover:prose-a:text-primary/80;
+
+    /* Strong/Bold */
+    @apply prose-strong:text-foreground prose-strong:font-semibold;
+
+    /* Lists */
+    @apply prose-ul:text-foreground/85 prose-ol:text-foreground/85;
+    @apply prose-li:marker:text-primary prose-li:mb-2 prose-li:leading-relaxed;
+
+    /* Blockquotes */
+    @apply prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5;
+    @apply prose-blockquote:pl-6 prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:rounded-r-lg;
+    @apply prose-blockquote:text-foreground/90 prose-blockquote:not-italic prose-blockquote:my-8;
+
+    /* Code blocks */
+    @apply prose-code:text-primary prose-code:bg-secondary/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm;
+    @apply prose-code:before:content-none prose-code:after:content-none;
+    @apply prose-pre:bg-secondary/70 prose-pre:border prose-pre:border-primary/20 prose-pre:rounded-xl;
+
+    /* Tables */
+    @apply prose-table:border-collapse prose-table:w-full prose-table:my-8;
+    @apply prose-thead:bg-primary/10 prose-thead:border-b-2 prose-thead:border-primary/30;
+    @apply prose-th:text-foreground prose-th:font-semibold prose-th:text-left prose-th:p-4 prose-th:text-sm;
+    @apply prose-td:text-foreground/85 prose-td:p-4 prose-td:border-b prose-td:border-foreground/10 prose-td:text-sm;
+    @apply prose-tr:hover:bg-primary/10;
   }
+
+  /* Alternating table row colors */
+  .prose-custom tbody tr:nth-child(odd) {
+    @apply bg-secondary/20;
+  }
+
+  .prose-custom tbody tr:nth-child(even) {
+    @apply bg-transparent;
+  }
+
+  .prose-custom {
+
+    /* Horizontal rules */
+    @apply prose-hr:border-primary/20 prose-hr:my-12;
+
+    /* Images */
+    @apply prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8;
+  }
+
+  /* KaTeX Math styling for dark theme */
+  .katex-display {
+    @apply my-8 overflow-x-auto overflow-y-hidden py-4;
+  }
+
+  .katex-display > .katex {
+    @apply text-primary;
+  }
+
+  .katex {
+    @apply text-foreground;
+  }
+
+  /* Hide MathML fallback - must be explicitly hidden */
+  .katex-mathml {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden !important;
+  }
+
 
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent;
