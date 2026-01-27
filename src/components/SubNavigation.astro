@@ -10,14 +10,20 @@ interface Props {
 }
 
 const { items, currentPath } = Astro.props;
+
+// Normalize path by removing trailing slashes for comparison
+const normalizePath = (path: string) => path.replace(/\/+$/, '') || '/';
+const normalizedCurrentPath = normalizePath(currentPath);
 ---
 
 <nav class="sticky top-20 z-40 bg-background/95 backdrop-blur-sm border-b border-foreground/10">
   <div class="container-custom">
     <div class="flex items-center justify-center gap-1 overflow-x-auto py-3 scrollbar-hide">
       {items.map((item) => {
-        const isActive = currentPath === item.href ||
-          (item.href.endsWith('vicus-districts') && currentPath.endsWith('vicus-districts/'));
+        const normalizedHref = normalizePath(item.href);
+        // Check exact match or if currentPath ends with href (handles base path differences)
+        const isActive = normalizedCurrentPath === normalizedHref ||
+          (normalizedHref.length > 1 && normalizedCurrentPath.endsWith(normalizedHref));
         return (
           <a
             href={item.href}
