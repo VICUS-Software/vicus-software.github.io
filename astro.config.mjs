@@ -4,8 +4,9 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 // For GitHub Pages: set SITE_URL and BASE_PATH in environment
-// e.g., SITE_URL=https://username.github.io BASE_PATH=/repo-name
-const site = process.env.SITE_URL || 'https://vicus-software.com';
+// For org main site (vicus-software.github.io): leave BASE_PATH empty
+// For project site: set BASE_PATH=/repo-name
+const site = process.env.SITE_URL || 'https://vicus-software.github.io';
 const base = process.env.BASE_PATH || undefined;
 
 export default defineConfig({
