@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations, url } from '../i18n/utils';
 import type { Language } from '../i18n/languages';
+import HeroBackground from './HeroBackground.astro';
 
 interface Props {
   headline?: string;
@@ -52,6 +53,8 @@ const {
 <section class="relative min-h-screen flex items-center overflow-hidden">
   <!-- Background gradient -->
   <div class="absolute inset-0 bg-gradient-to-br from-background via-background to-tertiary/10"></div>
+  <!-- Animated particle network -->
+  <HeroBackground />
 
   <!-- Content -->
   <div class="container-custom relative z-10 pt-24 pb-16">
