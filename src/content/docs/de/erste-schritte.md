@@ -5,64 +5,64 @@ order: 1
 lang: de
 ---
 
-# VICUS Districts: Quick Start Guide
+# VICUS Districts: Schnelleinstieg
 
-This documentation provides an overview of the user interface and core functionalities of **VICUS Districts** for heating network simulation and building modeling.
+Diese Dokumentation bietet eine Übersicht über die Benutzeroberfläche und die Kernfunktionen von **VICUS Districts** für die Wärmenetzsimulation und Gebäudemodellierung.
 
 ---
 
-## 1. Getting Started
-When launching the software for the first time, it is recommended to explore the built-in examples.
-* **Action:** Navigate to the **"Netzbeispiele"** (Network Examples) tab and open a sample project.
-* **Benefit:** Quickly see how a network is structured, how stationary calculations are performed, and how results are visualized.
+## 1. Erste Schritte
+Beim ersten Start der Software empfiehlt es sich, die integrierten Beispiele zu erkunden.
+* **Aktion:** Navigieren Sie zum Tab **„Netzbeispiele"** und öffnen Sie ein Beispielprojekt.
+* **Vorteil:** So sehen Sie schnell, wie ein Netz aufgebaut ist, wie stationäre Berechnungen durchgeführt werden und wie Ergebnisse visualisiert werden.
 
-## 2. Interface Overview
+## 2. Benutzeroberfläche
 
-### The Navigation Tree (Left Side)
-The tree manages all project elements:
-* **Selection:** Clicking an element in the tree highlights it in the map view.
-* **Visibility:** Use the "Lightbulb" icons to toggle layers or specific elements on/off.
-* **Editing:** Double-click any element in the tree to rename it.
+### Der Navigationsbaum (linke Seite)
+Der Baum verwaltet alle Projektelemente:
+* **Auswahl:** Ein Klick auf ein Element im Baum hebt es in der Kartenansicht hervor.
+* **Sichtbarkeit:** Über die „Glühbirnen"-Symbole können Layer oder einzelne Elemente ein-/ausgeblendet werden.
+* **Bearbeiten:** Doppelklick auf ein Element im Baum, um es umzubenennen.
 
-### Interaction & Controls
-* **Additive Selection:** Selecting multiple items adds them to the selection.
-* **Deselect:** Press `ESC` to clear all current selections.
-* **Navigation:** Hold the **Spacebar** while moving in the 3D/2D view to increase movement speed—especially useful for large models.
+### Interaktion & Steuerung
+* **Additive Auswahl:** Das Auswählen mehrerer Elemente fügt sie zur Selektion hinzu.
+* **Abwählen:** Mit `ESC` wird die gesamte Auswahl aufgehoben.
+* **Navigation:** Halten Sie die **Leertaste** beim Bewegen in der 3D-/2D-Ansicht, um die Bewegungsgeschwindigkeit zu erhöhen — besonders nützlich bei großen Modellen.
 
-## 3. Network Design & Configuration
+## 3. Netzplanung & Konfiguration
 
-### Data Import
-VICUS Districts supports several import formats to speed up model creation:
-* GIS Data
-* Open Street Maps (OSM)
-* DXF Plans
-* PDF Plans
+### Datenimport
+VICUS Districts unterstützt mehrere Importformate zur schnellen Modellerstellung:
+* GIS-Daten
+* OpenStreetMap (OSM)
+* DXF-Pläne
+* PDF-Pläne
 
-### Key Configuration Tabs (Right Side)
-| Tab | Function |
+### Wichtige Konfigurationstabs (rechte Seite)
+| Tab | Funktion |
 | :--- | :--- |
-| **General** | Define the fluid type and use topology tools like "Auto-connect consumers." |
-| **Building Demand** | Visualize connected loads and heating energy requirements. |
-| **Pipe Dimensioning** | Assign pipe types and view lengths/dimensions directly in the scene. |
-| **Systems (Anlagen)** | Configure house transfer stations and central energy plants. |
-| **Soil Conditions** | Set ground temperatures and boundary conditions for heat loss. |
+| **Allgemein** | Fluidtyp festlegen und Topologie-Werkzeuge wie „Verbraucher automatisch verbinden" nutzen. |
+| **Gebäudebedarf** | Angeschlossene Lasten und Heizenergiebedarf visualisieren. |
+| **Rohrdimensionierung** | Rohrtypen zuweisen und Längen/Dimensionen direkt in der Szene anzeigen. |
+| **Anlagen** | Hausübergabestationen und zentrale Energieanlagen konfigurieren. |
+| **Bodenverhältnisse** | Bodentemperaturen und Randbedingungen für Wärmeverluste einstellen. |
 
-## 4. Calculation & Simulation
+## 4. Berechnung & Simulation
 
-### Stationary Analysis
-Provides a "snapshot" of the network performance.
-* Displays the pressure curve.
-* Identifies the "Schlechtpunkt" (hydraulically most remote point).
-* Offers automatic pump dimensioning based on a built-in database.
+### Stationäre Analyse
+Liefert eine „Momentaufnahme" der Netzleistung.
+* Zeigt die Druckkurve an.
+* Identifiziert den „Schlechtpunkt" (hydraulisch ungünstigster Punkt).
+* Bietet automatische Pumpendimensionierung auf Basis einer integrierten Datenbank.
 
-### Dynamic Simulation
-Uses time-dependent data for high-fidelity results.
-* **Climate Data:** Import weather data directly from the German Weather Service (DWD).
-* **Hourly Results:** Analyze hourly performance for heating power, COP, and network heat losses.
+### Dynamische Simulation
+Nutzt zeitabhängige Daten für hochgenaue Ergebnisse.
+* **Klimadaten:** Wetterdaten direkt vom Deutschen Wetterdienst (DWD) importieren.
+* **Stündliche Ergebnisse:** Stündliche Analyse von Heizleistung, COP und Netzwärmeverlusten.
 
-## 5. Reporting & Outputs
-* **Massenauszug (Bill of Materials):** Generates a complete list of all pipes, T-pieces, reducers, and fittings.
-* **Results Summary:** Provides a high-level overview of the most important simulation metrics.
+## 5. Berichte & Ausgaben
+* **Massenauszug:** Erstellt eine vollständige Liste aller Rohre, T-Stücke, Reduzierstücke und Formteile.
+* **Ergebnisübersicht:** Bietet eine Zusammenfassung der wichtigsten Simulationskennwerte.
 
 ---
-**Reference:** [VICUS Basics Tutorial](https://www.youtube.com/watch?v=k7zjsrNO-7I)
+**Referenz:** [VICUS Basics Tutorial](https://www.youtube.com/watch?v=k7zjsrNO-7I)
