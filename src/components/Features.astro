@@ -27,15 +27,15 @@ const icons: Record<string, string> = {
 <section class="section bg-secondary/30">
   <div class="container-custom">
     {(title || subtitle) && (
-      <div class="text-center mb-16">
+      <div class="text-center mb-16" data-scroll="up">
         {title && <h2 class="text-foreground mb-4">{title}</h2>}
         {subtitle && <p class="text-xl text-foreground/70 max-w-2xl mx-auto">{subtitle}</p>}
       </div>
     )}
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {features.map((feature) => (
-        <div class="card hover-lift group">
+      {features.map((feature, i) => (
+        <div class="card hover-lift group" data-scroll="up" data-scroll-delay={i * 100}>
           <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
             <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <Fragment set:html={icons[feature.icon] || icons.default} />

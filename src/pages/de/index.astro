@@ -56,7 +56,7 @@ const products = [
   },
   {
     title: 'VICUS DISTRICTS',
-    description: 'Spezialsoftware für die Planung und Simulation von Wärmenetzen und Quartiersenergie.',
+    description: 'Spezialsoftware für die Planung und Simulation von Wärmenetzen und Quartiersenergie. Optimieren Sie Netzauslegung, Betriebskosten und Versorgungssicherheit.',
     image: url('/images/screenshots/vicus-districts-gui.png'),
     href: url('/de/vicus-districts'),
     features: [
@@ -79,15 +79,17 @@ const products = [
   <!-- Products Section -->
   <section class="section">
     <div class="container-custom">
-      <div class="text-center mb-16">
+      <div class="text-center mb-16" data-scroll="up">
         <h2 class="text-foreground mb-4">Unsere Software</h2>
         <p class="text-xl text-foreground/70 max-w-2xl mx-auto">
           Professionelle Werkzeuge für nachhaltige Planung und Simulation
         </p>
       </div>
       <div class="grid md:grid-cols-2 gap-8">
-        {products.map((product) => (
-          <ProductCard {...product} />
+        {products.map((product, i) => (
+          <div data-scroll={i === 0 ? "left" : "right"} data-scroll-delay={i * 150}>
+            <ProductCard {...product} />
+          </div>
         ))}
       </div>
     </div>
@@ -103,7 +105,7 @@ const products = [
   <!-- Partners Section -->
   <section class="section bg-foreground overflow-hidden">
     <div class="container-custom">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-scroll="up">
         <h2 class="text-background mb-4">Führende Unternehmen vertrauen auf VICUS</h2>
         <p class="text-xl text-background/70 max-w-2xl mx-auto">
           Gemeinsam für nachhaltige Lösungen
@@ -143,7 +145,7 @@ const products = [
   <!-- CTA Section -->
   <section class="section">
     <div class="container-custom">
-      <div class="card bg-gradient-to-r from-primary/20 to-tertiary/20 text-center py-16">
+      <div class="card bg-gradient-to-r from-primary/20 to-tertiary/20 text-center py-16" data-scroll="scale">
         <h2 class="text-foreground mb-4">Bereit für nachhaltige Planung?</h2>
         <p class="text-xl text-foreground/70 max-w-2xl mx-auto mb-8">
           Kontaktieren Sie uns für eine persönliche Demo oder laden Sie die Software direkt herunter.

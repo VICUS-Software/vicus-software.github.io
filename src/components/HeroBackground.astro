@@ -8,12 +8,12 @@
   let w: number, h: number;
   let particles: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
   let mouse = { x: -9999, y: -9999 };
-  let animId: number;
+  let time = 0;
 
   const PRIMARY = [106, 220, 173]; // #6adcad
   const TERTIARY = [20, 70, 160];  // #1446a0
   const MAX_DIST = 160;
-  const PARTICLE_COUNT_FACTOR = 8000; // one particle per this many px²
+  const PARTICLE_COUNT_FACTOR = 7500;
 
   function resize() {
     w = canvas.width = canvas.offsetWidth;
@@ -22,13 +22,13 @@
   }
 
   function initParticles() {
-    const count = Math.min(80, Math.max(30, Math.floor((w * h) / PARTICLE_COUNT_FACTOR)));
+    const count = Math.min(70, Math.max(30, Math.floor((w * h) / PARTICLE_COUNT_FACTOR)));
     particles = Array.from({ length: count }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 1.5 + 0.5,
+      r: Math.random() * 1.5 + 0.6,
     }));
   }
 
@@ -37,6 +37,7 @@
   }
 
   function draw() {
+    time += 0.003;
     ctx.clearRect(0, 0, w, h);
 
     // Update positions
@@ -46,20 +47,19 @@
       if (p.x < 0 || p.x > w) p.vx *= -1;
       if (p.y < 0 || p.y > h) p.vy *= -1;
 
-      // Subtle mouse repulsion
+      // Mouse repulsion
       const dx = p.x - mouse.x;
       const dy = p.y - mouse.y;
       const md = Math.sqrt(dx * dx + dy * dy);
-      if (md < 120) {
-        p.vx += (dx / md) * 0.02;
-        p.vy += (dy / md) * 0.02;
+      if (md < 150) {
+        p.vx += (dx / md) * 0.03;
+        p.vy += (dy / md) * 0.03;
       }
 
-      // Clamp speed
       const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (speed > 0.6) {
-        p.vx *= 0.6 / speed;
-        p.vy *= 0.6 / speed;
+      if (speed > 0.7) {
+        p.vx *= 0.7 / speed;
+        p.vy *= 0.7 / speed;
       }
     }
 
@@ -70,11 +70,11 @@
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < MAX_DIST) {
-          const alpha = (1 - dist / MAX_DIST) * 0.15;
+          const alpha = (1 - dist / MAX_DIST) * 0.18;
           const t = (particles[i].x + particles[j].x) / (2 * w);
           const c = lerp(PRIMARY, TERTIARY, t);
           ctx.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${alpha})`;
-          ctx.lineWidth = 0.5;
+          ctx.lineWidth = 0.8;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
@@ -83,17 +83,26 @@
       }
     }
 
-    // Draw particles
+    // Draw particles with glow
     for (const p of particles) {
       const t = p.x / w;
       const c = lerp(PRIMARY, TERTIARY, t);
-      ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},0.5)`;
+      const pulse = 0.5 + Math.sin(time * 2 + p.x * 0.01) * 0.15;
+
+      // Glow
+      ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${pulse * 0.08})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core
+      ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${pulse + 0.1})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    animId = requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
 
   canvas.addEventListener('mousemove', (e) => {

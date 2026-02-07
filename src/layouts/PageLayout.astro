@@ -20,7 +20,7 @@ const {
   showHero = true,
   heroTitle,
   heroSubtitle,
-  heroCenter = false,
+  heroCenter = true,
   primaryBtn,
   secondaryBtn
 } = Astro.props;
@@ -28,7 +28,7 @@ const {
 
 <BaseLayout title={title} description={description} image={image}>
   {showHero && (
-    <section class="relative pt-32 pb-16 overflow-hidden">
+    <section class="relative pt-48 pb-2 overflow-hidden">
       <!-- Gradient background -->
       <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
 
@@ -38,7 +38,7 @@ const {
             {heroTitle || title}
           </h1>
           {heroSubtitle && (
-            <p class="text-xl md:text-2xl text-primary font-medium mb-8">{heroSubtitle}</p>
+            <p class="text-xl md:text-2xl text-primary font-medium mb-8 inline-block border-b-2 border-primary pb-2">{heroSubtitle}</p>
           )}
           {(primaryBtn || secondaryBtn) && (
             <div class:list={["flex flex-wrap gap-4", heroCenter && "justify-center"]}>
