@@ -3,7 +3,6 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import ZeegBooking from '../../components/ZeegBooking.astro';
 import DownloadForm from '../../components/DownloadForm.astro';
 import LicenseForm from '../../components/LicenseForm.astro';
-import { ZEEG_CONFIG } from '../../config/zeeg';
 
 ---
 
@@ -60,7 +59,7 @@ import { ZEEG_CONFIG } from '../../config/zeeg';
               Pick a convenient time for your personal demo session.
               We'll show you the software's capabilities and answer your questions.
             </p>
-            <ZeegBooking eventType={ZEEG_CONFIG.eventTypes.buildings} />
+            <ZeegBooking eventType="buildings-demo" />
           </div>
 
           <div class="mt-8">
@@ -69,7 +68,7 @@ import { ZEEG_CONFIG } from '../../config/zeeg';
               <p class="text-foreground/70 mb-6">
                 Learn how to efficiently plan and simulate heat networks.
               </p>
-              <ZeegBooking eventType={ZEEG_CONFIG.eventTypes.districts} />
+              <ZeegBooking eventType="district-demo" />
             </div>
           </div>
         </div>
