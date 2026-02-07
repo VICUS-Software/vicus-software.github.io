@@ -1,0 +1,103 @@
+---
+interface Props {
+  username?: string;
+  eventType: string;
+  height?: string;
+}
+
+const {
+  username = 'vicus',
+  eventType,
+  height = '750px',
+} = Astro.props;
+
+const zeegUrl = `https://zeeg.me/${username}/${eventType}?redirect_parent=true`;
+const widgetId = `zeeg-widget-${eventType}`;
+---
+
+<div
+  class="zeeg-booking"
+  id={widgetId}
+  data-zeeg-url={zeegUrl}
+  style={`min-width: 320px; height: ${height};`}
+>
+  <div class="zeeg-placeholder">
+    <div class="zeeg-spinner"></div>
+    <p>Loading scheduling...</p>
+  </div>
+</div>
+
+<style>
+  .zeeg-booking {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .zeeg-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: rgba(242, 246, 246, 0.5);
+    font-size: 0.875rem;
+    gap: 0.75rem;
+  }
+
+  .zeeg-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid rgba(106, 220, 173, 0.2);
+    border-top-color: #6adcad;
+    border-radius: 50%;
+    animation: zeeg-spin 0.7s linear infinite;
+  }
+
+  @keyframes zeeg-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Style the iframe Zeeg injects */
+  .zeeg-booking :global(iframe) {
+    border: none !important;
+    border-radius: 0.75rem;
+  }
+</style>
+
+<script is:inline>
+(function() {
+  // Load the Zeeg embed script once
+  if (!document.querySelector('script[src*="assets.zeeg.me/embed"]')) {
+    var script = document.createElement('script');
+    script.src = 'https://assets.zeeg.me/embed.min.js';
+    script.async = true;
+    script.onload = initAllWidgets;
+    document.head.appendChild(script);
+  } else if (typeof Zeeg !== 'undefined') {
+    initAllWidgets();
+  } else {
+    // Script exists but not loaded yet — wait for it
+    var existing = document.querySelector('script[src*="assets.zeeg.me/embed"]');
+    existing.addEventListener('load', initAllWidgets);
+  }
+
+  function initAllWidgets() {
+    document.querySelectorAll('.zeeg-booking[data-zeeg-url]').forEach(function(el) {
+      if (el.dataset.zeegInitialized) return;
+      el.dataset.zeegInitialized = 'true';
+
+      // Clear placeholder
+      var placeholder = el.querySelector('.zeeg-placeholder');
+      if (placeholder) placeholder.remove();
+
+      Zeeg.initInlineWidget({
+        url: el.dataset.zeegUrl,
+        parentElement: el,
+        prefill: {},
+        utm: {},
+      });
+    });
+  }
+})();
+</script>

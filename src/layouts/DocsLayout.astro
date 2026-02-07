@@ -1,0 +1,103 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl } from '../i18n/utils';
+import type { Language } from '../i18n/languages';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentSlug: string;
+}
+
+const { title, description, currentSlug } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as Language;
+
+// Get all docs for this language, sorted by order
+const allDocs = (await getCollection('docs', ({ data }) => {
+  return data.lang === lang && !data.draft;
+})).sort((a, b) => (a.data.order ?? 100) - (b.data.order ?? 100));
+
+const basePath = lang === 'de' ? '/de/dokumentation' : '/en/documentation';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="pt-24 pb-16">
+    <div class="container-custom">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- Sidebar -->
+        <aside class="lg:w-64 flex-shrink-0">
+          <div class="lg:sticky lg:top-24">
+            <!-- Back link -->
+            <a href={lang === 'de' ? '/de/dokumentation' : '/en/documentation'} class="inline-flex items-center text-primary hover:text-primary/80 mb-6 text-sm font-medium">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              {lang === 'de' ? 'Dokumentation' : 'Documentation'}
+            </a>
+
+            <!-- Mobile dropdown -->
+            <div class="lg:hidden mb-6">
+              <label for="docs-nav-select" class="form-label">{lang === 'de' ? 'Dokumentation' : 'Documentation'}</label>
+              <select id="docs-nav-select" class="form-input" onchange="window.location.href = this.value">
+                {allDocs.map((doc) => {
+                  const slug = doc.slug.replace(`${lang}/`, '');
+                  const href = `${basePath}/${slug}`;
+                  return (
+                    <option value={href} selected={slug === currentSlug}>
+                      {doc.data.title}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+
+            <!-- Desktop nav list -->
+            <nav class="hidden lg:block" aria-label="Documentation">
+              <h2 class="text-sm font-semibold text-foreground/50 uppercase tracking-wider mb-3">
+                {lang === 'de' ? 'Dokumentation' : 'Documentation'}
+              </h2>
+              <ul class="space-y-1">
+                {allDocs.map((doc) => {
+                  const slug = doc.slug.replace(`${lang}/`, '');
+                  const href = `${basePath}/${slug}`;
+                  const isActive = slug === currentSlug;
+                  return (
+                    <li>
+                      <a
+                        href={href}
+                        class:list={[
+                          'block px-3 py-2 rounded-lg text-sm transition-colors',
+                          isActive
+                            ? 'bg-primary/15 text-primary font-medium border-l-2 border-primary'
+                            : 'text-foreground/70 hover:text-foreground hover:bg-secondary/50',
+                        ]}
+                      >
+                        {doc.data.title}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Content -->
+        <article class="flex-1 min-w-0">
+          <header class="mb-8 pb-6 border-b border-primary/20">
+            <h1 class="text-3xl md:text-4xl font-bold text-foreground">{title}</h1>
+            {description && (
+              <p class="text-foreground/60 mt-2">{description}</p>
+            )}
+          </header>
+
+          <div class="prose-custom">
+            <slot />
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

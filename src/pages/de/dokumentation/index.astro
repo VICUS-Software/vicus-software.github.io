@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = (await getCollection('docs', ({ data }) => {
+  return data.lang === 'de' && !data.draft;
+})).sort((a, b) => (a.data.order ?? 100) - (b.data.order ?? 100));
+---
+
+<BaseLayout title="Dokumentation" description="VICUS Software Dokumentation — Anleitungen und Referenzen.">
+  <div class="pt-24 pb-16">
+    <div class="container-custom max-w-3xl">
+      <!-- Back link -->
+      <a href="/de/tutorials-hilfe" class="inline-flex items-center text-primary hover:text-primary/80 mb-8 text-sm font-medium">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Tutorials & Hilfe
+      </a>
+
+      <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">Dokumentation</h1>
+      <p class="text-xl text-foreground/60 mb-12">Anleitungen und Referenzen für VICUS Software.</p>
+
+      <div class="space-y-4">
+        {docs.map((doc) => {
+          const slug = doc.slug.replace('de/', '');
+          return (
+            <a href={`/de/dokumentation/${slug}`} class="card block group">
+              <h2 class="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                {doc.data.title}
+              </h2>
+              {doc.data.description && (
+                <p class="text-foreground/60 text-sm">{doc.data.description}</p>
+              )}
+            </a>
+          );
+        })}
+      </div>
+
+      {docs.length === 0 && (
+        <p class="text-foreground/50 text-center py-12">Noch keine Dokumentation vorhanden.</p>
+      )}
+    </div>
+  </div>
+</BaseLayout>
