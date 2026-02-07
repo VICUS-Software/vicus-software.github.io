@@ -2,15 +2,48 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const docs = (await getCollection('docs', ({ data }) => {
+const allDocs = (await getCollection('docs', ({ data }) => {
   return data.lang === 'de' && !data.draft;
 })).sort((a, b) => (a.data.order ?? 100) - (b.data.order ?? 100));
+
+const categoryLabels: Record<string, string> = {
+  'import-export': 'Import & Export',
+};
+
+// Group by directory
+type DocEntry = typeof allDocs[number];
+interface DocGroup {
+  category: string | null;
+  label: string;
+  docs: DocEntry[];
+}
+
+const groups: DocGroup[] = [];
+const topLevel: DocGroup = { category: null, label: '', docs: [] };
+const categoryMap = new Map<string, DocGroup>();
+
+for (const doc of allDocs) {
+  const slug = doc.slug.replace('de/', '');
+  const parts = slug.split('/');
+  if (parts.length === 1) {
+    topLevel.docs.push(doc);
+  } else {
+    const category = parts[0];
+    if (!categoryMap.has(category)) {
+      const label = categoryLabels[category] ?? category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      categoryMap.set(category, { category, label, docs: [] });
+    }
+    categoryMap.get(category)!.docs.push(doc);
+  }
+}
+
+if (topLevel.docs.length > 0) groups.push(topLevel);
+for (const group of categoryMap.values()) groups.push(group);
 ---
 
 <BaseLayout title="Dokumentation" description="VICUS Software Dokumentation — Anleitungen und Referenzen.">
   <div class="pt-24 pb-16">
     <div class="container-custom max-w-3xl">
-      <!-- Back link -->
       <a href="/de/tutorials-hilfe" class="inline-flex items-center text-primary hover:text-primary/80 mb-8 text-sm font-medium">
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -21,23 +54,35 @@ const docs = (await getCollection('docs', ({ data }) => {
       <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">Dokumentation</h1>
       <p class="text-xl text-foreground/60 mb-12">Anleitungen und Referenzen für VICUS Software.</p>
 
-      <div class="space-y-4">
-        {docs.map((doc) => {
-          const slug = doc.slug.replace('de/', '');
-          return (
-            <a href={`/de/dokumentation/${slug}`} class="card block group">
-              <h2 class="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                {doc.data.title}
-              </h2>
-              {doc.data.description && (
-                <p class="text-foreground/60 text-sm">{doc.data.description}</p>
-              )}
-            </a>
-          );
-        })}
-      </div>
+      {groups.map((group) => (
+        <div class={group.category ? 'mt-10' : ''}>
+          {group.category && (
+            <h2 class="text-lg font-semibold text-foreground/60 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+              </svg>
+              {group.label}
+            </h2>
+          )}
+          <div class="space-y-3">
+            {group.docs.map((doc) => {
+              const slug = doc.slug.replace('de/', '');
+              return (
+                <a href={`/de/dokumentation/${slug}`} class="card block group">
+                  <h3 class="text-lg font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                    {doc.data.title}
+                  </h3>
+                  {doc.data.description && (
+                    <p class="text-foreground/60 text-sm">{doc.data.description}</p>
+                  )}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))}
 
-      {docs.length === 0 && (
+      {allDocs.length === 0 && (
         <p class="text-foreground/50 text-center py-12">Noch keine Dokumentation vorhanden.</p>
       )}
     </div>

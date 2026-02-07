@@ -19,6 +19,55 @@ const allDocs = (await getCollection('docs', ({ data }) => {
 })).sort((a, b) => (a.data.order ?? 100) - (b.data.order ?? 100));
 
 const basePath = lang === 'de' ? '/de/dokumentation' : '/en/documentation';
+
+// Category labels
+const categoryLabels: Record<string, Record<string, string>> = {
+  de: {
+    'import-export': 'Import & Export',
+  },
+  en: {
+    'import-export': 'Import & Export',
+  },
+};
+
+// Group docs by directory: top-level vs subdirectory
+type DocEntry = typeof allDocs[number];
+interface DocGroup {
+  category: string | null;
+  label: string;
+  docs: { doc: DocEntry; slug: string; href: string; isActive: boolean }[];
+}
+
+const groups: DocGroup[] = [];
+const topLevel: DocGroup = { category: null, label: '', docs: [] };
+const categoryMap = new Map<string, DocGroup>();
+
+for (const doc of allDocs) {
+  const slug = doc.slug.replace(`${lang}/`, '');
+  const href = `${basePath}/${slug}`;
+  const isActive = slug === currentSlug;
+  const parts = slug.split('/');
+
+  if (parts.length === 1) {
+    // Top-level doc
+    topLevel.docs.push({ doc, slug, href, isActive });
+  } else {
+    // Nested doc — group by first directory
+    const category = parts[0];
+    if (!categoryMap.has(category)) {
+      const label = categoryLabels[lang]?.[category] ?? category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const group: DocGroup = { category, label, docs: [] };
+      categoryMap.set(category, group);
+    }
+    categoryMap.get(category)!.docs.push({ doc, slug, href, isActive });
+  }
+}
+
+if (topLevel.docs.length > 0) groups.push(topLevel);
+for (const group of categoryMap.values()) groups.push(group);
+
+// Flat list for mobile dropdown
+const allEntries = groups.flatMap(g => g.docs);
 ---
 
 <BaseLayout title={title} description={description}>
@@ -30,7 +79,7 @@ const basePath = lang === 'de' ? '/de/dokumentation' : '/en/documentation';
         <aside class="lg:w-64 flex-shrink-0">
           <div class="lg:sticky lg:top-24">
             <!-- Back link -->
-            <a href={lang === 'de' ? '/de/dokumentation' : '/en/documentation'} class="inline-flex items-center text-primary hover:text-primary/80 mb-6 text-sm font-medium">
+            <a href={basePath} class="inline-flex items-center text-primary hover:text-primary/80 mb-6 text-sm font-medium">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
@@ -41,45 +90,56 @@ const basePath = lang === 'de' ? '/de/dokumentation' : '/en/documentation';
             <div class="lg:hidden mb-6">
               <label for="docs-nav-select" class="form-label">{lang === 'de' ? 'Dokumentation' : 'Documentation'}</label>
               <select id="docs-nav-select" class="form-input" onchange="window.location.href = this.value">
-                {allDocs.map((doc) => {
-                  const slug = doc.slug.replace(`${lang}/`, '');
-                  const href = `${basePath}/${slug}`;
-                  return (
-                    <option value={href} selected={slug === currentSlug}>
-                      {doc.data.title}
-                    </option>
-                  );
-                })}
+                {groups.map((group) => (
+                  group.category
+                    ? <optgroup label={group.label}>
+                        {group.docs.map((entry) => (
+                          <option value={entry.href} selected={entry.isActive}>
+                            {entry.doc.data.title}
+                          </option>
+                        ))}
+                      </optgroup>
+                    : group.docs.map((entry) => (
+                        <option value={entry.href} selected={entry.isActive}>
+                          {entry.doc.data.title}
+                        </option>
+                      ))
+                ))}
               </select>
             </div>
 
             <!-- Desktop nav list -->
             <nav class="hidden lg:block" aria-label="Documentation">
-              <h2 class="text-sm font-semibold text-foreground/50 uppercase tracking-wider mb-3">
-                {lang === 'de' ? 'Dokumentation' : 'Documentation'}
-              </h2>
-              <ul class="space-y-1">
-                {allDocs.map((doc) => {
-                  const slug = doc.slug.replace(`${lang}/`, '');
-                  const href = `${basePath}/${slug}`;
-                  const isActive = slug === currentSlug;
-                  return (
-                    <li>
-                      <a
-                        href={href}
-                        class:list={[
-                          'block px-3 py-2 rounded-lg text-sm transition-colors',
-                          isActive
-                            ? 'bg-primary/15 text-primary font-medium border-l-2 border-primary'
-                            : 'text-foreground/70 hover:text-foreground hover:bg-secondary/50',
-                        ]}
-                      >
-                        {doc.data.title}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
+              {groups.map((group) => (
+                <div class={group.category ? 'mt-5' : ''}>
+                  {group.category ? (
+                    <h3 class="text-xs font-semibold text-foreground/40 uppercase tracking-wider mb-2 px-3">
+                      {group.label}
+                    </h3>
+                  ) : (
+                    <h2 class="text-sm font-semibold text-foreground/50 uppercase tracking-wider mb-3">
+                      {lang === 'de' ? 'Dokumentation' : 'Documentation'}
+                    </h2>
+                  )}
+                  <ul class="space-y-1">
+                    {group.docs.map((entry) => (
+                      <li>
+                        <a
+                          href={entry.href}
+                          class:list={[
+                            'block px-3 py-2 rounded-lg text-sm transition-colors',
+                            entry.isActive
+                              ? 'bg-primary/15 text-primary font-medium border-l-2 border-primary'
+                              : 'text-foreground/70 hover:text-foreground hover:bg-secondary/50',
+                          ]}
+                        >
+                          {entry.doc.data.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </nav>
           </div>
         </aside>
