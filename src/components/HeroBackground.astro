@@ -1,122 +1,76 @@
-<!-- Techy particle network background animation -->
-<canvas id="hero-bg-canvas" class="absolute inset-0 w-full h-full"></canvas>
+<!-- Subtle gradient mesh background -->
+<div class="hero-mesh absolute inset-0">
+  <div class="mesh-blob mesh-blob-1"></div>
+  <div class="mesh-blob mesh-blob-2"></div>
+  <div class="mesh-blob mesh-blob-3"></div>
+</div>
 
-<script>
-  const canvas = document.getElementById('hero-bg-canvas') as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d')!;
-
-  let w: number, h: number;
-  let particles: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
-  let mouse = { x: -9999, y: -9999 };
-  let time = 0;
-
-  const PRIMARY = [106, 220, 173]; // #6adcad
-  const TERTIARY = [20, 70, 160];  // #1446a0
-  const MAX_DIST = 160;
-  const PARTICLE_COUNT_FACTOR = 7500;
-
-  function resize() {
-    w = canvas.width = canvas.offsetWidth;
-    h = canvas.height = canvas.offsetHeight;
-    initParticles();
+<style>
+  .hero-mesh {
+    overflow: hidden;
+    filter: blur(80px);
   }
 
-  function initParticles() {
-    const count = Math.min(70, Math.max(30, Math.floor((w * h) / PARTICLE_COUNT_FACTOR)));
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 1.5 + 0.6,
-    }));
+  .mesh-blob {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
   }
 
-  function lerp(a: number[], b: number[], t: number) {
-    return a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  .mesh-blob-1 {
+    width: 50vw;
+    height: 50vw;
+    max-width: 700px;
+    max-height: 700px;
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(106, 220, 173, 0.25) 0%, transparent 70%);
+    animation: drift1 14s ease-in-out infinite;
   }
 
-  function draw() {
-    time += 0.003;
-    ctx.clearRect(0, 0, w, h);
-
-    // Update positions
-    for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > w) p.vx *= -1;
-      if (p.y < 0 || p.y > h) p.vy *= -1;
-
-      // Mouse repulsion
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const md = Math.sqrt(dx * dx + dy * dy);
-      if (md < 150) {
-        p.vx += (dx / md) * 0.03;
-        p.vy += (dy / md) * 0.03;
-      }
-
-      const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (speed > 0.7) {
-        p.vx *= 0.7 / speed;
-        p.vy *= 0.7 / speed;
-      }
-    }
-
-    // Draw connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MAX_DIST) {
-          const alpha = (1 - dist / MAX_DIST) * 0.18;
-          const t = (particles[i].x + particles[j].x) / (2 * w);
-          const c = lerp(PRIMARY, TERTIARY, t);
-          ctx.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${alpha})`;
-          ctx.lineWidth = 0.8;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Draw particles with glow
-    for (const p of particles) {
-      const t = p.x / w;
-      const c = lerp(PRIMARY, TERTIARY, t);
-      const pulse = 0.5 + Math.sin(time * 2 + p.x * 0.01) * 0.15;
-
-      // Glow
-      ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${pulse * 0.08})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Core
-      ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${pulse + 0.1})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    requestAnimationFrame(draw);
+  .mesh-blob-2 {
+    width: 45vw;
+    height: 45vw;
+    max-width: 600px;
+    max-height: 600px;
+    bottom: -15%;
+    right: -5%;
+    background: radial-gradient(circle, rgba(20, 70, 160, 0.2) 0%, transparent 70%);
+    animation: drift2 18s ease-in-out infinite;
   }
 
-  canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
+  .mesh-blob-3 {
+    width: 35vw;
+    height: 35vw;
+    max-width: 500px;
+    max-height: 500px;
+    top: 40%;
+    left: 35%;
+    background: radial-gradient(circle, rgba(106, 220, 173, 0.12) 0%, transparent 70%);
+    animation: drift3 20s ease-in-out infinite;
+  }
 
-  canvas.addEventListener('mouseleave', () => {
-    mouse.x = -9999;
-    mouse.y = -9999;
-  });
+  @keyframes drift1 {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(30%, 20%) scale(1.1); }
+    50% { transform: translate(50%, -10%) scale(0.95); }
+    75% { transform: translate(10%, 30%) scale(1.05); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
 
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
-</script>
+  @keyframes drift2 {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-35%, -20%) scale(1.08); }
+    50% { transform: translate(-15%, 25%) scale(0.92); }
+    75% { transform: translate(20%, -30%) scale(1.05); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  @keyframes drift3 {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(25%, -25%) scale(1.12); }
+    50% { transform: translate(-30%, 15%) scale(0.9); }
+    75% { transform: translate(-10%, -20%) scale(1.08); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+</style>

@@ -1,8 +1,9 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import DemoForm from '../../components/DemoForm.astro';
+import ZeegBooking from '../../components/ZeegBooking.astro';
 import DownloadForm from '../../components/DownloadForm.astro';
 import LicenseForm from '../../components/LicenseForm.astro';
+import { ZEEG_CONFIG } from '../../config/zeeg';
 
 ---
 
@@ -45,7 +46,7 @@ import LicenseForm from '../../components/LicenseForm.astro';
       </div>
 
       <!-- Tab Panels -->
-      <div class="max-w-2xl mx-auto">
+      <div class="max-w-3xl mx-auto">
         <!-- Demo Panel -->
         <div
           role="tabpanel"
@@ -54,23 +55,21 @@ import LicenseForm from '../../components/LicenseForm.astro';
           class="tab-panel"
         >
           <div class="card">
-            <h2 class="text-2xl font-bold text-foreground mb-2">Personal Demo</h2>
-            <p class="text-foreground/70 mb-8">
-              Experience VICUS in a personal demo session. We'll show you
-              the software's capabilities and answer your questions.
+            <h2 class="text-2xl font-bold text-foreground mb-2">VICUS Buildings Demo</h2>
+            <p class="text-foreground/70 mb-6">
+              Pick a convenient time for your personal demo session.
+              We'll show you the software's capabilities and answer your questions.
             </p>
-            <DemoForm />
+            <ZeegBooking eventType={ZEEG_CONFIG.eventTypes.buildings} />
+          </div>
 
-            <div class="mt-8 pt-8 border-t border-foreground/10">
-              <p class="text-foreground/70 mb-4">
-                Specifically for VICUS Districts?
+          <div class="mt-8">
+            <div class="card">
+              <h2 class="text-2xl font-bold text-foreground mb-2">VICUS Districts Demo</h2>
+              <p class="text-foreground/70 mb-6">
+                Learn how to efficiently plan and simulate heat networks.
               </p>
-              <button
-                id="open-districts-modal"
-                class="btn btn-secondary"
-              >
-                Book Districts Demo
-              </button>
+              <ZeegBooking eventType={ZEEG_CONFIG.eventTypes.districts} />
             </div>
           </div>
         </div>
@@ -111,33 +110,7 @@ import LicenseForm from '../../components/LicenseForm.astro';
       </div>
     </div>
   </section>
-  <!-- Districts Demo Modal -->
-  <div
-    id="districts-modal"
-    class="fixed inset-0 z-50 hidden items-center justify-center"
-  >
-    <div class="absolute inset-0 bg-background/80 backdrop-blur-sm" id="modal-backdrop"></div>
-    <div class="relative bg-secondary rounded-2xl p-6 mx-4 max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl">
-      <button
-        id="close-districts-modal"
-        class="absolute top-4 right-4 text-foreground/70 hover:text-foreground transition-colors"
-        aria-label="Close"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      <h2 class="text-2xl font-bold text-foreground mb-2">VICUS Districts Demo</h2>
-      <p class="text-foreground/70 mb-6">
-        Book a demo for VICUS Districts and learn how to efficiently plan
-        and simulate heat networks.
-      </p>
-      <div class="zeeg-inline-widget" id="zeeg-embed-vicus-district-demo" style="min-width: 320px; height: 700px"></div>
-    </div>
-  </div>
 </PageLayout>
-
-<script is:inline src="https://assets.zeeg.me/embed.min.js" data-user="vicus" data-event-type="district-demo" data-redirect-parent="true" data-background-color="041d25" data-text-color="F2F6F6" data-primary-color="6adcad" async></script>
 
 <style>
   .tab-btn {
@@ -171,33 +144,5 @@ import LicenseForm from '../../components/LicenseForm.astro';
       const panel = document.getElementById(panelId!);
       panel?.classList.remove('hidden');
     });
-  });
-
-  // Districts Demo Modal
-  const modal = document.getElementById('districts-modal');
-  const openBtn = document.getElementById('open-districts-modal');
-  const closeBtn = document.getElementById('close-districts-modal');
-  const backdrop = document.getElementById('modal-backdrop');
-
-  function openModal() {
-    modal?.classList.remove('hidden');
-    modal?.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    modal?.classList.add('hidden');
-    modal?.classList.remove('flex');
-    document.body.style.overflow = '';
-  }
-
-  openBtn?.addEventListener('click', openModal);
-  closeBtn?.addEventListener('click', closeModal);
-  backdrop?.addEventListener('click', closeModal);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
-      closeModal();
-    }
   });
 </script>
