@@ -15,13 +15,25 @@ const t = useTranslations(lang);
 >
   <div class="grid md:grid-cols-2 gap-6">
     <div class="form-group">
-      <label for="lic-name" class="form-label">
-        {t('form.name')} <span class="text-primary">*</span>
+      <label for="lic-firstname" class="form-label">
+        {t('form.firstname')} <span class="text-primary">*</span>
       </label>
       <input
         type="text"
-        id="lic-name"
-        name="name"
+        id="lic-firstname"
+        name="firstname"
+        required
+        class="form-input"
+      />
+    </div>
+    <div class="form-group">
+      <label for="lic-lastname" class="form-label">
+        {t('form.lastname')} <span class="text-primary">*</span>
+      </label>
+      <input
+        type="text"
+        id="lic-lastname"
+        name="lastname"
         required
         class="form-input"
       />

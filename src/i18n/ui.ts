@@ -37,7 +37,8 @@ export const ui = {
     'footer.copyright': '© {year} VICUS Software. Alle Rechte vorbehalten.',
 
     // Forms
-    'form.name': 'Name',
+    'form.firstname': 'Vorname',
+    'form.lastname': 'Nachname',
     'form.email': 'E-Mail',
     'form.company': 'Firma',
     'form.phone': 'Telefon',
@@ -135,7 +136,8 @@ export const ui = {
     'footer.copyright': '© {year} VICUS Software. All rights reserved.',
 
     // Forms
-    'form.name': 'Name',
+    'form.firstname': 'First Name',
+    'form.lastname': 'Last Name',
     'form.email': 'Email',
     'form.company': 'Company',
     'form.phone': 'Phone',

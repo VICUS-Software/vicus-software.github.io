@@ -19,6 +19,15 @@
           "dependentFields": []
         },
         {
+          "fieldType": "single_line_text",
+          "name": "lastname",
+          "label": "Last Name",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": []
+        },
+        {
           "fieldType": "email",
           "name": "email",
           "label": "Email",

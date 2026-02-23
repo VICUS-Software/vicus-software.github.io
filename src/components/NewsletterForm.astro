@@ -44,11 +44,20 @@ const t = useTranslations(lang);
   >
     <div class="grid md:grid-cols-2 gap-6">
       <div class="form-group">
-        <label for="nl-name" class="form-label">{t('form.name')}</label>
+        <label for="nl-firstname" class="form-label">{t('form.firstname')}</label>
         <input
           type="text"
-          id="nl-name"
-          name="name"
+          id="nl-firstname"
+          name="firstname"
+          class="form-input"
+        />
+      </div>
+      <div class="form-group">
+        <label for="nl-lastname" class="form-label">{t('form.lastname')}</label>
+        <input
+          type="text"
+          id="nl-lastname"
+          name="lastname"
           class="form-input"
         />
       </div>

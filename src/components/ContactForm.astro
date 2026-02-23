@@ -17,16 +17,29 @@ const t = useTranslations(lang);
 >
   <div class="grid md:grid-cols-2 gap-6">
     <div class="form-group">
-      <label for="name" class="form-label">
-        {t('form.name')} <span class="text-primary">*</span>
+      <label for="firstname" class="form-label">
+        {t('form.firstname')} <span class="text-primary">*</span>
       </label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="firstname"
+        name="firstname"
         required
         class="form-input"
-        placeholder={lang === 'de' ? 'Ihr Name' : 'Your name'}
+        placeholder={lang === 'de' ? 'Vorname' : 'First name'}
+      />
+    </div>
+    <div class="form-group">
+      <label for="lastname" class="form-label">
+        {t('form.lastname')} <span class="text-primary">*</span>
+      </label>
+      <input
+        type="text"
+        id="lastname"
+        name="lastname"
+        required
+        class="form-input"
+        placeholder={lang === 'de' ? 'Nachname' : 'Last name'}
       />
     </div>
     <div class="form-group">

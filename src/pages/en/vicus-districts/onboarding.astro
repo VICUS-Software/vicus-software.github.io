@@ -296,9 +296,15 @@ const subNavItems = [
 
           <div class="card">
             <form class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-foreground/80 mb-1">{t('form.name')} *</label>
-                <input type="text" required class="w-full bg-background border border-foreground/20 rounded-lg px-4 py-2 text-foreground focus:border-primary focus:outline-none" />
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-foreground/80 mb-1">{t('form.firstname')} *</label>
+                  <input type="text" required class="w-full bg-background border border-foreground/20 rounded-lg px-4 py-2 text-foreground focus:border-primary focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-foreground/80 mb-1">{t('form.lastname')} *</label>
+                  <input type="text" required class="w-full bg-background border border-foreground/20 rounded-lg px-4 py-2 text-foreground focus:border-primary focus:outline-none" />
+                </div>
               </div>
 
               <div>

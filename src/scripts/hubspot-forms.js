@@ -20,6 +20,12 @@
   // Fields to skip (not sent to HubSpot)
   var SKIP_FIELDS = ['privacy'];
 
+  // Map HTML field names to HubSpot property names
+  var FIELD_MAP = {
+    'licenseType': 'license_type',
+    'coverLetter': 'cover_letter',
+  };
+
   function getLang() {
     return document.documentElement.lang === 'de' ? 'de' : 'en';
   }
@@ -40,8 +46,8 @@
 
     for (var i = 0; i < elements.length; i++) {
       var el = elements[i];
-      var name = el.name;
-      if (!name || SKIP_FIELDS.indexOf(name) !== -1) continue;
+      var name = FIELD_MAP[el.name] || el.name;
+      if (!name || SKIP_FIELDS.indexOf(el.name) !== -1) continue;
       if (el.type === 'submit' || el.type === 'button' || el.type === 'file') continue;
 
       // Checkboxes with same name → collect all checked values
