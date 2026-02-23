@@ -34,11 +34,15 @@ jobs:
 
       - name: Build with Astro
         env:
-          # Site URL is always https://<owner>.github.io for org pages
-          # BASE_PATH is empty for org main site (repo named <owner>.github.io)
-          # or /<repo-name> for project sites
           SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
           BASE_PATH: ${{ vars.BASE_PATH }}
+          HUBSPOT_PORTAL_ID: ${{ vars.HUBSPOT_PORTAL_ID }}
+          HUBSPOT_CONTACT_FORM_ID: ${{ vars.HUBSPOT_CONTACT_FORM_ID }}
+          HUBSPOT_DEMO_FORM_ID: ${{ vars.HUBSPOT_DEMO_FORM_ID }}
+          HUBSPOT_NEWSLETTER_FORM_ID: ${{ vars.HUBSPOT_NEWSLETTER_FORM_ID }}
+          HUBSPOT_DOWNLOAD_FORM_ID: ${{ vars.HUBSPOT_DOWNLOAD_FORM_ID }}
+          HUBSPOT_LICENSE_FORM_ID: ${{ vars.HUBSPOT_LICENSE_FORM_ID }}
+          HUBSPOT_APPLICATION_FORM_ID: ${{ vars.HUBSPOT_APPLICATION_FORM_ID }}
         run: npm run build
 
       - name: Upload artifact

@@ -1,0 +1,124 @@
+{
+  "name": "VICUS Website - Demo Request Form",
+  "formType": "hubspot",
+  "createdAt": "2026-02-23T00:00:00Z",
+  "updatedAt": "2026-02-23T00:00:00Z",
+  "archived": false,
+  "fieldGroups": [
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "firstname",
+          "label": "Name",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Your name"
+        },
+        {
+          "fieldType": "email",
+          "name": "email",
+          "label": "Email",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "your@email.com",
+          "validation": {
+            "useDefaultBlockList": true,
+            "blockedEmailDomains": []
+          }
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "company",
+          "label": "Company",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Company name"
+        },
+        {
+          "fieldType": "phone",
+          "name": "phone",
+          "label": "Phone",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "+49 123 456 789",
+          "validation": {
+            "minAllowedDigits": 7,
+            "maxAllowedDigits": 20
+          }
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "dropdown",
+          "name": "product",
+          "label": "Product",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "options": [
+            { "label": "VICUS BUILDINGS", "value": "buildings", "displayOrder": 0 },
+            { "label": "VICUS DISTRICTS", "value": "districts", "displayOrder": 1 },
+            { "label": "Both products", "value": "both", "displayOrder": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "multi_line_text",
+          "name": "message",
+          "label": "Message",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Tell us about your project..."
+        }
+      ]
+    }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "prePopulateKnownValues": true,
+    "cloneable": true,
+    "editable": true,
+    "archivable": true,
+    "postSubmitAction": {
+      "type": "thank_you",
+      "value": "Thank you! We will contact you to schedule your demo."
+    }
+  },
+  "displayOptions": {
+    "renderRawHtml": false,
+    "submitButtonText": "Request Demo"
+  },
+  "legalConsentOptions": {
+    "type": "none"
+  }
+}

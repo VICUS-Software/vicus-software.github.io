@@ -12,6 +12,8 @@ const t = useTranslations(lang);
   class="space-y-6"
   data-hubspot-portal={HUBSPOT_CONFIG.portalId}
   data-hubspot-form={HUBSPOT_CONFIG.formIds.download}
+  data-success-de="Vielen Dank! Sie erhalten den Download-Link per E-Mail."
+  data-success-en="Thank you! You will receive the download link via email."
 >
   <div class="grid md:grid-cols-2 gap-6">
     <div class="form-group">
@@ -79,41 +81,3 @@ const t = useTranslations(lang);
   </button>
 </form>
 
-<script>
-  const form = document.getElementById('download-form') as HTMLFormElement;
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const statusEl = document.getElementById('download-form-status');
-    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = '...';
-
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      if (statusEl) {
-        statusEl.className = 'p-4 rounded-lg bg-primary/20 text-primary';
-        statusEl.textContent = document.documentElement.lang === 'de'
-          ? 'Vielen Dank! Sie erhalten den Download-Link per E-Mail.'
-          : 'Thank you! You will receive the download link via email.';
-        statusEl.classList.remove('hidden');
-      }
-
-      form.reset();
-    } catch (error) {
-      if (statusEl) {
-        statusEl.className = 'p-4 rounded-lg bg-red-500/20 text-red-400';
-        statusEl.textContent = document.documentElement.lang === 'de'
-          ? 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.'
-          : 'An error occurred. Please try again.';
-        statusEl.classList.remove('hidden');
-      }
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = document.documentElement.lang === 'de' ? 'Download' : 'Download';
-    }
-  });
-</script>

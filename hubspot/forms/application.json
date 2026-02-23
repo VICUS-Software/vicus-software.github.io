@@ -1,0 +1,137 @@
+{
+  "name": "VICUS Website - Job Application Form",
+  "formType": "hubspot",
+  "createdAt": "2026-02-23T00:00:00Z",
+  "updatedAt": "2026-02-23T00:00:00Z",
+  "archived": false,
+  "fieldGroups": [
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "firstname",
+          "label": "Name",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": []
+        },
+        {
+          "fieldType": "email",
+          "name": "email",
+          "label": "Email",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "validation": {
+            "useDefaultBlockList": true,
+            "blockedEmailDomains": []
+          }
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "phone",
+          "name": "phone",
+          "label": "Phone",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": [],
+          "validation": {
+            "minAllowedDigits": 7,
+            "maxAllowedDigits": 20
+          }
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "jobtitle",
+          "label": "Position",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Position you are applying for"
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "file",
+          "name": "resume",
+          "label": "Resume (PDF)",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": []
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "file",
+          "name": "cover_letter",
+          "label": "Cover Letter (PDF, optional)",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": []
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "multi_line_text",
+          "name": "message",
+          "label": "Why do you want to work at VICUS?",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Tell us about yourself..."
+        }
+      ]
+    }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "prePopulateKnownValues": true,
+    "cloneable": true,
+    "editable": true,
+    "archivable": true,
+    "postSubmitAction": {
+      "type": "thank_you",
+      "value": "Thank you for your application! We will contact you shortly."
+    }
+  },
+  "displayOptions": {
+    "renderRawHtml": false,
+    "submitButtonText": "Apply"
+  },
+  "legalConsentOptions": {
+    "type": "none"
+  }
+}

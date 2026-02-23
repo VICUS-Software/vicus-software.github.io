@@ -1,0 +1,105 @@
+{
+  "name": "VICUS Website - Download Form",
+  "formType": "hubspot",
+  "createdAt": "2026-02-23T00:00:00Z",
+  "updatedAt": "2026-02-23T00:00:00Z",
+  "archived": false,
+  "fieldGroups": [
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "firstname",
+          "label": "Name",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": []
+        },
+        {
+          "fieldType": "email",
+          "name": "email",
+          "label": "Email",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "validation": {
+            "useDefaultBlockList": true,
+            "blockedEmailDomains": []
+          }
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "company",
+          "label": "Company",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": []
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "dropdown",
+          "name": "product",
+          "label": "Product",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "options": [
+            { "label": "VICUS BUILDINGS", "value": "buildings", "displayOrder": 0 },
+            { "label": "VICUS DISTRICTS", "value": "districts", "displayOrder": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_checkbox",
+          "name": "newsletter",
+          "label": "I want to receive the VICUS newsletter",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": []
+        }
+      ]
+    }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "prePopulateKnownValues": true,
+    "cloneable": true,
+    "editable": true,
+    "archivable": true,
+    "postSubmitAction": {
+      "type": "thank_you",
+      "value": "Thank you! You will receive the download link via email."
+    }
+  },
+  "displayOptions": {
+    "renderRawHtml": false,
+    "submitButtonText": "Download"
+  },
+  "legalConsentOptions": {
+    "type": "none"
+  }
+}

@@ -13,7 +13,14 @@ const t = useTranslations(lang);
 ---
 
 {compact ? (
-  <form id="newsletter-form-compact" class="flex flex-col sm:flex-row gap-3">
+  <form
+    id="newsletter-form-compact"
+    class="flex flex-col sm:flex-row gap-3"
+    data-hubspot-portal={HUBSPOT_CONFIG.portalId}
+    data-hubspot-form={HUBSPOT_CONFIG.formIds.newsletter}
+    data-success-de="Erfolgreich angemeldet!"
+    data-success-en="Successfully subscribed!"
+  >
     <input
       type="email"
       name="email"
@@ -32,6 +39,8 @@ const t = useTranslations(lang);
     class="space-y-6"
     data-hubspot-portal={HUBSPOT_CONFIG.portalId}
     data-hubspot-form={HUBSPOT_CONFIG.formIds.newsletter}
+    data-success-de="Vielen Dank! Sie wurden erfolgreich angemeldet."
+    data-success-en="Thank you! You have been successfully subscribed."
   >
     <div class="grid md:grid-cols-2 gap-6">
       <div class="form-group">
@@ -104,74 +113,3 @@ const t = useTranslations(lang);
   </form>
 )}
 
-<script>
-  // Full form
-  const form = document.getElementById('newsletter-form') as HTMLFormElement;
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const statusEl = document.getElementById('newsletter-form-status');
-    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = '...';
-
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      if (statusEl) {
-        statusEl.className = 'p-4 rounded-lg bg-primary/20 text-primary';
-        statusEl.textContent = document.documentElement.lang === 'de'
-          ? 'Vielen Dank! Sie wurden erfolgreich angemeldet.'
-          : 'Thank you! You have been successfully subscribed.';
-        statusEl.classList.remove('hidden');
-      }
-
-      form.reset();
-    } catch (error) {
-      if (statusEl) {
-        statusEl.className = 'p-4 rounded-lg bg-red-500/20 text-red-400';
-        statusEl.textContent = document.documentElement.lang === 'de'
-          ? 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.'
-          : 'An error occurred. Please try again.';
-        statusEl.classList.remove('hidden');
-      }
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = document.documentElement.lang === 'de' ? 'Anmelden' : 'Subscribe';
-    }
-  });
-
-  // Compact form
-  const compactForm = document.getElementById('newsletter-form-compact') as HTMLFormElement;
-  compactForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const statusEl = document.getElementById('newsletter-compact-status');
-    const submitBtn = compactForm.querySelector('button[type="submit"]') as HTMLButtonElement;
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = '...';
-
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      if (statusEl) {
-        statusEl.className = 'text-sm text-primary';
-        statusEl.textContent = document.documentElement.lang === 'de' ? 'Erfolgreich angemeldet!' : 'Successfully subscribed!';
-        statusEl.classList.remove('hidden');
-      }
-
-      compactForm.reset();
-    } catch (error) {
-      if (statusEl) {
-        statusEl.className = 'text-sm text-red-400';
-        statusEl.textContent = document.documentElement.lang === 'de' ? 'Fehler aufgetreten' : 'Error occurred';
-        statusEl.classList.remove('hidden');
-      }
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = document.documentElement.lang === 'de' ? 'Anmelden' : 'Subscribe';
-    }
-  });
-</script>

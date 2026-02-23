@@ -1,0 +1,120 @@
+{
+  "name": "VICUS Website - Contact Form",
+  "formType": "hubspot",
+  "createdAt": "2026-02-23T00:00:00Z",
+  "updatedAt": "2026-02-23T00:00:00Z",
+  "archived": false,
+  "fieldGroups": [
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "firstname",
+          "label": "Name",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Your name"
+        },
+        {
+          "fieldType": "email",
+          "name": "email",
+          "label": "Email",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "your@email.com",
+          "validation": {
+            "useDefaultBlockList": true,
+            "blockedEmailDomains": []
+          }
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "company",
+          "label": "Company",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Company name"
+        },
+        {
+          "fieldType": "phone",
+          "name": "phone",
+          "label": "Phone",
+          "objectTypeId": "0-1",
+          "required": false,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "+49 123 456 789",
+          "validation": {
+            "minAllowedDigits": 7,
+            "maxAllowedDigits": 20
+          }
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "single_line_text",
+          "name": "subject",
+          "label": "Subject",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Subject of your inquiry"
+        }
+      ]
+    },
+    {
+      "groupType": "default_group",
+      "richTextType": "text",
+      "fields": [
+        {
+          "fieldType": "multi_line_text",
+          "name": "message",
+          "label": "Message",
+          "objectTypeId": "0-1",
+          "required": true,
+          "hidden": false,
+          "dependentFields": [],
+          "placeholder": "Your message..."
+        }
+      ]
+    }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "prePopulateKnownValues": true,
+    "cloneable": true,
+    "editable": true,
+    "archivable": true,
+    "postSubmitAction": {
+      "type": "thank_you",
+      "value": "Your message has been sent successfully."
+    }
+  },
+  "displayOptions": {
+    "renderRawHtml": false,
+    "submitButtonText": "Submit"
+  },
+  "legalConsentOptions": {
+    "type": "none"
+  }
+}
